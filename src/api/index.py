@@ -13,8 +13,8 @@ def debug():
     return ''
 
 
-@bp.route('healthcheck')
-def healthcheck():
+@bp.route('health_check')
+def health_check():
     return {
         "code": HTTPStatus.OK,
         "msg": "success"

@@ -19,3 +19,11 @@ def healthcheck():
         "code": HTTPStatus.OK,
         "msg": "success"
     }
+
+
+@bp.route('reset')
+def reset_mock_data():
+    return {
+        "code": HTTPStatus.OK,
+        "msg": "success"
+    }

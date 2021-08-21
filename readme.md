@@ -12,7 +12,7 @@
 JUST RUN: `> docker-compose up -d --build`
 
 ## Health check
-```curl -i http://localhost:5000/v1/core-api/common/healthcheck```
+```curl -i http://localhost:5000/v1/core-api/common/health_check```
 
 ## Container env config:
 ```/webapps/.env```

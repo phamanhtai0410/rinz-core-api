@@ -10,6 +10,7 @@ bp = Blueprint('block', __name__, url_prefix='/api/block')
 
 
 @bp.route('/<string:block_id>')
+@Http.make_cross_resp
 def get_item(block_id):
     print(block_id)
     page = py_.find(Blocks.MOCKS, {"id": block_id})
@@ -30,6 +31,7 @@ def get_item(block_id):
 
 
 @bp.route('', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@Http.make_cross_resp
 def cud_data():
     return {
         "status": Consts.STATUS_OK,

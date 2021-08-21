@@ -10,6 +10,7 @@ bp = Blueprint('track', __name__, url_prefix='/api/track')
 
 
 @bp.route('/<string:track_id>')
+@Http.make_cross_resp
 def get_item(track_id):
     page = py_.find(Tracks.MOCKS, {"id": track_id})
 
@@ -29,6 +30,7 @@ def get_item(track_id):
 
 
 @bp.route('/<string:track_id>/stream/<string:profile_id>')
+@Http.make_cross_resp
 def get_stream(track_id, profile_id):
     page = py_.find(
         Tracks.MOCKS_STREAMS,
@@ -51,6 +53,7 @@ def get_stream(track_id, profile_id):
 
 
 @bp.route('', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@Http.make_cross_resp
 def cud_data():
     return {
         "status": Consts.STATUS_OK,

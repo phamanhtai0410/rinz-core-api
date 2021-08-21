@@ -10,6 +10,7 @@ bp = Blueprint('sitemaps', __name__, url_prefix='/api/sitemaps')
 
 
 @bp.route('', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@Http.make_cross_resp
 def cud_data():
     return {
         "status": Consts.STATUS_OK,

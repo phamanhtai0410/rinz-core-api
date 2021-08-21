@@ -24,6 +24,6 @@ SODA = {
     "age": 18
 }
 
-DATA = [
+MOCKS = [
     BINZ, DEN_VAU, SODA
 ]

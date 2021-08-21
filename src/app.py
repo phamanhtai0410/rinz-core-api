@@ -68,7 +68,10 @@ def configure_blueprints(app, blueprints):
     """Configure blueprints in views."""
 
     for blueprint in blueprints:
-        app.register_blueprint(blueprint)
+        app.register_blueprint(
+            blueprint,
+            url_prefix=f'/v1/core-api/{blueprint.url_prefix}'
+        )
 
 
 def configure_template_filters(app):

@@ -26,12 +26,12 @@ MOCKS = [
         "description": "Trang thông tin tài khoản",
     },
     {
-        "name": "WALL_ARTIST_ID",
+        "name": "ARTIST_INFO",
         "route": "/artist/<artist_id>",
         "description": "Trang thông tin Nghệ Sĩ",
     },
     {
-        "name": "LIVE_EVENT_ID",
+        "name": "LIVE_EVENT_INFO",
         "route": "/live/<event_id>",
         "description": "Sự kiện đang Trực Tiếp",
     },

@@ -4,7 +4,7 @@ from flask import Blueprint
 import src.constants as Consts
 import src.middlewares.http as Http
 
-bp = Blueprint('index', __name__, url_prefix='/')
+bp = Blueprint('index', __name__, url_prefix='/common')
 
 
 @bp.route('debug')

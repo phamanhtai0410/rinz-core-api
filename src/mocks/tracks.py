@@ -4,7 +4,7 @@ track_1 = {
     "astist_id": "binz",
     "astist_name": "BinZ",
     "duration": 180,
-    "banner": "https://via.placeholder.com/100x100.png",
+    "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718422.122064_music1.png",
     "rz_point": 50000,
     "profiles": [
         {
@@ -30,13 +30,13 @@ MOCKS_STREAMS = [
         "track_id": "track-1",
         "type": "free",
         "name": "FREE",
-        "stream_url": "<stream-play-url-1>"
+        "stream_url": "http://test.rinznetwork.com/hls/vinaluxhouse_320/playlist.m3u8"
     },
     {
         "id": "track-stream-2",
         "track_id": "track-1",
         "type": "vip",
         "name": "VIP",
-        "stream_url": "<stream-play-url-2>"
+        "stream_url": "http://test.rinznetwork.com/hls/vinaluxhouse_320/playlist.m3u8"
     },
 ]

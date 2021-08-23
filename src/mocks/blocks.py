@@ -15,39 +15,33 @@ mock_idol_live = {
     "data": [
         {
             "name": "Trang Moon",
-            "image": "https://via.placeholder.com/100x100.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718574.491582_trangmoon.png",
             "live_stream": True,
             "href": "/live/artist/trang-moon"
         },
         {
             "name": "Soda",
-            "image": "https://via.placeholder.com/100x100.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png",
             "live_stream": True,
             "href": "/live/artist/soda"
         },
         {
             "name": "Alan Walker",
-            "image": "https://via.placeholder.com/100x100.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718494.115022_alan.png",
             "live_stream": True,
             "href": "/live/artist/alan-walker"
         },
         {
             "name": "Đen Vâu",
-            "image": "https://via.placeholder.com/100x100.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718774.680648_mei.png",
             "live_stream": False,
             "href": "/live/artist/den-vau"
         },
         {
             "name": "Binz",
-            "image": "https://via.placeholder.com/100x100.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png",
             "live_stream": False,
             "href": "/live/artist/binz"
-        },
-        {
-            "name": "Juno Bigboi",
-            "image": "https://via.placeholder.com/100x100.png",
-            "live_stream": False,
-            "href": "/live/artist/juno"
         },
     ],
     "meta": {}
@@ -59,14 +53,44 @@ mock_widget_menus = {
     "meta": {},
     "data": [
         {
-            "icon": "https://via.placeholder.com/100x100.png",
             "name": "Newfeed",
-            "href": "/newfeed"
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718338.634737_news.png",
+            "href": "#"
         },
         {
-            "icon": "https://via.placeholder.com/100x100.png",
+            "name": "Single",
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718555.391836_micrro.png",
+            "href": "#"
+        },
+        {
+            "name": "Group",
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718593.756582_group.png",
+            "href": "#"
+        },
+        {
             "name": "Artist",
-            "href": "/artist"
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718909.944816_artist.png",
+            "href": "#"
+        },
+        {
+            "name": "Producer",
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718946.179783_dj.png",
+            "href": "#"
+        },
+        {
+            "name": "Music",
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718986.420902_headphone.png",
+            "href": "#"
+        },
+        {
+            "name": "Rapper",
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629719033.21609_rapper.png",
+            "href": "#"
+        },
+        {
+            "name": "Talks Video",
+            "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629719058.737185_video.png",
+            "href": "#"
         },
     ]
 }
@@ -87,7 +111,7 @@ mock_slider_lich_livestream = {
             "artist_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://via.placeholder.com/100x100.png",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718809.065704_live1.png",
             "rz_point": 50000,
             "title": "Phá đảo mọi giới hạn Bứt phá mọi cuộc chơi",
             "followers": 10000,
@@ -99,7 +123,7 @@ mock_slider_lich_livestream = {
             "artist_id": "alan-walker",
             "artst_name": "Alan Walker",
             "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://via.placeholder.com/100x100.png",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718820.854798_live2.png",
             "rz_point": 50000,
             "title": "Quẩy lên nào bà coan ư ư ư....",
             "followers": 10000,
@@ -124,9 +148,9 @@ mock_slider_top_music = {
             "artist_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://via.placeholder.com/100x100.png",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718422.122064_music1.png",
             "rz_point": 50000,
-            "title": "Phá đảo mọi giới hạn Bứt phá mọi cuộc chơi",
+            "title": "Mixtape lên mây",
             "followers": 10000,
             "href": "/play/music/track1",
             "duration": 3600
@@ -134,11 +158,23 @@ mock_slider_top_music = {
         {
             "id": "track2",
             "artist_id": "dj-quang-minnh",
-            "artst_name": "DJ Quang Minh",
+            "artst_name": "Justin Bieber",
             "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://via.placeholder.com/100x100.png",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
-            "title": "Phá đảo mọi giới hạn Bứt phá mọi cuộc chơi",
+            "title": "Mixtape Peaches",
+            "followers": 10000,
+            "href": "/play/music/track2",
+            "duration": 3600
+        },
+        {
+            "id": "track3",
+            "artist_id": "dj-quang-minnh",
+            "artst_name": "Alan Bieber",
+            "on_air_time": "2021-08-10 10:10:10",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
+            "rz_point": 50000,
+            "title": "Khu tao sống",
             "followers": 10000,
             "href": "/play/music/track2",
             "duration": 3600
@@ -160,15 +196,22 @@ mock_top_idol = {
         {
             "id": "justin-bieber",
             "name": "Justin Bieber",
-            "avatar": "https://via.placeholder.com/100x100.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718758.478267_justin.png",
             "href": "/artist/justin-bieber",
             "following": False,
         },
         {
             "id": "soda",
             "name": "Soda",
-            "avatar": "https://via.placeholder.com/100x100.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png",
             "href": "/artist/soda",
+            "following": True,
+        },
+        {
+            "id": "binz",
+            "name": "BinZ",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718494.115022_alan.png",
+            "href": "/artist/binz",
             "following": True,
         },
     ]
@@ -185,25 +228,22 @@ mock_feed_all = {
             "astist_id": "alan-walker",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo culpa blanditiis neque veritatis animi non facere dicta dolores ratione accusamus pariatur, aut quos rem earum consectetur! Ducimus assumenda itaque voluptas.Quasi veritatis corporis odit mollitia, autem iusto fugit perferendis fugiat, perspiciatis voluptatibus molestiae dolore optio ea voluptatem dolores non laboriosam quam nobis. Inventore nulla illo perspiciatis, at officia consequuntur adipisci.",
             "name": "Alan Walker",
-            "avatar": "https://via.placeholder.com/100x100.png",
-            "created_date": "Thời gian đăng",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718494.115022_alan.png",
+            "created_date": "2021-08-10 10:10:10",
             "images": [
-                "https://via.placeholder.com/100x100.png",
-                "https://via.placeholder.com/100x100.png",
-                "https://via.placeholder.com/100x100.png",
+                "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718661.597107_feed1.png"
+                "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718687.819476_feed2.png"
             ]
         },
         {
             "id": "feed2",
-            "astist_id": "alan-walker",
+            "astist_id": "binz",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo culpa blanditiis neque veritatis animi non facere dicta dolores ratione accusamus pariatur, aut quos rem earum consectetur! Ducimus assumenda itaque voluptas.Quasi veritatis corporis odit mollitia, autem iusto fugit perferendis fugiat, perspiciatis voluptatibus molestiae dolore optio ea voluptatem dolores non laboriosam quam nobis. Inventore nulla illo perspiciatis, at officia consequuntur adipisci.",
-            "name": "Alan Walker",
-            "avatar": "https://via.placeholder.com/100x100.png",
-            "created_date": "Thời gian đăng",
+            "name": "BinZ",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718758.478267_justin.png",
+            "created_date": "2021-08-10 10:10:10",
             "images": [
-                "https://via.placeholder.com/100x100.png",
-                "https://via.placeholder.com/100x100.png",
-                "https://via.placeholder.com/100x100.png",
+                "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718661.597107_feed1.png"
             ]
         },
     ]
@@ -212,8 +252,8 @@ mock_tabs = {
     "type": BLOCK_TABS,
     "id": "mock_tabs",
     "meta": {
-        "image": "Top Idol",
-        "href": "https://via.placeholder.com/100x100.png",
+        "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629719775.600669_newfeed.png",
+        "href": "/feed",
     },
     "data": [
         {

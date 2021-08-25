@@ -15,31 +15,31 @@ mock_idol_live = {
     "data": [
         {
             "name": "Trang Moon",
-            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718574.491582_trangmoon.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835153.22718_1.png",
             "live_stream": True,
             "href": "/live/artist/trang-moon"
         },
         {
             "name": "Soda",
-            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835169.962013_2.png",
             "live_stream": True,
             "href": "/live/artist/soda"
         },
         {
             "name": "Alan Walker",
-            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718494.115022_alan.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
             "live_stream": True,
             "href": "/live/artist/alan-walker"
         },
         {
             "name": "Đen Vâu",
-            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718774.680648_mei.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png",
             "live_stream": False,
             "href": "/live/artist/den-vau"
         },
         {
             "name": "Binz",
-            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png",
+            "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
             "live_stream": False,
             "href": "/live/artist/binz"
         },
@@ -196,21 +196,21 @@ mock_top_idol = {
         {
             "id": "justin-bieber",
             "name": "Justin Bieber",
-            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718758.478267_justin.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
             "href": "/artist/justin-bieber",
             "following": False,
         },
         {
             "id": "soda",
             "name": "Soda",
-            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png",
             "href": "/artist/soda",
             "following": True,
         },
         {
             "id": "binz",
             "name": "BinZ",
-            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718494.115022_alan.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
             "href": "/artist/binz",
             "following": True,
         },
@@ -228,7 +228,7 @@ mock_feed_all = {
             "astist_id": "alan-walker",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo culpa blanditiis neque veritatis animi non facere dicta dolores ratione accusamus pariatur, aut quos rem earum consectetur! Ducimus assumenda itaque voluptas.Quasi veritatis corporis odit mollitia, autem iusto fugit perferendis fugiat, perspiciatis voluptatibus molestiae dolore optio ea voluptatem dolores non laboriosam quam nobis. Inventore nulla illo perspiciatis, at officia consequuntur adipisci.",
             "name": "Alan Walker",
-            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718494.115022_alan.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
             "created_date": "2021-08-10 10:10:10",
             "images": [
                 "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718661.597107_feed1.png"
@@ -240,7 +240,7 @@ mock_feed_all = {
             "astist_id": "binz",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo culpa blanditiis neque veritatis animi non facere dicta dolores ratione accusamus pariatur, aut quos rem earum consectetur! Ducimus assumenda itaque voluptas.Quasi veritatis corporis odit mollitia, autem iusto fugit perferendis fugiat, perspiciatis voluptatibus molestiae dolore optio ea voluptatem dolores non laboriosam quam nobis. Inventore nulla illo perspiciatis, at officia consequuntur adipisci.",
             "name": "BinZ",
-            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718758.478267_justin.png",
+            "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
             "created_date": "2021-08-10 10:10:10",
             "images": [
                 "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718661.597107_feed1.png"

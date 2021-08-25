@@ -20,7 +20,12 @@ IDOL = [
     'https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718574.491582_trangmoon.png',
     'https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718758.478267_justin.png',
     'https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718774.680648_mei.png',
-    'https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png'
+    'https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718836.541296_soda.png',
+    'https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835153.22718_1.png',
+    'https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835169.962013_2.png',
+    'https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png',
+    'https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png',
+    'https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png',
 ]
 
 FEEDS = [

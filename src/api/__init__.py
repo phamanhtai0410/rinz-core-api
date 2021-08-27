@@ -4,7 +4,7 @@ from .block import bp as rest_block
 from .sitemaps import bp as rest_sitemap
 from .artist import bp as rest_artist
 from .track import bp as rest_track
-from .evnt import bp as rest_event
+from .event import bp as rest_event
 
 DEFAULT_BLUEPRINTS = [
     rest_index,

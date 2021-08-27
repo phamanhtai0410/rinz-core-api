@@ -25,3 +25,5 @@ class DefaultConfig(BaseConfig):
     # Flask-babel: http://pythonhosted.org/Flask-Babel/
     ACCEPT_LANGUAGES = ['vi']
     BABEL_DEFAULT_LOCALE = 'en'
+
+    MONGO_URI_RINZ_MUSIC = 'mongodb://203.205.21.196:27017/rzmusic'

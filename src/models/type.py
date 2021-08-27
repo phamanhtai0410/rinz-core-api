@@ -1,0 +1,8 @@
+STATUS_PUBLIC = 'public'
+STATUS_INACTIVE = 'inactive'
+
+
+STATUS = [
+    STATUS_PUBLIC,
+    STATUS_INACTIVE,
+]

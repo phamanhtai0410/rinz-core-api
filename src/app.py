@@ -8,7 +8,10 @@ from sentry_sdk import capture_exception, capture_message
 from sentry_sdk.integrations.flask import FlaskIntegration
 from flask import Flask, request, jsonify
 from .config import DefaultConfig
-from .extensions import redis_cache
+from .extensions import (
+    redis_cache,
+    mdb
+)
 
 from src.api import DEFAULT_BLUEPRINTS
 
@@ -61,7 +64,7 @@ def configure_extensions(app):
     # print('Init Redis user info successfully')
 
     # Sentry
-    pass
+    mdb.init_app(app, uri=app.config['MONGO_URI_RINZ_MUSIC'])
 
 
 def configure_blueprints(app, blueprints):

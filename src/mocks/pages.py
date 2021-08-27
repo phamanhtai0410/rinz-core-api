@@ -12,6 +12,20 @@ home_screen = {
     ]
 }
 
+creator_screen = {
+    'id': 'creator',
+    'slug': '',
+    'blocks': [
+        "new_tweet_1",
+        "block_creator_icons",
+        "mock_slider_lich_livestream_us",
+        "mock_slider_music_uploaded",
+        "mock_albums_us",
+        "mock_albums_hot"
+    ]
+}
+
 MOCKS = [
-    home_screen
+    home_screen,
+    creator_screen
 ]

@@ -1,6 +1,7 @@
 home_screen = {
     'id': 'home-page',
     'slug': '',
+    'tile': '',
     'blocks': [
         "block_search_bar",
         "block_idol_live",
@@ -14,7 +15,8 @@ home_screen = {
 
 creator_screen = {
     'id': 'creator',
-    'slug': '',
+    'slug': 'creator',
+    'title': 'Góc sáng tạo',
     'blocks': [
         "new_tweet_1",
         "block_creator_icons",

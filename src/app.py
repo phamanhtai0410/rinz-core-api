@@ -13,25 +13,20 @@ from .extensions import (
     mdb
 )
 
-from src.api import DEFAULT_BLUEPRINTS
-
 # For import *
 __all__ = ['create_app']
 
 
-def create_app(config=None, app_name=None, blueprints=None):
+def create_app(config=None, app_name=None):
     """Create a Flask app."""
-
     if app_name is None:
         app_name = DefaultConfig.PROJECT
-    if blueprints is None:
-        blueprints = DEFAULT_BLUEPRINTS
 
     app = Flask(app_name, instance_relative_config=True)
     configure_app(app, config)
     configure_hook(app)
-    configure_blueprints(app, blueprints)
     configure_extensions(app)
+    configure_blueprints(app)
     configure_template_filters(app)
     configure_error_handlers(app)
     configure_logging_level()
@@ -63,13 +58,15 @@ def configure_extensions(app):
     # redis_cluster.init_app(app, config_prefix='REDIS_USERS')
     # print('Init Redis user info successfully')
 
+    print(app.config['MONGO_URI_RINZ_MUSIC'])
+
     # Sentry
     mdb.init_app(app, uri=app.config['MONGO_URI_RINZ_MUSIC'])
 
 
-def configure_blueprints(app, blueprints):
+def configure_blueprints(app):
     """Configure blueprints in views."""
-
+    from src.api import DEFAULT_BLUEPRINTS as blueprints
     for blueprint in blueprints:
         app.register_blueprint(
             blueprint,

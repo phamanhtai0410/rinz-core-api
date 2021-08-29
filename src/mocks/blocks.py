@@ -233,7 +233,7 @@ mock_feed_all = {
             "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
             "created_date": "2021-08-10 10:10:10",
             "images": [
-                "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718661.597107_feed1.png"
+                "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718661.597107_feed1.png",
                 "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718687.819476_feed2.png"
             ]
         },

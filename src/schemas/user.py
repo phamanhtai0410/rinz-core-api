@@ -10,11 +10,12 @@ class Item(ma.Schema):
         ordered = True
 
     id = ma.fields.Int()
+    balance = ma.fields.Int()
 
     user_address = ma.fields.Str()
     user_avatar = ma.fields.Str()
     user_bio = ma.fields.Str()
-    user_birthday = ma.fields.Str()
+    user_birthday = ma.fields.Int()
     user_email = ma.fields.Str()
     user_full_name = ma.fields.Str()
     user_gender = ma.fields.Str()

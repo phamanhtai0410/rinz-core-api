@@ -7,6 +7,7 @@ from .artist import bp as rest_artist
 from .track import bp as rest_track
 from .event import bp as rest_event
 from .meta import bp as rest_meta
+from .stream import bp as rest_stream
 
 DEFAULT_BLUEPRINTS = [
     rest_index,
@@ -18,4 +19,5 @@ DEFAULT_BLUEPRINTS = [
     rest_track,
     rest_event,
     rest_meta,
+    rest_stream,
 ]

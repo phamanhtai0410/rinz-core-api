@@ -7,7 +7,7 @@ from http import HTTPStatus
 import pydash as py_
 
 
-class RZ_ID(object):
+class RzID(object):
     RZ_ID_API = os.getenv('RZ_ID_API') or 'https://api-staging.thecuatui.net'
     RZ_ID_KEY = os.getenv('RZ_ID_KEY') or '8b65e82396d4c53296f36a1531ededca'
 

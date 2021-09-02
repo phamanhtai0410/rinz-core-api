@@ -1,7 +1,7 @@
 track_1 = {
     "id": "track-1",
     "name": "Trai Thành Phố Lớn",
-    "astist_id": "binz",
+    "author_id": "binz",
     "astist_name": "BinZ",
     "duration": 180,
     "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718422.122064_music1.png",

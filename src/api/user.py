@@ -24,8 +24,8 @@ def user_info(user_info):
         payload = request.json
         try:
             obj = SchemaUser.ItemUpdate().load(payload)
-            print(obj)
-            result = Repo.mUser.update(uid, obj, True)
+            user_info = {**user_info, **obj}
+            result = Repo.mUser.update(uid, user_info, True)
         except ValidationError as err:
             return {
                 "status": Consts.STATUS_NOT_OK,
@@ -34,8 +34,6 @@ def user_info(user_info):
                 "msg": "Invalid format!"
             }
 
-    rzm_user_info = Repo.mUser.get_item(uid)
-    user_info = {**user_info, **rzm_user_info}
     return {
         "status": Consts.STATUS_NOT_OK,
         "error_code": HTTPStatus.OK,

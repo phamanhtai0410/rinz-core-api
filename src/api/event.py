@@ -7,15 +7,19 @@ from marshmallow import ValidationError
 import src.constants as Consts
 import src.middlewares.http as Http
 import src.models.repo as Repo
-import src.schemas.event as SchemaEvent
+import src.schemas.event as SchemaResource
+import src.decorators as Decorators
 
 bp = Blueprint('event', __name__, url_prefix='/api/event')
+
+RepoResource = Repo.mEvent
 
 
 @bp.route('/<string:oid>', methods=['GET', 'PUT', 'DELETE'])
 @Http.make_cross_resp
-def get_item(oid):
-    item = Repo.mEvent.get_item(oid)
+@Decorators.require_login_actions
+def get_item(user_info, oid):
+    item = RepoResource.get_item(oid)
     print(oid, item)
     if not item:
         return {
@@ -25,10 +29,19 @@ def get_item(oid):
             "msg": ""
         }
 
+    uid = py_.get(user_info, 'id', -1)
+    if request.method in Consts.REQUEST_ACTTIONS_METHODS and uid != py_.get(item, 'author_id'):
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.FORBIDDEN,
+            "data": {},
+            "msg": "Permission Denied!"
+        }
+
     if request.method == 'DELETE':
         force = py_.get(request.args, 'force', False)
         print(force)
-        result = Repo.mEvent.delete(oid, force)
+        result = RepoResource.delete(oid, force)
         return {
             "status": Consts.STATUS_OK,
             "error_code": Consts.NOT_E,
@@ -36,25 +49,42 @@ def get_item(oid):
             "msg": "success"
         }
 
+    if request.method == 'PUT':
+        payload = request.json
+        try:
+            obj = SchemaResource.ItemUpdate().load(payload)
+            print(obj)
+            result = RepoResource.update(oid, obj, True)
+        except ValidationError as err:
+            return {
+                "status": Consts.STATUS_NOT_OK,
+                "error_code": HTTPStatus.BAD_REQUEST,
+                "data": err.messages,
+                "msg": "Invalid format!"
+            }
+
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,
-        "data": SchemaEvent.Item().dump(item),
+        "data": SchemaResource.Item().dump(item),
         "msg": "success"
     }
 
 
 @bp.route('', methods=['GET', 'POST'])
 @Http.make_cross_resp
-def crud():
+@Decorators.require_login_actions
+def crud(user_info):
     if request.method == 'POST':
         payload = request.json
         try:
-            obj = SchemaEvent.Item().load(payload)
+            obj = SchemaResource.ItemUpdate().load(payload)
+            obj["author_id"] = user_info["id"]
+            obj["author_name"] = user_info["user_full_name"]
             print(obj)
-            result = Repo.mEvent.insert(obj)
+            result = RepoResource.insert(obj)
             return {
-                "status": Consts.STATUS_NOT_OK,
+                "status": Consts.STATUS_OK,
                 "error_code": HTTPStatus.OK,
                 "data": bool(result),
                 "msg": "Success"
@@ -67,10 +97,10 @@ def crud():
                 "msg": "Invalid format!"
             }
 
-    data = Repo.mEvent.get_list()
+    data = RepoResource.get_list()
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,
-        "data": SchemaEvent.Item(many=True).dump(data),
+        "data": SchemaResource.Item(many=True).dump(data),
         "msg": "Success"
     }

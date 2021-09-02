@@ -2,8 +2,8 @@
 
 from flask_script import Manager
 from src import create_app
-from gevent import monkey
-monkey.patch_all()
+# from gevent import monkey
+# monkey.patch_all()
 
 
 app = create_app()

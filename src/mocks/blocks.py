@@ -14,34 +14,39 @@ mock_idol_live = {
     "id": "block_idol_live",
     "data": [
         {
-            "name": "Trang Moon",
+            "author_name": "Trang Moon",
+            "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835153.22718_1.png",
             "live_stream": True,
-            "href": "/live/artist/trang-moon"
+            "type": "livestream" 
         },
         {
-            "name": "Soda",
+            "author_name": "Soda",
+            "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835169.962013_2.png",
             "live_stream": True,
-            "href": "/live/artist/soda"
+            "type": "livestream" 
         },
         {
-            "name": "Alan Walker",
+            "author_name": "Alan Walker",
+            "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
             "live_stream": True,
-            "href": "/live/artist/alan-walker"
+            "type": "livestream" 
         },
         {
-            "name": "Đen Vâu",
+            "author_name": "Đen Vâu",
+            "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png",
             "live_stream": False,
-            "href": "/live/artist/den-vau"
+            "type": "livestream" 
         },
         {
-            "name": "Binz",
+            "author_name": "Binz",
+            "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
             "live_stream": False,
-            "href": "/live/artist/binz"
+            "type": "livestream" 
         },
     ],
     "meta": {}
@@ -55,42 +60,42 @@ mock_widget_menus = {
         {
             "name": "Newfeed",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718338.634737_news.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Single",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718555.391836_micrro.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Group",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718593.756582_group.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Artist",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718909.944816_artist.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Producer",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718946.179783_dj.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Music",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718986.420902_headphone.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Rapper",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629719033.21609_rapper.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Talks Video",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629719058.737185_video.png",
-            "href": "#"
+            "type": "#"
         },
     ]
 }
@@ -100,35 +105,35 @@ mock_slider_lich_livestream = {
     "id": "mock_slider_lich_livestream",
     "meta": {
         "title": "Lịch Live Stream",
-        "href": "#",
+        "type": "#",
         "more_text": "Xem tất cả >>",
-        "more_href": "/live/all",
+        "more_href": "#",
         "data_type": "event",
         "rows": 1
     },
     "data": [
         {
-            "id": "event1",
-            "artist_id": "dj-quang-minnh",
+            "id": "613033af6c5a390b818098c7",
+            "author_id": 248,
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718809.065704_live1.png",
             "rz_point": 50000,
             "title": "Phá đảo mọi giới hạn Bứt phá mọi cuộc chơi",
             "followers": 10000,
-            "href": "/event/event1",
+            "type": "livestream",
             "duration": 3600
         },
         {
-            "id": "event2",
-            "artist_id": "alan-walker",
+            "id": "613033af6c5a390b818098c7",
+            "author_id": 248,
             "artst_name": "Alan Walker",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718820.854798_live2.png",
             "rz_point": 50000,
             "title": "Quẩy lên nào bà coan ư ư ư....",
             "followers": 10000,
-            "href": "/event/event2",
+            "type": "livestream",
             "duration": 3600
         }
     ]
@@ -138,7 +143,7 @@ mock_slider_top_music = {
     "id": "mock_slider_top_music",
     "meta": {
         "title": "Top Music",
-        "href": "#",
+        "type": "#",
         "more_text": "Xem tất cả >>",
         "more_href": "/music",
         "data_type": "music",
@@ -147,38 +152,38 @@ mock_slider_top_music = {
     "data": [
         {
             "id": "track1",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718422.122064_music1.png",
             "rz_point": 50000,
             "title": "Mixtape lên mây",
             "followers": 10000,
-            "href": "/play/music/track1",
+            "type": "music",
             "duration": 3600
         },
         {
             "id": "track2",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Justin Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Mixtape Peaches",
             "followers": 10000,
-            "href": "/play/music/track2",
+            "type": "music",
             "duration": 3600
         },
         {
             "id": "track3",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/music/track2",
+            "type": "music",
             "duration": 3600
         },
     ]
@@ -189,31 +194,31 @@ mock_top_idol = {
     "id": "mock_top_idol",
     "meta": {
         "title": "Top Idol",
-        "href": "#",
+        "type": "#",
         "more_text": "Xem tất cả >>",
         "more_href": "/idols",
         "data_type": "idols"
     },
     "data": [
         {
-            "id": "justin-bieber",
+            "id": 248,
             "name": "Justin Bieber",
             "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
-            "href": "/artist/justin-bieber",
+            "type": "livestream",
             "following": False,
         },
         {
-            "id": "soda",
+            "id": 248,
             "name": "Soda",
             "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png",
-            "href": "/artist/soda",
+            "type": "livestream",
             "following": True,
         },
         {
-            "id": "binz",
+            "id": "justin-bieber",
             "name": "BinZ",
             "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
-            "href": "/artist/binz",
+            "type": "livestream",
             "following": True,
         },
     ]
@@ -227,7 +232,7 @@ mock_feed_all = {
     "data": [
         {
             "id": "feed1",
-            "astist_id": "alan-walker",
+            "author_id": "alan-walker",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo culpa blanditiis neque veritatis animi non facere dicta dolores ratione accusamus pariatur, aut quos rem earum consectetur! Ducimus assumenda itaque voluptas.Quasi veritatis corporis odit mollitia, autem iusto fugit perferendis fugiat, perspiciatis voluptatibus molestiae dolore optio ea voluptatem dolores non laboriosam quam nobis. Inventore nulla illo perspiciatis, at officia consequuntur adipisci.",
             "name": "Alan Walker",
             "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
@@ -239,7 +244,7 @@ mock_feed_all = {
         },
         {
             "id": "feed2",
-            "astist_id": "binz",
+            "author_id": "binz",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo culpa blanditiis neque veritatis animi non facere dicta dolores ratione accusamus pariatur, aut quos rem earum consectetur! Ducimus assumenda itaque voluptas.Quasi veritatis corporis odit mollitia, autem iusto fugit perferendis fugiat, perspiciatis voluptatibus molestiae dolore optio ea voluptatem dolores non laboriosam quam nobis. Inventore nulla illo perspiciatis, at officia consequuntur adipisci.",
             "name": "BinZ",
             "avatar": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
@@ -255,26 +260,26 @@ mock_tabs = {
     "id": "mock_tabs",
     "meta": {
         "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629719775.600669_newfeed.png",
-        "href": "/feed",
+        "type": "/feed",
     },
     "data": [
         {
             "id": "mock_feed_all",  # block_id
             "name": "Tất cả",
             "type": "render",
-            "href": ""
+            "type": ""
         },
         {
             "id": "",
             "name": "RinZ Music",
             "type": "direct",
-            "href": "<site-map-route>"
+            "type": "<site-map-route>"
         },
         {
             "id": "",
             "name": "Idol",
             "type": "direct",
-            "href": "<site-map-route>"
+            "type": "<site-map-route>"
         },
     ]
 }
@@ -297,22 +302,22 @@ mock_creator_icons = {
         {
             "name": "Upload nhạc",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718338.634737_news.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Tạo Album",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718338.634737_news.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Tạo Private call",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718338.634737_news.png",
-            "href": "#"
+            "type": "#"
         },
         {
             "name": "Tạo Livestream",
             "icon": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718338.634737_news.png",
-            "href": "#"
+            "type": "#"
         },
     ]
 }
@@ -322,7 +327,7 @@ mock_slider_lich_livestream_us = {
     "id": "mock_slider_lich_livestream_us",
     "meta": {
         "title": "Livestream của tối",
-        "href": "#",
+        "type": "#",
         "more_text": "",
         "more_href": "#",
         "data_type": "event"
@@ -330,26 +335,26 @@ mock_slider_lich_livestream_us = {
     "data": [
         {
             "id": "event1",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718809.065704_live1.png",
             "rz_point": 50000,
             "title": "Phá đảo mọi giới hạn Bứt phá mọi cuộc chơi",
             "followers": 10000,
-            "href": "/event/event1",
+            "type": "/event/event1",
             "duration": 3600
         },
         {
             "id": "event2",
-            "artist_id": "alan-walker",
+            "author_id": "alan-walker",
             "artst_name": "Alan Walker",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718820.854798_live2.png",
             "rz_point": 50000,
             "title": "Quẩy lên nào bà coan ư ư ư....",
             "followers": 10000,
-            "href": "/event/event2",
+            "type": "/event/event2",
             "duration": 3600
         }
     ]
@@ -359,7 +364,7 @@ mock_slider_music_uploaded = {
     "id": "mock_slider_music_uploaded",
     "meta": {
         "title": "Nhạc đã upload",
-        "href": "#",
+        "type": "#",
         "more_text": "",
         "more_href": "",
         "data_type": "music",
@@ -368,62 +373,62 @@ mock_slider_music_uploaded = {
     "data": [
         {
             "id": "track1",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718422.122064_music1.png",
             "rz_point": 50000,
             "title": "Mixtape lên mây",
             "followers": 10000,
-            "href": "/play/music/track1",
+            "type": "/play/music/track1",
             "duration": 3600
         },
         {
             "id": "track2",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Justin Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Mixtape Peaches",
             "followers": 10000,
-            "href": "/play/music/track2",
+            "type": "/play/music/track2",
             "duration": 3600
         },
         {
             "id": "track3",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/music/track2",
+            "type": "/play/music/track2",
             "duration": 3600
         },
         {
             "id": "track3",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/music/track2",
+            "type": "/play/music/track2",
             "duration": 3600
         },
         {
             "id": "track3",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/music/track2",
+            "type": "/play/music/track2",
             "duration": 3600
         },
     ]
@@ -433,7 +438,7 @@ mock_albums_us = {
     "id": "mock_albums_us",
     "meta": {
         "title": "Album Nhạc",
-        "href": "#",
+        "type": "#",
         "more_text": "",
         "more_href": "",
         "data_type": "album",
@@ -442,7 +447,7 @@ mock_albums_us = {
     "data": [
         {
             "id": "album-1",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": [
@@ -454,56 +459,56 @@ mock_albums_us = {
             "rz_point": 50000,
             "title": "Mixtape lên mây",
             "followers": 10000,
-            "href": "/play/album/album-1",
+            "type": "/play/album/album-1",
             "duration": 3600,
             "banner_mixed": True,
         },
         {
             "id": "album-2",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Justin Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Mixtape Peaches",
             "followers": 10000,
-            "href": "/play/album/album-2",
+            "type": "/play/album/album-2",
             "duration": 3600
         },
         {
             "id": "album-3",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/album/album-3",
+            "type": "/play/album/album-3",
             "duration": 3600
         },
         {
             "id": "album-4",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/album/album-4",
+            "type": "/play/album/album-4",
             "duration": 3600
         },
         {
             "id": "album-5",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/album/album-5",
+            "type": "/play/album/album-5",
             "duration": 3600
         },
     ]
@@ -513,7 +518,7 @@ mock_albums_hot = {
     "id": "mock_albums_hot",
     "meta": {
         "title": "Đang HOT",
-        "href": "#",
+        "type": "#",
         "more_text": "",
         "more_href": "",
         "data_type": "album",
@@ -522,7 +527,7 @@ mock_albums_hot = {
     "data": [
         {
             "id": "album-1",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": [
@@ -534,56 +539,56 @@ mock_albums_hot = {
             "rz_point": 50000,
             "title": "Mixtape lên mây",
             "followers": 10000,
-            "href": "/play/album/album-1",
+            "type": "/play/album/album-1",
             "duration": 3600,
             "banner_mixed": True,
         },
         {
             "id": "album-2",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Justin Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Mixtape Peaches",
             "followers": 10000,
-            "href": "/play/album/album-2",
+            "type": "/play/album/album-2",
             "duration": 3600
         },
         {
             "id": "album-3",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/album/album-3",
+            "type": "/play/album/album-3",
             "duration": 3600
         },
         {
             "id": "album-4",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/album/album-4",
+            "type": "/play/album/album-4",
             "duration": 3600
         },
         {
             "id": "album-5",
-            "artist_id": "dj-quang-minnh",
+            "author_id": "dj-quang-minnh",
             "artst_name": "Alan Bieber",
             "on_air_time": "2021-08-10 10:10:10",
             "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "href": "/play/album/album-5",
+            "type": "/play/album/album-5",
             "duration": 3600
         },
     ]

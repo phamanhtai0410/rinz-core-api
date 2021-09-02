@@ -24,7 +24,7 @@ def get_item(user_info, oid):
     if not item:
         return {
             "status": Consts.STATUS_NOT_OK,
-            "error_code": Consts.ERROR_MISSING_DATA,
+            "error_code": HTTPStatus.NOT_FOUND,
             "data": {},
             "msg": ""
         }
@@ -44,7 +44,7 @@ def get_item(user_info, oid):
         result = RepoResource.delete(oid, force)
         return {
             "status": Consts.STATUS_OK,
-            "error_code": Consts.NOT_E,
+            "error_code": HTTPStatus.OK,
             "data": bool(result),
             "msg": "success"
         }
@@ -100,7 +100,7 @@ def crud(user_info):
     data = RepoResource.get_list()
     return {
         "status": Consts.STATUS_OK,
-        "error_code": Consts.NOT_E,
+        "error_code": HTTPStatus.OK,
         "data": SchemaResource.Item(many=True).dump(data),
         "msg": "Success"
     }

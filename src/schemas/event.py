@@ -12,7 +12,7 @@ class Item(ma.Schema):
     author_id = ma.fields.Int(required=True)
     author_name = ma.fields.Str()
 
-    banner = ma.fields.Str()
+    banner = ma.fields.Str(default='')
     duration = ma.fields.Int(default=0)
 
     title = ma.fields.Str(required=True)
@@ -30,11 +30,11 @@ class ItemUpdate(ma.Schema):
     class Meta:
         ordered = True
 
-    banner = ma.fields.Str()
+    banner = ma.fields.Str(default='')
     duration = ma.fields.Int(default=0)
 
     title = ma.fields.Str(required=True)
-    description = ma.fields.Str()
+    description = ma.fields.Str(default='')
 
     start_time = ma.fields.DateTime(Consts.DATETIME_FORMAT, required=True)
     end_time = ma.fields.DateTime(Consts.DATETIME_FORMAT)

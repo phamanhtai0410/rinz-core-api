@@ -14,39 +14,44 @@ mock_idol_live = {
     "id": "block_idol_live",
     "data": [
         {
+            "id": "61304fc0602a02d24e81c736",
             "author_name": "Trang Moon",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835153.22718_1.png",
             "live_stream": True,
-            "type": "livestream" 
+            "type": "event"
         },
         {
+            "id": "61304fc0602a02d24e81c736",
             "author_name": "Soda",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835169.962013_2.png",
             "live_stream": True,
-            "type": "livestream" 
+            "type": "event"
         },
         {
+            "id": "61304fc0602a02d24e81c736",
             "author_name": "Alan Walker",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
             "live_stream": True,
-            "type": "livestream" 
+            "type": "event"
         },
         {
+            "id": "61304fc0602a02d24e81c736",
             "author_name": "Đen Vâu",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png",
             "live_stream": False,
-            "type": "livestream" 
+            "type": "event"
         },
         {
+            "id": "61304fc0602a02d24e81c736",
             "author_name": "Binz",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",
             "live_stream": False,
-            "type": "livestream" 
+            "type": "event"
         },
     ],
     "meta": {}
@@ -113,7 +118,7 @@ mock_slider_lich_livestream = {
     },
     "data": [
         {
-            "id": "613033af6c5a390b818098c7",
+            "id": "61304fc0602a02d24e81c736",
             "author_id": 248,
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
@@ -125,7 +130,7 @@ mock_slider_lich_livestream = {
             "duration": 3600
         },
         {
-            "id": "613033af6c5a390b818098c7",
+            "id": "61304fc0602a02d24e81c736",
             "author_id": 248,
             "artst_name": "Alan Walker",
             "on_air_time": "2021-08-10 10:10:10",

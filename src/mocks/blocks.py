@@ -140,7 +140,53 @@ mock_slider_lich_livestream = {
             "followers": 10000,
             "type": "event",
             "duration": 3600
+        },
+        {
+            "id": "6130bcf004d0e61b857a4df2",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/09/02/1630558801.826208_poster.jpg",
+            "title": "Hook Dream Out",
+            "description": "DJ Myno tên đầy đủ là Nguyễn Thị Ngọc My sinh năm 1991. Cô là DJ nổi tiếng với nhiều năm kinh nghiệm trình diễn tại các bar club. Cô là vợ trung vệ Danny Van Bakel. Từ cuộc sống của một DJ sang chảnh bậc nhất, Myno lui về làm bà mẹ bỉm sữa như bao người phụ nữ khác.",
+            "start_time": "2021-09-06 07:00:00",
+            "rz_point": 1,
+            "tracks": [],
+            "author_id": 248,
+            "author_name": "DJ Myno",
+            "type": "event",
+            "followers": 0,
+            "artst_name": "DJ Myno",
+            "on_air_time": "2021-09-06 07:00:00",
+        },
+        {
+            "id": "6130bbfed90d87ae679d7098",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/09/02/1630558554.935137_poster.jpg",
+            "title": "Les't go, it real",
+            "description": "DJ Myno tên đầy đủ là Nguyễn Thị Ngọc My sinh năm 1991. Cô là DJ nổi tiếng với nhiều năm kinh nghiệm trình diễn tại các bar club. Cô là vợ trung vệ Danny Van Bakel. Từ cuộc sống của một DJ sang chảnh bậc nhất, Myno lui về làm bà mẹ bỉm sữa như bao người phụ nữ khác.",
+            "start_time": "2021-09-05 07:00:49",
+            "rz_point": 0,
+            "tracks": [],
+            "author_id": 248,
+            "author_name": "DJ Myno",
+            "type": "event",
+            "followers": 0,
+            "artst_name": "DJ Myno",
+            "on_air_time": "2021-09-05 07:00:49",
+        },
+        {
+            "id": "6130bb0de0c0f6d096cd618b",
+            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/09/02/1630558323.147796_poster.jpg",
+            "title": "DJ Myno cực sung",
+            "description": "DJ Myno tên đầy đủ là Nguyễn Thị Ngọc My sinh năm 1991. Cô là DJ nổi tiếng với nhiều năm kinh nghiệm trình diễn tại các bar club. Cô là vợ trung vệ Danny Van Bakel. Từ cuộc sống của một DJ sang chảnh bậc nhất, Myno lui về làm bà mẹ bỉm sữa như bao người phụ nữ khác.",
+            "start_time": "2021-09-05 06:55:20",
+            "rz_point": 0,
+            "tracks": [],
+            "author_id": 248,
+            "author_name": "FOO BAR",
+            "type": "event",
+            "followers": 0,
+            "artst_name": "DJ Myno",
+            "on_air_time": "2021-09-05 07:00:49",
         }
+
     ]
 }
 mock_slider_top_music = {

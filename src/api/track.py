@@ -10,7 +10,7 @@ import src.models.repo as Repo
 import src.schemas.event as SchemaResource
 import src.decorators as Decorators
 
-bp = Blueprint('event', __name__, url_prefix='/api/event')
+bp = Blueprint('track', __name__, url_prefix='/api/track')
 
 RepoResource = Repo.mTrack
 

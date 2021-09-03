@@ -39,6 +39,9 @@ class BaseDAO(object):
             oid = ObjectId(oid)
 
         return self.db.find_one({"_id": oid})
+    
+    def get_list_active(self):
+        return self.db.find({"status": STATUS_ACTIVE})
 
     def get_list(self, filter={}, page=1, per_page=PER_PAGE_DEFAULT, ):
         if not page:

@@ -210,7 +210,7 @@ mock_slider_top_music = {
             "rz_point": 50000,
             "title": "Mixtape lên mây",
             "followers": 10000,
-            "type": "music",
+            "type": "track",
             "duration": 3600
         },
         {
@@ -222,7 +222,7 @@ mock_slider_top_music = {
             "rz_point": 50000,
             "title": "Mixtape Peaches",
             "followers": 10000,
-            "type": "music",
+            "type": "track",
             "duration": 3600
         },
         {
@@ -234,7 +234,7 @@ mock_slider_top_music = {
             "rz_point": 50000,
             "title": "Khu tao sống",
             "followers": 10000,
-            "type": "music",
+            "type": "track",
             "duration": 3600
         },
     ]

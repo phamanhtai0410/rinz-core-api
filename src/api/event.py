@@ -97,7 +97,7 @@ def crud(user_info):
                 "msg": "Invalid format!"
             }
 
-    data = RepoResource.get_list()
+    data = RepoResource.get_list({"status": {"$ne": Consts.STATUS_INACTIVE}})
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

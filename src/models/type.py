@@ -1,9 +1,9 @@
-STATUS_PUBLIC = 'public'
+STATUS_ACTIVE = 'active'
 STATUS_INACTIVE = 'inactive'
 
 
 STATUS = [
-    STATUS_PUBLIC,
+    STATUS_ACTIVE,
     STATUS_INACTIVE,
 ]
 

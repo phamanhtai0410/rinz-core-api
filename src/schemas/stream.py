@@ -9,6 +9,11 @@ class StreamItem(ma.Schema):
     url = ma.fields.Str(required=True)
 
 
+class StreamProfile(ma.Schema):
+    profile = ma.fields.Str(required=True)
+    name = ma.fields.Str(required=True)
+
+
 class EventParserAPI(ma.Schema):
     class Meta:
         ordered = True
@@ -44,7 +49,15 @@ class EventConsumer(ma.Schema):
     class Meta:
         ordered = True
 
-    full_rtmp_url = ma.fields.Str()
+    # full_rtmp_url = ma.fields.Str()
+    streams = ma.fields.List(ma.fields.Nested(StreamItem))
+
+
+class Track(ma.Schema):
+    class Meta:
+        ordered = True
+
+    download = ma.fields.Boolean()
     streams = ma.fields.List(ma.fields.Nested(StreamItem))
 
 

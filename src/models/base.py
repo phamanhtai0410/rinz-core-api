@@ -39,14 +39,17 @@ class BaseDAO(object):
             oid = ObjectId(oid)
 
         return self.db.find_one({"_id": oid})
-    
-    def get_list_active(self):
-        return self.db.find({"status": STATUS_ACTIVE})
 
-    def get_list(self, filter={}, page=1, per_page=PER_PAGE_DEFAULT, ):
+    def get_list_active(self):
+        return self.get_list({"status": {"$ne": STATUS_INACTIVE}})
+
+    def get_list(self, filter={}, sort={}, page=1, per_page=PER_PAGE_DEFAULT, ):
         if not page:
             page = 1
         if not per_page or per_page > PER_PAGE_MAX:
             per_page = PER_PAGE_DEFAULT
 
-        return self.db.find(filter).sort("_id", -1).skip(int((page - 1) * per_page)).limit(per_page)
+        if not sort:
+            sort = [("_id", -1)]
+
+        return self.db.find(filter).sort(sort).skip(int((page - 1) * per_page)).limit(per_page)

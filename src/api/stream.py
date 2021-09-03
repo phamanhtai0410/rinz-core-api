@@ -105,3 +105,38 @@ def get_music_stream(user_info, oid):
         "data": schema_item.dump(stream),
         "msg": "success"
     }
+
+
+@bp.route('', methods=['POST'])
+@Http.make_cross_resp
+@Decorators.get_user_info
+def sync_encoded(user_info, oid):
+    event = Repo.mEvent.get_item(oid)
+    if not event:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": "Not found Event"
+        }
+
+    stream = Repo.mStream.get_stream(oid, Consts.RESOURCE_TYPE_EVENT, event)
+    if not stream:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": "Not found Stream"
+        }
+
+    uid = py_.get(user_info, 'id', -1)
+    author_id = py_.get(event, 'author_id')
+    is_owner = bool(uid == author_id)
+
+    schema_item = SchemaStream.EventOwner() if is_owner else SchemaStream.EventConsumer()
+    return {
+        "status": Consts.STATUS_OK,
+        "error_code": HTTPStatus.OK,
+        "data": schema_item.dump(stream),
+        "msg": "success"
+    }

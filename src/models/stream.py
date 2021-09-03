@@ -16,7 +16,9 @@ class StreamDAO(BaseDAO):
         """CACHE GET STREAM FLOW
 
         Args:
-            oid ([type]): [description]
+            oid ([str]):
+                + event: object id
+                + track, video: stream url
             rtype ([type]): [Resource Type]
         """
         obj_stream = self.m_get_item_by_type(oid, rtype)

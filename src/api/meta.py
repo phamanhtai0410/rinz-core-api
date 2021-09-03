@@ -9,6 +9,8 @@ import src.middlewares.http as Http
 import src.models.repo as Repo
 import src.schemas.meta as SchemaMeta
 
+from slugify import slugify
+
 bp = Blueprint('meta', __name__, url_prefix='/api/meta')
 
 
@@ -50,8 +52,13 @@ def crud():
     if request.method == 'POST':
         payload = request.json
         try:
-            obj = SchemaMeta.Item().load(payload)
+            obj = SchemaMeta.ItemUpdate().load(payload)
             print(obj)
+            slug = slugify(obj["name"])
+            obj["slug"] = slug
+            if not py_.get(obj, "value"):
+                obj["value"] = slug
+
             item = Repo.mMeta.insert(obj)
             return {
                 "status": Consts.STATUS_NOT_OK,
@@ -73,7 +80,7 @@ def crud():
     if _type and _type in Consts.META_TYPES:
         _filter = {'type': _type}
 
-    data = Repo.mMeta.get_list(_filter)
+    data = Repo.mMeta.get_list(_filter, [("name", 1)])
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,

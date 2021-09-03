@@ -8,9 +8,16 @@ class Item(ma.Schema):
     class Meta:
         ordered = True
 
-    id = ma.fields.Str(attribute='_id')
     type = ma.fields.Str(validate=ma.validate.OneOf(Consts.META_TYPES))
-    slug = ma.fields.Str()
-
+    id = ma.fields.Str(attribute='slug')
     name = ma.fields.Str(required=True)
-    value = ma.fields.Str()
+    value = ma.fields.Str(default='')
+
+
+class ItemUpdate(ma.Schema):
+    class Meta:
+        ordered = True
+
+    type = ma.fields.Str(validate=ma.validate.OneOf(Consts.META_TYPES))
+    name = ma.fields.Str(required=True)
+    value = ma.fields.Str(default='')

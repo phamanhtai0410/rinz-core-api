@@ -17,6 +17,7 @@ class Item(ma.Schema):
     banner = ma.fields.Str(default='')
     duration = ma.fields.Int(default=0)
 
+    url = ma.fields.Url(required=True)
     title = ma.fields.Str(required=True)
     description = ma.fields.Str()
 
@@ -37,12 +38,9 @@ class ItemUpdate(ma.Schema):
         ordered = True
 
     banner = ma.fields.Str(default='')
-
+    url = ma.fields.Url(required=True)
     title = ma.fields.Str(required=True)
     description = ma.fields.Str(default='')
-
     category = ma.fields.Str(default='')
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
-
-    url = ma.fields.Url(required=True)

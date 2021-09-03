@@ -15,7 +15,7 @@ class Item(ma.Schema):
     author_name = ma.fields.Str()
 
     banner = ma.fields.Str(default='')
-    duration = ma.fields.Int(default=0)
+    duration = ma.fields.Int(default=530)
 
     url = ma.fields.Url(required=True)
     title = ma.fields.Str(required=True)
@@ -27,10 +27,10 @@ class Item(ma.Schema):
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
 
-    streams = ma.fields.List(ma.fields.Nested(StreamProfile))
+    streams = ma.fields.List(ma.fields.Nested(StreamProfile), default=[])
     download = ma.fields.Boolean(default=False)
 
-    status = ma.fields.Str(validate=ma.validate.OneOf(Consts.TRACKS_STATUS))
+    status = ma.fields.Str(validate=ma.validate.OneOf(Consts.TRACKS_STATUS), default=Consts.STATUS_PROCESSING)
 
 
 class ItemUpdate(ma.Schema):

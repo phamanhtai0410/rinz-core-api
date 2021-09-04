@@ -120,11 +120,11 @@ mock_slider_lich_livestream = {
         {
             "id": "613257e369dcc076cee85bba",
             "author_id": 248,
-            "artst_name": "DJ Quang Minh",
+            "artst_name": "DJ Trang Moon",
             "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718809.065704_live1.png",
+            "banner": "https://static.thecuatui.net/thecuatui/images/2021/09/04/1630699833.230428_melo.jpeg",
             "rz_point": 50000,
-            "title": "Phá đảo mọi giới hạn Bứt phá mọi cuộc chơi",
+            "title": "Lên nóc nhà anh em ơi!!!",
             "followers": 10000,
             "type": "event",
             "duration": 3600
@@ -132,11 +132,11 @@ mock_slider_lich_livestream = {
         {
             "id": "6132574f69dcc076cee85bb9",
             "author_id": 248,
-            "artst_name": "Alan Walker",
+            "artst_name": "DJ Oxy",
             "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718820.854798_live2.png",
+            "banner": "https://static.thecuatui.net/thecuatui/images/2021/09/04/1630699646.481307_oxy.jpeg",
             "rz_point": 50000,
-            "title": "Quẩy lên nào bà coan ư ư ư....",
+            "title": "Vui lên nào bà coan ư ư ư....",
             "followers": 10000,
             "type": "event",
             "duration": 3600

@@ -118,7 +118,7 @@ mock_slider_lich_livestream = {
     },
     "data": [
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "613257e369dcc076cee85bba",
             "author_id": 248,
             "artst_name": "DJ Quang Minh",
             "on_air_time": "2021-08-10 10:10:10",
@@ -130,7 +130,7 @@ mock_slider_lich_livestream = {
             "duration": 3600
         },
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "6132574f69dcc076cee85bb9",
             "author_id": 248,
             "artst_name": "Alan Walker",
             "on_air_time": "2021-08-10 10:10:10",
@@ -168,7 +168,7 @@ mock_slider_lich_livestream = {
             "author_name": "DJ Myno",
             "type": "event",
             "followers": 0,
-            "artst_name": "DJ Myno",
+            "artst_name": "DJ Soma Ly",
             "on_air_time": "2021-09-05 07:00:49",
         },
         {

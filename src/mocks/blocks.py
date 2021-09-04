@@ -14,7 +14,7 @@ mock_idol_live = {
     "id": "block_idol_live",
     "data": [
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "613257e369dcc076cee85bba",
             "author_name": "Trang Moon",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835153.22718_1.png",
@@ -22,7 +22,7 @@ mock_idol_live = {
             "type": "event"
         },
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "6132574f69dcc076cee85bb9",
             "author_name": "Soda",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835169.962013_2.png",
@@ -30,7 +30,7 @@ mock_idol_live = {
             "type": "event"
         },
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "6130bcf004d0e61b857a4df2",
             "author_name": "Alan Walker",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835186.406358_3.png",
@@ -38,7 +38,7 @@ mock_idol_live = {
             "type": "event"
         },
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "6130bbfed90d87ae679d7098",
             "author_name": "Đen Vâu",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835197.565234_4.png",
@@ -46,7 +46,7 @@ mock_idol_live = {
             "type": "event"
         },
         {
-            "id": "6130737c602a02d24e81c737",
+            "id": "6130bbfed90d87ae679d7098",
             "author_name": "Binz",
             "author_id": 248,
             "image": "https://static.rinznetwork.com/rinzmusic/images/2021/08/25/1629835210.724095_5.png",

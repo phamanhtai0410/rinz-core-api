@@ -53,3 +53,9 @@ class BaseDAO(object):
             sort = [("_id", -1)]
 
         return self.db.find(filter).sort(sort).skip(int((page - 1) * per_page)).limit(per_page)
+
+    def get_random_items(self, filter={}, sort={}, size=1):
+        return self.db.aggregate([
+            {"$match": filter},
+            {"$sample": {"size": size}}
+        ])

@@ -54,25 +54,16 @@ def get_event_stream(user_info, oid):
 @Http.make_cross_resp
 @Decorators.get_user_info
 def get_music_stream(user_info, oid):
-    default_strack = {
-        "url": "/path/of/resource_track.mp3",
-        "download": "https://v01.rinznetwork.com/source/mp3/2021/08/31/test.mp3",
-        "streams": [
-            {
-                "profile": "128k",
-                "url": "https://v01.rinznetwork.com/encode/mp3/2021/08/31/test/test_128k.m3u8"
-            },
-            {
-                "profile": "320k",
-                "url": "https://v01.rinznetwork.com/encode/mp3/2021/08/31/test/test_320k.m3u8"
-            }
-        ]
-    }
+    results = Repo.mStream.get_random_items(
+        {"type": "track", "streams": {"$exists": True}},
+        size=1
+    )
+    stream = py_.get([item for item in results], 0)
     schema_item = SchemaStream.Track()
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
-        "data": schema_item.dump(default_strack),
+        "data": schema_item.dump(stream),
         "msg": "success"
     }
 

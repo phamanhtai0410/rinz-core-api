@@ -17,7 +17,7 @@ class Item(ma.Schema):
     banner = ma.fields.Str(default='')
     duration = ma.fields.Int(default=530)
 
-    url = ma.fields.Url(required=True)
+    url = ma.fields.Str(required=True)
     title = ma.fields.Str(required=True)
     description = ma.fields.Str()
 
@@ -30,7 +30,10 @@ class Item(ma.Schema):
     streams = ma.fields.List(ma.fields.Nested(StreamProfile), default=[])
     download = ma.fields.Boolean(default=False)
 
-    status = ma.fields.Str(validate=ma.validate.OneOf(Consts.TRACKS_STATUS), default=Consts.STATUS_PROCESSING)
+    status = ma.fields.Str(
+        validate=ma.validate.OneOf(Consts.TRACKS_STATUS),
+        default=Consts.STATUS_PROCESSING
+    )
 
 
 class ItemUpdate(ma.Schema):
@@ -38,7 +41,7 @@ class ItemUpdate(ma.Schema):
         ordered = True
 
     banner = ma.fields.Str(default='')
-    url = ma.fields.Url(required=True)
+    url = ma.fields.Str(required=True)
     title = ma.fields.Str(required=True)
     description = ma.fields.Str(default='')
     category = ma.fields.Str(default='')

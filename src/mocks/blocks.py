@@ -202,7 +202,7 @@ mock_slider_top_music = {
     },
     "data": [
         {
-            "id": "track3",
+            "id": "track1",
             "author_id": "dj-quang-minnh",
             "artst_name": "Ryker",
             "on_air_time": "2021-08-10 10:10:10",
@@ -214,7 +214,7 @@ mock_slider_top_music = {
             "duration": 3600
         },
         {
-            "id": "track3",
+            "id": "track2",
             "author_id": "dj-quang-minnh",
             "artst_name": "DJ TILO",
             "on_air_time": "2021-08-10 10:10:10",

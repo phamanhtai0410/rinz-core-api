@@ -202,30 +202,6 @@ mock_slider_top_music = {
     },
     "data": [
         {
-            "id": "track1",
-            "author_id": "dj-quang-minnh",
-            "artst_name": "DJ Quang Minh",
-            "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718422.122064_music1.png",
-            "rz_point": 50000,
-            "title": "Mixtape lên mây",
-            "followers": 10000,
-            "type": "track",
-            "duration": 3600
-        },
-        {
-            "id": "track2",
-            "author_id": "dj-quang-minnh",
-            "artst_name": "Justin Bieber",
-            "on_air_time": "2021-08-10 10:10:10",
-            "banner": "https://static.rinznetwork.com/rinzmusic/images/2021/08/23/1629718459.087283_music2.png",
-            "rz_point": 50000,
-            "title": "Mixtape Peaches",
-            "followers": 10000,
-            "type": "track",
-            "duration": 3600
-        },
-        {
             "id": "track3",
             "author_id": "dj-quang-minnh",
             "artst_name": "Ryker",
@@ -257,6 +233,42 @@ mock_slider_top_music = {
             "banner": "https://static.thecuatui.net/thecuatui/images/2021/08/31/1630367080.416072_Image-1.png",
             "rz_point": 50000,
             "title": "Mixtape lên mây cùng người chơi hệ nước",
+            "followers": 10000,
+            "type": "track",
+            "duration": 3600
+        },
+        {
+            "id": "track1",
+            "author_id": "dj-quang-minnh",
+            "artst_name": "DJ Quang Minh",
+            "on_air_time": "2021-08-10 10:10:10",
+            "banner": "https://static.thecuatui.net/thecuatui/images/2021/08/31/1630367272.036715_a.png",
+            "rz_point": 50000,
+            "title": "Mixtape lên mây",
+            "followers": 10000,
+            "type": "track",
+            "duration": 3600
+        },
+        {
+            "id": "track2",
+            "author_id": "dj-quang-minnh",
+            "artst_name": "CUKAK",
+            "on_air_time": "2021-08-10 10:10:10",
+            "banner": "https://static.thecuatui.net/thecuatui/images/2021/08/31/1630369966.209827_Rectangle%201543.png",
+            "rz_point": 50000,
+            "title": "Mixtape Peaches",
+            "followers": 10000,
+            "type": "track",
+            "duration": 3600
+        },
+        {
+            "id": "track2",
+            "author_id": "dj-quang-minnh",
+            "artst_name": "Nguyên Canu",
+            "on_air_time": "2021-08-10 10:10:10",
+            "banner": "https://static.thecuatui.net/thecuatui/images/2021/08/31/1630368878.874091_Rectangle%201544.png",
+            "rz_point": 10000,
+            "title": "Mixtape My Style My Name Vol9",
             "followers": 10000,
             "type": "track",
             "duration": 3600

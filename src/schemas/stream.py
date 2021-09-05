@@ -61,6 +61,33 @@ class Track(ma.Schema):
     streams = ma.fields.List(ma.fields.Nested(StreamItem))
 
 
+class EncodedTrack(ma.Schema):
+    class Meta:
+        ordered = True
+
+    type = ma.fields.Str(
+        validate=ma.validate.OneOf(Consts.RESOURCE_TYPE_ENCODEDS)
+    )
+    oid = ma.fields.Str(data_key='url', required=True)
+    download = ma.fields.Str(default='')
+    duration = ma.fields.Int(default=0)
+    streams = ma.fields.List(ma.fields.Nested(StreamItem), required=True)
+
+
+class EncodedVideo(ma.Schema):
+    class Meta:
+        ordered = True
+
+    type = ma.fields.Str(
+        validate=ma.validate.OneOf(Consts.RESOURCE_TYPE_ENCODEDS)
+    )
+    oid = ma.fields.Str(data_key='url', required=True)
+    download = ma.fields.Str(default='')
+    duration = ma.fields.Int(default=0)
+    thumb = ma.fields.Str(default='')
+    streams = ma.fields.List(ma.fields.Nested(StreamItem), required=True)
+
+
 class ItemUpdate(ma.Schema):
     class Meta:
         ordered = True

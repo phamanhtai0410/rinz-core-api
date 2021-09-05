@@ -100,34 +100,64 @@ def get_music_stream(user_info, oid):
 
 @bp.route('', methods=['POST'])
 @Http.make_cross_resp
-@Decorators.get_user_info
-def sync_encoded(user_info, oid):
-    event = Repo.mEvent.get_item(oid)
-    if not event:
+@Decorators.require_api_key
+def sync_encoded():
+    payload = request.json
+    try:
+        rtype = py_.get(payload, 'type')
+        if rtype not in Consts.RESOURCE_TYPE_ENCODEDS:
+            return {
+                "status": Consts.STATUS_NOT_OK,
+                "error_code": HTTPStatus.BAD_REQUEST,
+                "data": {},
+                "msg": "Invalid format resource type, It's must in `track, music, video` type!"
+            }
+
+        schema_update = SchemaStream.EncodedTrack()
+        if rtype in [Consts.RESOURCE_TYPE_MUSIC, Consts.RESOURCE_TYPE_TRACK]:
+            rtype = Consts.RESOURCE_TYPE_TRACK
+        else:
+            rtype = Consts.RESOURCE_TYPE_VIDEO
+            schema_update = SchemaStream.EncodedVideo()
+
+        obj = schema_update.load(payload)
+        # Check Item exists
+        obj_stream = RepoResource.get_item_with({
+            "oid": obj["oid"],
+            "type": rtype
+        })
+        if not obj_stream:
+            return {
+                "status": Consts.STATUS_NOT_OK,
+                "error_code": HTTPStatus.NOT_FOUND,
+                "data": {
+                    "url": obj["oid"],
+                    "type": rtype,
+                },
+                "msg": "This resource not available in our system. Please try again later."
+            }
+        obj["type"] = rtype
+        print(obj)
+        result = RepoResource.m_update_item_by_type(
+            obj["oid"], rtype,
+            obj, True
+        )
+        result = Repo.mTrack.update_by_filter(
+            {"url": obj["oid"]},
+            {"status": Consts.STATUS_ENCODED}
+        )
+        print(result)
         return {
-            "status": Consts.STATUS_NOT_OK,
-            "error_code": HTTPStatus.NOT_FOUND,
-            "data": {},
-            "msg": "Not found Event"
+            "status": Consts.STATUS_OK,
+            "error_code": HTTPStatus.OK,
+            "data": payload,
+            "msg": "success"
         }
 
-    stream = Repo.mStream.get_stream(oid, Consts.RESOURCE_TYPE_EVENT, event)
-    if not stream:
+    except ValidationError as err:
         return {
             "status": Consts.STATUS_NOT_OK,
-            "error_code": HTTPStatus.NOT_FOUND,
-            "data": {},
-            "msg": "Not found Stream"
+            "error_code": HTTPStatus.BAD_REQUEST,
+            "data": err.messages,
+            "msg": "Invalid format!"
         }
-
-    uid = py_.get(user_info, 'id', -1)
-    author_id = py_.get(event, 'author_id')
-    is_owner = bool(uid == author_id)
-
-    schema_item = SchemaStream.EventOwner() if is_owner else SchemaStream.EventConsumer()
-    return {
-        "status": Consts.STATUS_OK,
-        "error_code": HTTPStatus.OK,
-        "data": schema_item.dump(stream),
-        "msg": "success"
-    }

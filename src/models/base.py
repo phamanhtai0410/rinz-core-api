@@ -25,6 +25,10 @@ class BaseDAO(object):
         obj["last_updated"] = dt.datetime.utcnow()
         return self.db.update({"_id": oid}, {"$set": obj}, upsert=upsert)
 
+    def update_by_filter(self, filter, obj, upsert=False, multi=False):
+        obj["last_updated"] = dt.datetime.utcnow()
+        return self.db.update(filter, {"$set": obj}, upsert=upsert, multi=multi)
+
     def delete(self, oid, force=False):
         if ObjectId.is_valid(oid):
             oid = ObjectId(oid)
@@ -39,6 +43,9 @@ class BaseDAO(object):
             oid = ObjectId(oid)
 
         return self.db.find_one({"_id": oid})
+
+    def get_item_with(self, filter):
+        return self.db.find_one(filter)
 
     def get_list_active(self):
         return self.get_list({"status": {"$ne": STATUS_INACTIVE}})

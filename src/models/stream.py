@@ -12,6 +12,9 @@ class StreamDAO(BaseDAO):
     def m_get_item_by_type(self, oid, rtype):
         return self.db.find_one({"oid": oid, "type": rtype})
 
+    def m_update_item_by_type(self, oid, rtype, obj, upsert=False):
+        return self.db.update({"oid": oid, "type": rtype}, {"$set": obj}, upsert=upsert)
+
     def get_stream(self, oid, rtype, obj={}):
         """CACHE GET STREAM FLOW
 

@@ -82,6 +82,15 @@ def crud(user_info):
             author_id = user_info["id"]
             author_name = user_info["user_full_name"]
 
+            obj_track = RepoResource.get_item_with({"url": obj["url"]})
+            if obj_track:
+                return {
+                    "status": Consts.STATUS_NOT_OK,
+                    "error_code": HTTPStatus.CONFLICT,
+                    "data": {},
+                    "msg": "This Track already exists!"
+                }
+
             obj["author_id"] = author_id
             obj["author_name"] = author_name
             obj["status"] = Consts.STATUS_PROCESSING

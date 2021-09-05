@@ -3,6 +3,7 @@ from functools import wraps
 from http import HTTPStatus
 from src.api import user
 from flask import request
+import pydash as py_
 
 from lib.rz_id import RzID
 import src.constants as Consts
@@ -28,6 +29,22 @@ def get_user_info(f):
     def decorated(*args, **kwargs):
         user_info = get_rz_music_user_info()
         return f(user_info=user_info, *args, **kwargs)
+
+    return decorated
+
+
+def require_api_key(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        api_key = py_.get(request.headers, 'ApiKey', '')
+        if api_key not in Consts.VALIDATE_API_KEYS:
+            return {
+                "status": Consts.STATUS_NOT_OK,
+                "error_code": HTTPStatus.FORBIDDEN,
+                "data": {},
+                "msg": "API KEY INVALID!"
+            }
+        return f(*args, **kwargs)
 
     return decorated
 

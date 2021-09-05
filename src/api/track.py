@@ -82,6 +82,7 @@ def crud(user_info):
             author_id = user_info["id"]
             author_name = user_info["user_full_name"]
 
+            # Validate URL
             obj_track = RepoResource.get_item_with({"url": obj["url"]})
             if obj_track:
                 return {
@@ -89,6 +90,19 @@ def crud(user_info):
                     "error_code": HTTPStatus.CONFLICT,
                     "data": {},
                     "msg": "This Track already exists!"
+                }
+
+            # Validate Category
+            track_category = Repo.mMeta.get_item_with({
+                "type": Consts.META_TYPE_TRACK_CATEGORY,
+                "value": obj["category"]
+            })
+            if not track_category:
+                return {
+                    "status": Consts.STATUS_NOT_OK,
+                    "error_code": HTTPStatus.BAD_REQUEST,
+                    "data": {},
+                    "msg": "Invalid Track Category"
                 }
 
             obj["author_id"] = author_id

@@ -40,7 +40,7 @@ class ItemUpdate(ma.Schema):
     class Meta:
         ordered = True
 
-    banner = ma.fields.Str(default='')
+    banner = ma.fields.Str(required=True)
     url = ma.fields.Str(required=True)
     title = ma.fields.Str(required=True)
     description = ma.fields.Str(default='')

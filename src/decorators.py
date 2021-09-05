@@ -20,6 +20,10 @@ def get_rz_music_user_info():
 
     uid = user_info["id"]
     rzm_user_info = Repo.mUser.get_item(uid) or {}
+    if not rzm_user_info:
+        print(user_info)
+        Repo.mUser.update(uid, user_info, True)
+        print(f"- CREATED NEW USER SUCCESSFUL: {uid}")
     user_info = {**user_info, **rzm_user_info}
     return user_info
 

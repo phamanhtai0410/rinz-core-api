@@ -7,12 +7,12 @@ from marshmallow import ValidationError
 import src.constants as Consts
 import src.middlewares.http as Http
 import src.models.repo as Repo
-import src.schemas.track as SchemaResource
+import src.schemas.tweet as SchemaResource
 import src.decorators as Decorators
 
-bp = Blueprint('track', __name__, url_prefix='/api/track')
+bp = Blueprint('tweet', __name__, url_prefix='/api/tweet')
 
-RepoResource = Repo.mTrack
+RepoResource = Repo.mTweet
 
 
 @bp.route('/<string:oid>', methods=['GET', 'PUT', 'DELETE'])
@@ -79,41 +79,9 @@ def crud(user_info):
         payload = request.json
         try:
             obj = SchemaResource.ItemUpdate().load(payload)
-            author_id = user_info["id"]
-
-            # Validate URL
-            obj_track = RepoResource.get_item_with({"url": obj["url"]})
-            if obj_track:
-                return {
-                    "status": Consts.STATUS_NOT_OK,
-                    "error_code": HTTPStatus.CONFLICT,
-                    "data": {},
-                    "msg": "This Track already exists!"
-                }
-
-            # Validate Category
-            track_category = Repo.mMeta.get_item_with({
-                "type": Consts.META_TYPE_TRACK_CATEGORY,
-                "value": obj["category"]
-            })
-            if not track_category:
-                return {
-                    "status": Consts.STATUS_NOT_OK,
-                    "error_code": HTTPStatus.BAD_REQUEST,
-                    "data": {},
-                    "msg": "Invalid Track Category"
-                }
-
-            obj["author_id"] = author_id
-            obj["status"] = Consts.STATUS_PROCESSING
+            obj["author_id"] = user_info["id"]
             print(obj)
             result = RepoResource.insert(obj)
-            stream_obj = Repo.mStream.insert({
-                "type": Consts.RESOURCE_TYPE_TRACK,
-                "oid": obj["url"],
-                "author_id": author_id,
-            })
-            print(stream_obj)
             return {
                 "status": Consts.STATUS_OK,
                 "error_code": HTTPStatus.OK,

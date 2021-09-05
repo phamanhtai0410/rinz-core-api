@@ -80,7 +80,6 @@ def crud(user_info):
         try:
             obj = SchemaResource.ItemUpdate().load(payload)
             obj["author_id"] = user_info["id"]
-            obj["author_name"] = user_info["user_full_name"]
             print(obj)
             result = RepoResource.insert(obj)
             return {

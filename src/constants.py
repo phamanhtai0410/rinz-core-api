@@ -56,6 +56,15 @@ STATUS_INACTIVE = 'inactive'
 STATUS_PROCESSING = 'processing'
 STATUS_ENCODED = 'encoded'
 
+MODE_PUBLIC = 'public'
+MODE_PRIVATE = 'private'
+MODE_FRIEND = 'friend'
+TWEET_MODES = [
+    MODE_PUBLIC,
+    MODE_PRIVATE,
+    MODE_FRIEND,
+]
+
 TRACKS_STATUS = [
     STATUS_ACTIVE,
     STATUS_INACTIVE,

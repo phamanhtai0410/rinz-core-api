@@ -24,8 +24,12 @@ def get_rz_music_user_info():
         print(user_info)
         Repo.mUser.update(uid, user_info, True)
         print(f"- CREATED NEW USER SUCCESSFUL: {uid}")
-    user_info = {**user_info, **rzm_user_info}
-    return user_info
+    user_info_merged = {**user_info, **rzm_user_info}
+    # Get latest balance or change to check redis key if have any user info caching before this line
+    if 'balance' in user_info_merged and 'balance' in user_info:
+        user_info_merged['balance'] = user_info['balance']
+
+    return user_info_merged
 
 
 def get_user_info(f):

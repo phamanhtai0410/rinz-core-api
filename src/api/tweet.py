@@ -73,7 +73,7 @@ def get_item(user_info, oid):
 
 @bp.route('', methods=['GET', 'POST'])
 @Http.make_cross_resp
-@Decorators.require_login_actions
+@Decorators.require_login
 def crud(user_info):
     if request.method == 'POST':
         payload = request.json
@@ -96,7 +96,11 @@ def crud(user_info):
                 "msg": "Invalid format!"
             }
 
-    data = RepoResource.get_list_active()
+    uid = py_.get(user_info, 'id')
+    data = RepoResource.get_list({
+        "status": {"$ne": Consts.STATUS_INACTIVE},
+        "author_id": uid
+    })
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

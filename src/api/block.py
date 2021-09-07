@@ -19,7 +19,8 @@ RepoResource = Repo.mBlock
 
 @bp.route('/<string:oid>', methods=['GET'])
 @Http.make_cross_resp
-def get_item(oid):
+@Decorators.get_user_info
+def get_item(user_info, oid):
     block = RepoResource.get_item(oid)
     print(oid, block)
     if not block:
@@ -76,6 +77,7 @@ def get_item(oid):
 
     if isinstance(data, str):
         args_data = json.loads(data)
+        args_data["user_id"] = py_.get(user_info, 'id', -1)
         item_type = py_.get(args_data, 'type')
         mdata = Repo.factory_get_list(**args_data)
         print("GO HERE", item_type)

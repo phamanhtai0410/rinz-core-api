@@ -21,6 +21,9 @@ class BaseBlock(ma.Schema):
     id = ma.fields.Str(attribute='_id')
     type = ma.fields.Str()
 
+    meta = ma.fields.Dict()
+    data = ma.fields.List(ma.fields.Dict())
+
 
 class SearchBar(BaseBlock):
     meta = ma.fields.Nested(SearchBarMeta)

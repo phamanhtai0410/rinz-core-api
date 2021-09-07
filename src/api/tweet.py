@@ -1,3 +1,4 @@
+import re
 import pydash as py_
 from http import HTTPStatus
 from flask import (Blueprint, request)
@@ -97,10 +98,13 @@ def crud(user_info):
             }
 
     uid = py_.get(user_info, 'id')
-    data = RepoResource.get_list({
+    _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": uid
-    })
+    }
+    _sort = [("_id", -1)]
+
+    data = RepoResource.get_list(_filter, _sort)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

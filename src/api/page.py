@@ -1,40 +1,36 @@
 import pydash as py_
-from flask import Blueprint
+from http import HTTPStatus
+from flask import (Blueprint, request)
+
+from marshmallow import ValidationError
 
 import src.constants as Consts
 import src.middlewares.http as Http
-import src.mocks.pages as Pages
+import src.models.repo as Repo
+import src.schemas.page as SchemaResource
+import src.decorators as Decorators
 
 bp = Blueprint('page', __name__, url_prefix='/api/page')
 
+RepoResource = Repo.mPage
 
-@bp.route('/<string:page_id>')
+
+@bp.route('/<string:oid>', methods=['GET'])
 @Http.make_cross_resp
-def get_item(page_id):
-    print(page_id)
-    page = py_.find(Pages.MOCKS, {"id": page_id})
-
-    if not page:
+def get_item(oid):
+    item = RepoResource.get_item(oid)
+    print(oid, item)
+    if not item:
         return {
             "status": Consts.STATUS_NOT_OK,
-            "error_code": Consts.ERROR_MISSING_DATA,
+            "error_code": HTTPStatus.NOT_FOUND,
             "data": {},
             "msg": ""
         }
+
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,
-        "data": page,
-        "msg": "success"
-    }
-
-
-@bp.route('', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@Http.make_cross_resp
-def cud_data():
-    return {
-        "status": Consts.STATUS_OK,
-        "error_code": Consts.NOT_E,
-        "data": Pages.MOCKS,
+        "data": SchemaResource.Item().dump(item),
         "msg": "success"
     }

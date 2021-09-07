@@ -1,3 +1,4 @@
+import re
 import pydash as py_
 from http import HTTPStatus
 from flask import (Blueprint, request)
@@ -7,12 +8,12 @@ from marshmallow import ValidationError
 import src.constants as Consts
 import src.middlewares.http as Http
 import src.models.repo as Repo
-import src.schemas.event as SchemaResource
+import src.schemas.album as SchemaResource
 import src.decorators as Decorators
 
-bp = Blueprint('event', __name__, url_prefix='/api/event')
+bp = Blueprint('album', __name__, url_prefix='/api/album')
 
-RepoResource = Repo.mEvent
+RepoResource = Repo.mAlbum
 
 
 @bp.route('/<string:oid>', methods=['GET', 'PUT', 'DELETE'])
@@ -79,8 +80,34 @@ def crud(user_info):
         payload = request.json
         try:
             obj = SchemaResource.ItemUpdate().load(payload)
-            obj["author_id"] = user_info["id"]
-            print(obj)
+            author_id = user_info["id"]
+
+            # Validate URL
+            obj_track = RepoResource.get_item_with({"title": obj["title"]})
+            if obj_track:
+                return {
+                    "status": Consts.STATUS_NOT_OK,
+                    "error_code": HTTPStatus.CONFLICT,
+                    "data": {},
+                    "msg": "This Track already exists!"
+                }
+
+            # Validate Category
+            track_category = Repo.mMeta.get_item_with({
+                "type": Consts.META_TYPE_TRACK_CATEGORY,
+                "value": obj["category"]
+            })
+            if not track_category:
+                return {
+                    "status": Consts.STATUS_NOT_OK,
+                    "error_code": HTTPStatus.BAD_REQUEST,
+                    "data": {},
+                    "msg": "Invalid Track Category"
+                }
+
+            obj["author_id"] = author_id
+            obj["status"] = Consts.STATUS_ACTIVE
+
             result = RepoResource.insert(obj)
             return {
                 "status": Consts.STATUS_OK,
@@ -96,7 +123,20 @@ def crud(user_info):
                 "msg": "Invalid format!"
             }
 
-    data = RepoResource.get_list_active()
+    uid = py_.get(user_info, 'id')
+    _filter = {
+        "status": {"$ne": Consts.STATUS_INACTIVE},
+        "author_id": uid
+    }
+    _sort = [("_id", -1)]
+
+    s = request.args.get('s')
+    if s:
+        _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
+        _sort = [("title", 1)]
+
+    data = RepoResource.get_list(_filter, _sort)
+    data = py_.map_(data, Repo.mUser.map_item_user_info)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

@@ -1,3 +1,4 @@
+import re
 import pydash as py_
 from http import HTTPStatus
 from flask import (Blueprint, request)
@@ -73,7 +74,7 @@ def get_item(user_info, oid):
 
 @bp.route('', methods=['GET', 'POST'])
 @Http.make_cross_resp
-@Decorators.require_login_actions
+@Decorators.require_login
 def crud(user_info):
     if request.method == 'POST':
         payload = request.json
@@ -128,7 +129,20 @@ def crud(user_info):
                 "msg": "Invalid format!"
             }
 
-    data = RepoResource.get_list_active()
+    uid = py_.get(user_info, 'id')
+    _filter = {
+        "status": {"$ne": Consts.STATUS_INACTIVE},
+        "author_id": uid
+    }
+    _sort = [("_id", -1)]
+
+    s = request.args.get('s')
+    if s:
+        _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
+        _sort = [("title", 1)]
+
+    data = RepoResource.get_list(_filter, _sort)
+    data = py_.map_(data, Repo.mUser.map_item_user_info)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

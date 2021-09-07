@@ -9,6 +9,7 @@ from .event import bp as rest_event
 from .meta import bp as rest_meta
 from .stream import bp as rest_stream
 from .tweet import bp as rest_tweet
+from .album import bp as rest_album
 
 DEFAULT_BLUEPRINTS = [
     rest_index,
@@ -22,4 +23,5 @@ DEFAULT_BLUEPRINTS = [
     rest_meta,
     rest_stream,
     rest_tweet,
+    rest_album,
 ]

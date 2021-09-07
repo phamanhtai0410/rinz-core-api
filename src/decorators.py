@@ -21,15 +21,18 @@ def get_rz_music_user_info():
     uid = user_info["id"]
     rzm_user_info = Repo.mUser.get_item(uid) or {}
     if not rzm_user_info:
-        print(user_info)
+        # print(user_info)
         Repo.mUser.update(uid, user_info, True)
         print(f"- CREATED NEW USER SUCCESSFUL: {uid}")
-    user_info_merged = {**user_info, **rzm_user_info}
-    # Get latest balance or change to check redis key if have any user info caching before this line
-    if 'balance' in user_info_merged and 'balance' in user_info:
-        user_info_merged['balance'] = user_info['balance']
 
-    return user_info_merged
+    # This information get realtime from thecuatui, not saved in rzmusic
+    # Get latest balance or change to check redis key if have any user info caching before this line
+    REALTIME_INFO = ['balance']
+    for attr in REALTIME_INFO:
+        rzm_user_info.pop(attr, None)
+    user_info = {**user_info, **rzm_user_info}
+
+    return user_info
 
 
 def get_user_info(f):

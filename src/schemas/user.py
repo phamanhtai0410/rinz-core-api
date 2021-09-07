@@ -4,6 +4,8 @@ import marshmallow as ma
 
 import src.constants as Consts
 
+from .base import SchemaFunc
+
 
 class Item(ma.Schema):
     class Meta:
@@ -38,6 +40,11 @@ class Item(ma.Schema):
     followers = ma.fields.Function(lambda obj: random.randrange(100, 10000))
     following = ma.fields.Function(lambda obj: random.randrange(100, 1000))
     products = ma.fields.Function(lambda obj: random.randrange(0, 100))
+    share_link = ma.fields.Function(
+        lambda obj: SchemaFunc.generate_share_link(
+            obj,
+            Consts.RESOURCE_TYPE_IDOL
+        ))
 
 
 class ItemUpdate(ma.Schema):
@@ -50,4 +57,6 @@ class ItemUpdate(ma.Schema):
     user_birthday = ma.fields.Str()
     user_full_name = ma.fields.Str()
     user_gender = ma.fields.Str()
-    user_name = ma.fields.Str(validate=ma.validate.Regexp(r"^[a-zA-Z0-9\.-]+$"))
+    user_name = ma.fields.Str(
+        validate=ma.validate.Regexp(r"^[a-zA-Z0-9\.-]+$")
+    )

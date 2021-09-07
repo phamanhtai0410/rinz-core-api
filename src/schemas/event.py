@@ -2,7 +2,7 @@ import pydash as py_
 import marshmallow as ma
 
 import src.constants as Consts
-from .base import RzFieldDateTime
+from .base import RzFieldDateTime, SchemaFunc
 
 
 class Item(ma.Schema):
@@ -30,6 +30,11 @@ class Item(ma.Schema):
         validate=ma.validate.OneOf(Consts.LIVE_STATUS),
         default=Consts.STATUS_ACTIVE
     )
+    share_link = ma.fields.Function(
+        lambda obj: SchemaFunc.generate_share_link(
+            obj,
+            Consts.RESOURCE_TYPE_EVENT
+        ))
 
 
 class ItemUpdate(ma.Schema):

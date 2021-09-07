@@ -9,6 +9,8 @@ NOT_E = ''
 ERROR_MISSING_DATA = 'ERROR_MISSING_DATA'
 ERROR_WRONG_DATA = 'ERROR_WRONG_DATA'
 
+RZ_SHARE_WEBSITE = 'http://staging.rinzworld.com'
+
 # FORMAT
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 

@@ -10,7 +10,7 @@ from .base import BaseDAO
 
 class UserDAO(BaseDAO):
     def map_item_user_info(self, item):
-        print(item)
+        # print(item)
         author_id = py_.get(item, 'author_id')
         if not author_id:
             return item

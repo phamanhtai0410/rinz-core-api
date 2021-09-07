@@ -4,6 +4,7 @@ import marshmallow as ma
 import src.constants as Consts
 from .base import RzFieldDateTime
 
+
 class Item(ma.Schema):
     class Meta:
         ordered = True
@@ -25,6 +26,11 @@ class Item(ma.Schema):
 
     tracks = ma.fields.List(ma.fields.Str())
 
+    status = ma.fields.Str(
+        validate=ma.validate.OneOf(Consts.LIVE_STATUS),
+        default=Consts.STATUS_ACTIVE
+    )
+
 
 class ItemUpdate(ma.Schema):
     class Meta:
@@ -42,3 +48,8 @@ class ItemUpdate(ma.Schema):
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
 
     tracks = ma.fields.List(ma.fields.Str())
+
+    status = ma.fields.Str(
+        validate=ma.validate.OneOf(Consts.LIVE_STATUS),
+        default=Consts.STATUS_ACTIVE
+    )

@@ -79,7 +79,7 @@ def crud(user_info):
     content_type = py_.get(request.args, 'content_type')
     parent_id = py_.get(request.args, 'parent_id', '')
     page = py_.get(request.args, 'page', 1)
-    page_size = py_.get(request.args, 'per_page', 0)
+    page_size = py_.get(request.args, 'page_size', 0)
     sort_type = py_.get(request.args, 'sort_type', Consts.SORT_TYPE_LASTEST)
 
     if not content_id or content_type not in Consts.RESOURCE_TYPES:

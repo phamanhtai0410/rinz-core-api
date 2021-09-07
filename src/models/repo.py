@@ -1,4 +1,7 @@
 from src.extensions import mdb
+import src.constants as Consts
+
+from .type import *
 from .base import BaseDAO
 from .stream import StreamDAO
 from .user import UserDAO
@@ -15,3 +18,19 @@ mEvent = BaseDAO(mdb.db.event)
 mTrack = BaseDAO(mdb.db.track)
 mTweet = BaseDAO(mdb.db.tweet)
 mAlbum = BaseDAO(mdb.db.album)
+
+
+def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_DEFAULT, randomize=False):
+    collection = mTrack
+    if type == Consts.RESOURCE_TYPE_EVENT:
+        collection = mEvent
+    if type == Consts.RESOURCE_TYPE_ALBUM:
+        collection = mAlbum
+    if type == Consts.RESOURCE_TYPE_TWEET:
+        collection = mTweet
+
+    if user_id:
+        filter["author_id"] = user_id
+
+    print(collection, filter, sort)
+    return collection.get_random_items(filter, sort, PAGE_SIZE_DEFAULT)

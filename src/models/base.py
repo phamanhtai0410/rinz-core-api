@@ -50,18 +50,25 @@ class BaseDAO(object):
     def get_list_active(self):
         return self.get_list({"status": {"$ne": STATUS_INACTIVE}})
 
-    def get_list(self, filter={}, sort={}, page=1, per_page=PER_PAGE_DEFAULT, ):
+    def get_list(self, filter={}, sort={}, page=1, page_size=PAGE_SIZE_DEFAULT, ):
         if not page:
             page = 1
-        if not per_page or per_page > PER_PAGE_MAX:
-            per_page = PER_PAGE_DEFAULT
+        if not page_size or page_size > PAGE_SIZE_MAX:
+            page_size = PAGE_SIZE_DEFAULT
 
         if not sort:
             sort = [("_id", -1)]
 
-        return self.db.find(filter).sort(sort).skip(int((page - 1) * per_page)).limit(per_page)
+        return self.db.find(filter).sort(sort).skip(int((page - 1) * page_size)).limit(page_size)
 
     def get_random_items(self, filter={}, sort={}, size=1):
+        if sort:
+            return self.db.aggregate([
+                {"$match": filter},
+                {"$sort": sort},
+                {"$sample": {"size": size}}
+            ])
+
         return self.db.aggregate([
             {"$match": filter},
             {"$sample": {"size": size}}

@@ -37,7 +37,7 @@ class Item(ma.Schema):
     share_link = ma.fields.Function(
         lambda obj: SchemaFunc.generate_share_link(
             obj,
-            Consts.RESOURCE_TYPE_EVENT
+            Consts.RESOURCE_TYPE_TRACK
         ))
 
 

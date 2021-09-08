@@ -12,6 +12,7 @@ class Item(ma.Schema):
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int(required=True)
     author_name = ma.fields.Str()
+    author_avatar = ma.fields.Str()
 
     banner = ma.fields.Str(default='')
     duration = ma.fields.Int(default=0)

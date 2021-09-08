@@ -12,7 +12,7 @@ class Item(ma.Schema):
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int(required=True)
     author_name = ma.fields.Str()
-    avatar = ma.fields.Str()
+    author_avatar = ma.fields.Str()
 
     content = ma.fields.Str(required=True)
     images = ma.fields.List(ma.fields.Url())

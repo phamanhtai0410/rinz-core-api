@@ -54,7 +54,7 @@ def get_item(user_info, oid):
         mdata = Repo.mEvent.get_list({
             "status": {"$ne": Consts.STATUS_INACTIVE},
             "start_time": {"$gte": dt.datetime.now()},
-        }, [("start_time", -1)])
+        }, [("start_time", 1)])
 
         for idt in mdata:
             print(idt)

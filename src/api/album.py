@@ -92,19 +92,6 @@ def crud(user_info):
                     "msg": "This Track already exists!"
                 }
 
-            # Validate Category
-            track_category = Repo.mMeta.get_item_with({
-                "type": Consts.META_TYPE_TRACK_CATEGORY,
-                "value": obj["category"]
-            })
-            if not track_category:
-                return {
-                    "status": Consts.STATUS_NOT_OK,
-                    "error_code": HTTPStatus.BAD_REQUEST,
-                    "data": {},
-                    "msg": "Invalid Track Category"
-                }
-
             obj["author_id"] = author_id
             obj["status"] = Consts.STATUS_ACTIVE
 

@@ -55,8 +55,8 @@ def get_item(user_info, oid):
         payload = request.json
         try:
             obj = SchemaResource.ItemUpdate().load(payload)
-            print(obj)
             result = RepoResource.update(oid, obj, True)
+            item = RepoResource.get_item(oid)
         except ValidationError as err:
             return {
                 "status": Consts.STATUS_NOT_OK,
@@ -124,7 +124,7 @@ def crud(user_info):
             return {
                 "status": Consts.STATUS_OK,
                 "error_code": HTTPStatus.OK,
-                "data": bool(result),
+                "data": SchemaResource.Item().dump(obj),
                 "msg": "Success"
             }
         except ValidationError as err:

@@ -13,7 +13,9 @@ class BaseDAO(object):
             raise TypeError("obj must be dictionary!")
 
         obj["created_date"] = dt.datetime.utcnow()
-        return self.db.insert(obj)
+        oid = self.db.insert(obj)
+        obj["_id"] = oid
+        return obj 
 
     def update(self, oid, obj, upsert=False):
         if ObjectId.is_valid(oid):

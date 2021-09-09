@@ -62,6 +62,8 @@ def get_item(user_info, oid):
                 "data": err.messages,
                 "msg": "Invalid format!"
             }
+    
+    item = Repo.mUser.map_item_user_info(item)
 
     return {
         "status": Consts.STATUS_OK,

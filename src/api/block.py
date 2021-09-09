@@ -78,6 +78,9 @@ def get_item(user_info, oid):
     if isinstance(data, str):
         args_data = json.loads(data)
         args_data["user_id"] = py_.get(user_info, 'id', -1)
+        page = py_.get(request.args, 'page', 1)
+        page = py_.to_integer(page) or 1
+        args_data["page"] = int(page)
         item_type = py_.get(args_data, 'type')
         mdata = Repo.factory_get_list(**args_data)
         print("GO HERE", item_type)

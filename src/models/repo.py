@@ -20,7 +20,7 @@ mTweet = BaseDAO(mdb.db.tweet)
 mAlbum = BaseDAO(mdb.db.album)
 
 
-def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_DEFAULT, randomize=False, personalize=False):
+def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_DEFAULT, randomize=True, personalize=False):
     collection = mTrack
     if type == Consts.RESOURCE_TYPE_EVENT:
         collection = mEvent
@@ -33,4 +33,8 @@ def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_
         filter["author_id"] = user_id
 
     print(collection, filter, sort)
-    return collection.get_random_items(filter, sort, PAGE_SIZE_DEFAULT)
+    if randomize:
+        print("randomize", page, page_size)
+        return collection.get_random_items(filter, sort, PAGE_SIZE_DEFAULT)
+    print("normalize", page, page_size)
+    return collection.get_list(filter, sort, page, page_size)

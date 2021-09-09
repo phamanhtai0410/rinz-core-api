@@ -91,7 +91,6 @@ def get_tracks(user_info, oid):
 
     page = py_.get(request.args, 'page', 1)
     page = py_.to_integer(page) or 1
-    print(page)
     page_size = Consts.PAGE_SIZE_DEFAULT
     tracks = py_.get(item, 'tracks', [])
     tracks_id = py_.slice_(tracks,

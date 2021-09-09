@@ -15,7 +15,7 @@ class BaseDAO(object):
         obj["created_date"] = dt.datetime.utcnow()
         oid = self.db.insert(obj)
         obj["_id"] = oid
-        return obj 
+        return obj
 
     def update(self, oid, obj, upsert=False):
         if ObjectId.is_valid(oid):
@@ -26,6 +26,18 @@ class BaseDAO(object):
 
         obj["last_updated"] = dt.datetime.utcnow()
         return self.db.update({"_id": oid}, {"$set": obj}, upsert=upsert)
+
+    def update_raw(self, filter, raw_obj, upsert=False):
+        if not isinstance(raw_obj, dict):
+            raise TypeError("obj must be dictionary!")
+
+        if "$set" in raw_obj:
+            raw_obj["$set"]["last_updated"] = dt.datetime.utcnow()
+        else:
+            raw_obj["$set"] = {"last_updated": dt.datetime.utcnow()}
+
+        print(filter, raw_obj)
+        return self.db.update(filter, raw_obj, upsert=upsert)
 
     def update_by_filter(self, filter, obj, upsert=False, multi=False):
         obj["last_updated"] = dt.datetime.utcnow()

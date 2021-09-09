@@ -5,6 +5,7 @@ from .type import *
 from .base import BaseDAO
 from .stream import StreamDAO
 from .user import UserDAO
+from .follow import FollowDAO
 
 mPage = BaseDAO(mdb.db.page)
 mBlock = BaseDAO(mdb.db.block)
@@ -12,6 +13,7 @@ mSiteMap = BaseDAO(mdb.db.site_map)
 
 mMeta = BaseDAO(mdb.db.meta)
 mUser = UserDAO(mdb.db.user)
+mFollow = FollowDAO(mdb.db.follow)
 
 mStream = StreamDAO(mdb.db.stream)
 mEvent = BaseDAO(mdb.db.event)

@@ -37,6 +37,11 @@ class Item(ma.Schema):
             Consts.RESOURCE_TYPE_EVENT
         ))
 
+    followers = ma.fields.Function(
+        lambda obj: len(py_.get(obj, "followers", []))
+    )
+    following = ma.fields.Boolean(default=False)
+
 
 class ItemUpdate(ma.Schema):
     class Meta:

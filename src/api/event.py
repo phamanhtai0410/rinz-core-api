@@ -1,3 +1,4 @@
+from bson import ObjectId
 import pydash as py_
 from http import HTTPStatus
 from flask import (Blueprint, request)
@@ -8,6 +9,7 @@ import src.constants as Consts
 import src.middlewares.http as Http
 import src.models.repo as Repo
 import src.schemas.event as SchemaResource
+import src.schemas.track as SchemaTrack
 import src.decorators as Decorators
 
 bp = Blueprint('event', __name__, url_prefix='/api/event')
@@ -62,13 +64,48 @@ def get_item(user_info, oid):
                 "data": err.messages,
                 "msg": "Invalid format!"
             }
-    
+
     item = Repo.mUser.map_item_user_info(item)
 
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,
         "data": SchemaResource.Item().dump(item),
+        "msg": "success"
+    }
+
+
+@bp.route('/<string:oid>/tracks', methods=['GET'])
+@Http.make_cross_resp
+@Decorators.require_login_actions
+def get_tracks(user_info, oid):
+    item = RepoResource.get_item(oid)
+    print(oid, item)
+    if not item:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": ""
+        }
+
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
+    print(page)
+    page_size = Consts.PAGE_SIZE_DEFAULT
+    tracks = py_.get(item, 'tracks', [])
+    tracks_id = py_.slice_(tracks,
+                           (page - 1) * page_size, page * page_size)
+    tracks_oid = [ObjectId(itm) for itm in tracks_id]
+    items = Repo.mTrack.get_list({
+        "_id": {"$in": tracks_oid},
+        "status": {"$ne": Consts.STATUS_INACTIVE}
+    })
+    items = py_.map_(items, Repo.mUser.map_item_user_info)
+    return {
+        "status": Consts.STATUS_OK,
+        "error_code": HTTPStatus.OK,
+        "data": SchemaTrack.Item(many=True).dump(items),
         "msg": "success"
     }
 

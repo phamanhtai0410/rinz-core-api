@@ -2,7 +2,7 @@ import pydash as py_
 import marshmallow as ma
 
 import src.constants as Consts
-from .base import RzFieldDateTime
+from .base import RzFieldDateTime, SchemaFunc
 
 
 class Item(ma.Schema):
@@ -14,7 +14,9 @@ class Item(ma.Schema):
     author_name = ma.fields.Str()
     author_avatar = ma.fields.Str()
 
-    banner = ma.fields.Str(default='')
+    banner = ma.fields.Function(
+        lambda obj: SchemaFunc.generate_album_banner(obj)
+    )
     duration = ma.fields.Int(default=0)
 
     title = ma.fields.Str(required=True)

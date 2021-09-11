@@ -54,18 +54,18 @@ def get_event_stream(user_info, oid):
 @Http.make_cross_resp
 @Decorators.get_user_info
 def get_music_stream(user_info, oid):
-    results = Repo.mStream.get_random_items(
-        {"type": "track", "streams": {"$exists": True}},
-        size=1
-    )
-    stream = py_.get([item for item in results], 0)
-    schema_item = SchemaStream.Track()
-    return {
-        "status": Consts.STATUS_OK,
-        "error_code": HTTPStatus.OK,
-        "data": schema_item.dump(stream),
-        "msg": "success"
-    }
+    # results = Repo.mStream.get_random_items(
+    #     {"type": "track", "streams": {"$exists": True}},
+    #     size=1
+    # )
+    # stream = py_.get([item for item in results], 0)
+    # schema_item = SchemaStream.Track()
+    # return {
+    #     "status": Consts.STATUS_OK,
+    #     "error_code": HTTPStatus.OK,
+    #     "data": schema_item.dump(stream),
+    #     "msg": "success"
+    # }
 
     track = Repo.mTrack.get_item(oid)
     if not track:
@@ -121,21 +121,21 @@ def sync_encoded():
             schema_update = SchemaStream.EncodedVideo()
 
         obj = schema_update.load(payload)
-        # Check Item exists
-        obj_stream = RepoResource.get_item_with({
-            "oid": obj["oid"],
-            "type": rtype
-        })
-        if not obj_stream:
-            return {
-                "status": Consts.STATUS_NOT_OK,
-                "error_code": HTTPStatus.NOT_FOUND,
-                "data": {
-                    "url": obj["oid"],
-                    "type": rtype,
-                },
-                "msg": "This resource not available in our system. Please try again later."
-            }
+        # # Check Item exists
+        # obj_stream = RepoResource.get_item_with({
+        #     "oid": obj["oid"],
+        #     "type": rtype
+        # })
+        # if not obj_stream:
+        #     return {
+        #         "status": Consts.STATUS_NOT_OK,
+        #         "error_code": HTTPStatus.NOT_FOUND,
+        #         "data": {
+        #             "url": obj["oid"],
+        #             "type": rtype,
+        #         },
+        #         "msg": "This resource not available in our system. Please try again later."
+        #     }
         obj["type"] = rtype
         print(obj)
         result = RepoResource.m_update_item_by_type(

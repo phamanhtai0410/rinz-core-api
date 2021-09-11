@@ -1,9 +1,11 @@
-
+from bson import ObjectId
+import random as rd
 import datetime as dt
 import marshmallow as ma
 import pydash as py_
 
 import src.constants as Consts
+import src.models.repo as Repo
 
 
 class RzFieldDateTime(ma.fields.Field):
@@ -29,3 +31,22 @@ class SchemaFunc(object):
             return f"{Consts.RZ_SHARE_WEBSITE}/event/{oid}"
         rtype = Consts.RESOURCE_TYPE_TRACK
         return f"{Consts.RZ_SHARE_WEBSITE}/track/{oid}"
+
+    @classmethod
+    def generate_album_banner(cls, obj):
+        img_banner = py_.get(obj, 'banner', '')
+        if img_banner:
+            return [img_banner]
+
+        # Try to get banner from tracks images
+        tracks = py_.get(obj, 'tracks', [])
+        print(len(tracks))
+        n_imgs = 4 if len(tracks) >= 4 else 1
+        track_oids = [ObjectId(track) for track in rd.sample(tracks, n_imgs)]
+        # print(track_oids)
+        # track_oids = []
+        images = [py_.get(item, 'banner', '') for item in Repo.mTrack.get_list({
+            "_id": {"$in": track_oids},
+            "status": {"$ne": Consts.STATUS_INACTIVE}
+        })]
+        return images

@@ -110,11 +110,14 @@ def crud(user_info):
             obj["status"] = Consts.STATUS_PROCESSING
             print(obj)
             result = RepoResource.insert(obj)
-            stream_obj = Repo.mStream.insert({
-                "type": Consts.RESOURCE_TYPE_TRACK,
-                "oid": obj["url"],
-                "author_id": author_id,
-            })
+            stream_obj = Repo.mStream.update_by_filter(
+                {
+                    "type": Consts.RESOURCE_TYPE_TRACK,
+                    "oid": obj["url"],
+                },
+                {"author_id": author_id},
+                True
+            )
             print(stream_obj)
             return {
                 "status": Consts.STATUS_OK,

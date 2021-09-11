@@ -24,7 +24,10 @@ class StreamDAO(BaseDAO):
                 + track, video: stream url
             rtype ([type]): [Resource Type]
         """
+        if rtype == Consts.RESOURCE_TYPE_TRACK:
+            oid = py_.get(obj, 'url', '')
         obj_stream = self.m_get_item_by_type(oid, rtype)
+        print(oid, rtype)
         print("1. GET STREAM INFO FROM DB")
         if obj_stream:
             return obj_stream

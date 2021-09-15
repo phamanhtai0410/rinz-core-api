@@ -64,7 +64,7 @@ def get_item(user_info, oid):
                 "data": err.messages,
                 "msg": "Invalid format!"
             }
-    
+
     item = Repo.mUser.map_item_user_info(item)
     return {
         "status": Consts.STATUS_OK,
@@ -166,4 +166,35 @@ def get_tracks(user_info, oid):
         "error_code": HTTPStatus.OK,
         "data": SchemaTrack.Item(many=True).dump(items),
         "msg": "success"
+    }
+
+
+@bp.route('/<string:oid>/related', methods=['GET'])
+@Http.make_cross_resp
+@Decorators.require_login_actions
+def get_related(user_info, oid):
+    item = RepoResource.get_item(oid)
+    print(oid, item)
+    if not item:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": ""
+        }
+
+    # author_id = py_.get(item, 'id')
+    _filter = {
+        "status": {"$ne": Consts.STATUS_INACTIVE},
+        "_id": {"$ne": ObjectId(oid)}
+    }
+    _sort = [("_id", -1)]
+
+    data = RepoResource.get_list(_filter, _sort)
+    data = py_.map_(data, Repo.mUser.map_item_user_info)
+    return {
+        "status": Consts.STATUS_OK,
+        "error_code": HTTPStatus.OK,
+        "data": SchemaResource.Item(many=True).dump(data),
+        "msg": "Success"
     }

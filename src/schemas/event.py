@@ -42,6 +42,8 @@ class Item(ma.Schema):
     )
     following = ma.fields.Boolean(default=False)
 
+    type = ma.fields.Str(default=Consts.RESOURCE_TYPE_EVENT)
+
 
 class ItemUpdate(ma.Schema):
     class Meta:

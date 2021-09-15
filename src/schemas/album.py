@@ -26,7 +26,7 @@ class Item(ma.Schema):
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
 
     tracks = ma.fields.List(ma.fields.Str())
-
+    type = ma.fields.Str(default=Consts.RESOURCE_TYPE_ALBUM)
 
 class ItemUpdate(ma.Schema):
     class Meta:

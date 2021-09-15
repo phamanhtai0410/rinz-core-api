@@ -22,6 +22,7 @@ class Item(ma.Schema):
     )
 
     created_date = RzFieldDateTime()
+    type = ma.fields.Str(default=Consts.RESOURCE_TYPE_TWEET)
 
 
 class ItemUpdate(ma.Schema):

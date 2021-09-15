@@ -3,7 +3,6 @@ import marshmallow as ma
 
 import src.constants as Consts
 from .base import RzFieldDateTime, SchemaFunc
-from .stream import StreamProfile
 
 
 class Item(ma.Schema):
@@ -16,42 +15,52 @@ class Item(ma.Schema):
     author_avatar = ma.fields.Str()
 
     banner = ma.fields.Str(default='')
-    duration = ma.fields.Int(default=530)
+    duration = ma.fields.Int(default=0)
 
-    url = ma.fields.Str(required=True)
     title = ma.fields.Str(required=True)
     description = ma.fields.Str()
 
-    category = ma.fields.Str(default='')
-
-    created_date = RzFieldDateTime()
+    start_time = RzFieldDateTime(required=True)
+    end_time = RzFieldDateTime()
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
 
-    streams = ma.fields.List(ma.fields.Nested(StreamProfile), default=[])
-    download = ma.fields.Boolean(default=False)
+    tracks = ma.fields.List(ma.fields.Str())
 
     status = ma.fields.Str(
-        validate=ma.validate.OneOf(Consts.TRACKS_STATUS),
-        default=Consts.STATUS_PROCESSING
+        validate=ma.validate.OneOf(Consts.LIVE_STATUS),
+        default=Consts.STATUS_ACTIVE
     )
     share_link = ma.fields.Function(
         lambda obj: SchemaFunc.generate_share_link(
             obj,
-            Consts.RESOURCE_TYPE_TRACK
+            Consts.RESOURCE_TYPE_EVENT
         ))
 
-    type = ma.fields.Str(default=Consts.RESOURCE_TYPE_TRACK)
+    followers = ma.fields.Function(
+        lambda obj: len(py_.get(obj, "followers", []))
+    )
+    following = ma.fields.Boolean(default=False)
 
 
 class ItemUpdate(ma.Schema):
     class Meta:
         ordered = True
 
-    banner = ma.fields.Str(required=True)
-    url = ma.fields.Str(required=True)
+    banner = ma.fields.Str(default='')
+    duration = ma.fields.Int(default=0)
+
     title = ma.fields.Str(required=True)
     description = ma.fields.Str(default='')
-    category = ma.fields.Str(required=True)
+
+    start_time = ma.fields.DateTime(Consts.DATETIME_FORMAT, required=True)
+    end_time = ma.fields.DateTime(Consts.DATETIME_FORMAT)
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
+
+    tracks = ma.fields.List(ma.fields.Str())
+
+    status = ma.fields.Str(
+        validate=ma.validate.OneOf(Consts.LIVE_STATUS),
+        default=Consts.STATUS_ACTIVE
+    )

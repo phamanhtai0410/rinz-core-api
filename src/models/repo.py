@@ -1,4 +1,4 @@
-from src.extensions import mdb
+from src.extensions import mdb, mdb_payment
 import src.constants as Consts
 
 from .type import *
@@ -20,6 +20,9 @@ mEvent = BaseDAO(mdb.db.event)
 mTrack = BaseDAO(mdb.db.track)
 mTweet = BaseDAO(mdb.db.tweet)
 mAlbum = BaseDAO(mdb.db.album)
+
+mPayment = BaseDAO(mdb.db.payment)
+mRzPayment = BaseDAO(mdb_payment.db.orders)
 
 
 def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_DEFAULT, randomize=True, personalize=False):

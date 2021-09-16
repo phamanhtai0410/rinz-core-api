@@ -27,3 +27,4 @@ class DefaultConfig(BaseConfig):
     BABEL_DEFAULT_LOCALE = 'en'
 
     MONGO_URI_RINZ_MUSIC = 'mongodb://18.140.62.59:27017/rzmusic'
+    MONGO_URI_RINZ_PAYMENT = 'mongodb://203.205.21.196:27017/thecuatui'

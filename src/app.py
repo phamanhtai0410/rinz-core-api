@@ -10,7 +10,8 @@ from flask import Flask, request, jsonify
 from .config import DefaultConfig
 from .extensions import (
     redis_cache,
-    mdb
+    mdb,
+    mdb_payment
 )
 
 # For import *
@@ -62,6 +63,7 @@ def configure_extensions(app):
 
     # Sentry
     mdb.init_app(app, uri=app.config['MONGO_URI_RINZ_MUSIC'])
+    mdb_payment.init_app(app, uri=app.config['MONGO_URI_RINZ_PAYMENT'])
 
 
 def configure_blueprints(app):

@@ -8,8 +8,10 @@ from marshmallow import ValidationError
 import src.constants as Consts
 import src.middlewares.http as Http
 import src.models.repo as Repo
-import src.schemas.event as SchemaResource
+import src.schemas.event as SchemaEvent
 import src.schemas.track as SchemaTrack
+import src.schemas.tweet as SchemaTweet
+import src.schemas.album as SchemaAlbum
 import src.decorators as Decorators
 
 bp = Blueprint('follow', __name__, url_prefix='/api/follow')
@@ -82,5 +84,54 @@ def item_action(user_info, rtype, oid):
         "data": {
             "followers": followers
         },
+        "msg": "success"
+    }
+
+
+@bp.route('/<string:rtype>', methods=['GET'])
+@Http.make_cross_resp
+@Decorators.require_login
+def item_follow_list(user_info, rtype):
+    collection = Repo.mTrack
+    schema = SchemaTrack
+    if rtype == Consts.RESOURCE_TYPE_EVENT:
+        collection = Repo.mEvent
+        schema = SchemaEvent
+    if rtype == Consts.RESOURCE_TYPE_ALBUM:
+        collection = Repo.mAlbum
+        schema = SchemaAlbum
+    if rtype == Consts.RESOURCE_TYPE_TWEET:
+        collection = Repo.mTweet
+        schema = SchemaTweet
+
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
+    page_size = Consts.PAGE_SIZE_DEFAULT
+    uid = py_.get(user_info, 'id', -1)
+    objs = RepoResource.aggregate([
+        {"$match": {"type": rtype, "followers": uid}},
+        {"$addFields": {"_oid": {"$toObjectId": "$oid"}}},
+        {"$project": {"followers": 0}},
+        {
+            '$lookup': {
+                'from': rtype,
+                'localField': "_oid",
+                'foreignField': "_id",
+                'as': "data"
+            }
+        },
+        {"$unwind": "$data"},
+        {"$match": {"data.status": {"$ne": "inactive"}}},
+        {"$sort": {"data.title": 1}},
+        {'$skip': int((page - 1) * page_size)},
+        {'$limit': page_size},
+    ])
+    data = [py_.get(obj, 'data') for obj in objs]
+    data = py_.map_(data, Repo.mUser.map_item_user_info)
+
+    return {
+        "status": Consts.STATUS_OK,
+        "error_code": HTTPStatus.OK,
+        "data": schema.Item(many=True).dump(data),
         "msg": "success"
     }

@@ -87,3 +87,6 @@ class BaseDAO(object):
             {"$match": filter},
             {"$sample": {"size": size}}
         ])
+
+    def aggregate(self, pipelines):
+        return self.db.aggregate(pipelines)

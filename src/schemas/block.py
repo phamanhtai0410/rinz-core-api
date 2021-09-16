@@ -83,7 +83,6 @@ class SliderMeta(ma.Schema):
 
 
 class Slider(BaseBlock):
-    data = ma.fields.List(ma.fields.Nested(SliderItem))
     meta = ma.fields.Nested(SliderMeta)
 
 

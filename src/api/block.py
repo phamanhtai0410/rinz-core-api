@@ -10,6 +10,10 @@ import src.constants as Consts
 import src.middlewares.http as Http
 import src.models.repo as Repo
 import src.schemas.block as SchemaBlock
+import src.schemas.album as SchemaAlbum
+import src.schemas.track as SchemaTrack
+import src.schemas.tweet as SchemaTweet
+import src.schemas.event as SchemaEvent
 import src.decorators as Decorators
 
 bp = Blueprint('block', __name__, url_prefix='/api/block')
@@ -91,6 +95,15 @@ def get_item(user_info, oid):
             idt = Repo.mUser.map_item_user_info(idt)
             idt["type"] = item_type
             data.append(idt)
+
+        if item_type == Consts.RESOURCE_TYPE_ALBUM:
+            data = SchemaAlbum.Item(many=True).dump(data)
+        if item_type == Consts.RESOURCE_TYPE_TRACK:
+            data = SchemaTrack.Item(many=True).dump(data)
+        if item_type == Consts.RESOURCE_TYPE_TWEET:
+            data = SchemaTweet.Item(many=True).dump(data)
+        if item_type == Consts.RESOURCE_TYPE_EVENT:
+            data = SchemaEvent.Item(many=True).dump(data)
 
     block["data"] = data
     # print(data)

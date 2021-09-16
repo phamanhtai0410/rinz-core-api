@@ -12,6 +12,7 @@ from .tweet import bp as rest_tweet
 from .album import bp as rest_album
 from .follow import bp as rest_follow
 from .music import bp as rest_music
+from .comment import bp as rest_comment
 
 DEFAULT_BLUEPRINTS = [
     rest_index,
@@ -28,4 +29,5 @@ DEFAULT_BLUEPRINTS = [
     rest_album,
     rest_follow,
     rest_music,
+    rest_comment,
 ]

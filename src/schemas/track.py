@@ -42,6 +42,8 @@ class Item(ma.Schema):
         ))
 
     type = ma.fields.Str(default=Consts.RESOURCE_TYPE_TRACK)
+    enable_comment = ma.fields.Boolean(default=True)
+    comment_type = ma.fields.Str(default=Consts.COMMENT_TYPE_NORMAL)
 
 
 class ItemUpdate(ma.Schema):
@@ -55,3 +57,4 @@ class ItemUpdate(ma.Schema):
     category = ma.fields.Str(required=True)
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
+    enable_comment = ma.fields.Boolean(default=True)

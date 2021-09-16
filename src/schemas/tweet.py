@@ -24,6 +24,9 @@ class Item(ma.Schema):
     created_date = RzFieldDateTime()
     type = ma.fields.Str(default=Consts.RESOURCE_TYPE_TWEET)
 
+    enable_comment = ma.fields.Boolean(default=True)
+    comment_type = ma.fields.Str(default=Consts.COMMENT_TYPE_NORMAL)
+
 
 class ItemUpdate(ma.Schema):
     class Meta:
@@ -35,3 +38,5 @@ class ItemUpdate(ma.Schema):
         validate=ma.validate.OneOf(Consts.TWEET_MODES),
         default=Consts.MODE_PUBLIC
     )
+
+    enable_comment = ma.fields.Boolean(default=True)

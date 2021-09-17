@@ -125,6 +125,7 @@ MUSIC_TYPES = [
 
 COMMENT_TYPE_LIVE_CHAT = 'live_chat'
 COMMENT_TYPE_NORMAL = 'normal'
+
 SORT_TYPE_LASTEST = 'lastest'
 SORT_TYPE_OLDEST = 'oldest'
 SORT_TYPE_LIKE = 'like'

@@ -100,8 +100,9 @@ class TopIdol(BaseBlock):
 
 
 class NewFeed(BaseBlock):
-    meta = ma.fields.Nested(TopIdolMeta)
-    data = ma.fields.List(ma.fields.Nested(TweetItem))
+    # meta = ma.fields.Nested(TopIdolMeta)
+    # data = ma.fields.List(ma.fields.Nested(TweetItem))
+    pass
 
 
 class TabItem(BaseBlock):

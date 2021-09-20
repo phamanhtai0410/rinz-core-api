@@ -20,6 +20,7 @@ class EventParserAPI(ma.Schema):
 
     full_rtmp_url = ma.fields.Str()
     live_event_id = ma.fields.Str()
+    key_url = ma.fields.Str()
     streams = ma.fields.List(
         ma.fields.Nested(StreamItem),
         attribute='live_event_url'
@@ -37,6 +38,7 @@ class EventOwner(ma.Schema):
 
     full_rtmp_url = ma.fields.Str()
     live_event_id = ma.fields.Str()
+    key_url = ma.fields.Str()
     streams = ma.fields.List(ma.fields.Nested(StreamItem))
 
     rtmp_url = ma.fields.Str()

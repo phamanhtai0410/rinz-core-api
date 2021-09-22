@@ -68,7 +68,7 @@ class PaymentGateway(object):
             "status": Consts.PAYMENT_STATUS_PAID,
             "gateway": Consts.PAYMENT_RZ_MUSIC_GATEWAY,
             "user_id": user_id,
-            "items.value._id": oid,
+            "items.value.id": oid,
         })
         if not tct_order:
             return {}

@@ -60,3 +60,39 @@ class ItemUpdate(ma.Schema):
     user_name = ma.fields.Str(
         validate=ma.validate.Regexp(r"^[a-zA-Z0-9\.-]+$")
     )
+
+
+class PublicItem(ma.Schema):
+    id = ma.fields.Int()
+
+    user_address = ma.fields.Str()
+    user_avatar = ma.fields.Str()
+    user_bio = ma.fields.Str()
+    user_birthday = ma.fields.Int()
+    user_email = ma.fields.Str()
+    user_full_name = ma.fields.Str()
+    user_gender = ma.fields.Str()
+    user_name = ma.fields.Str()
+    user_password = ma.fields.Str()
+    user_phone = ma.fields.Str()
+
+    type = ma.fields.Str()
+
+    official = ma.fields.Boolean(default=False)
+    rzm_type = ma.fields.Function(
+        lambda obj: random.choice(Consts.USER_TYPES)
+    )
+    rzm_level = ma.fields.Function(
+        lambda obj: random.choice(Consts.USER_LEVELS)
+    )
+
+    followers = ma.fields.Function(
+        lambda obj: len(py_.get(obj, "followers", []))
+    )
+    following = ma.fields.Boolean(default=False)
+    products = ma.fields.Function(lambda obj: random.randrange(0, 100))
+    share_link = ma.fields.Function(
+        lambda obj: SchemaFunc.generate_share_link(
+            obj,
+            Consts.RESOURCE_TYPE_IDOL
+        ))

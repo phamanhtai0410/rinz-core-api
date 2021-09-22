@@ -1,3 +1,4 @@
+import re
 from bson import ObjectId
 import pydash as py_
 from http import HTTPStatus
@@ -117,11 +118,12 @@ def get_tracks(user_info, oid):
 @Http.make_cross_resp
 @Decorators.require_login
 def crud(user_info):
+    uid = py_.get(user_info, 'id')
     if request.method == 'POST':
         payload = request.json
         try:
             obj = SchemaResource.ItemUpdate().load(payload)
-            obj["author_id"] = user_info["id"]
+            obj["author_id"] = uid
             print(obj)
             result = RepoResource.insert(obj)
             return {
@@ -138,7 +140,50 @@ def crud(user_info):
                 "msg": "Invalid format!"
             }
 
-    data = RepoResource.get_list_active()
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
+    _filter = {
+        "status": {"$ne": Consts.STATUS_INACTIVE},
+        "author_id": uid
+    }
+    _sort = [("_id", -1)]
+
+    s = request.args.get('s')
+    if s:
+        _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
+        _sort = [("title", 1)]
+
+    data = RepoResource.get_list(_filter, _sort, page)
+    return {
+        "status": Consts.STATUS_OK,
+        "error_code": HTTPStatus.OK,
+        "data": SchemaResource.Item(many=True).dump(data),
+        "msg": "Success"
+    }
+
+
+@bp.route('/author/<string:author_id>', methods=['GET'])
+@Http.make_cross_resp
+@Decorators.require_login
+def get_by_author_id(user_info, author_id):
+    uid = py_.get(user_info, 'id')
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
+    author_id = py_.to_integer(author_id)
+    
+    _filter = {
+        "status": {"$ne": Consts.STATUS_INACTIVE},
+        "author_id": author_id
+    }
+    _sort = [("_id", -1)]
+
+    s = request.args.get('s')
+    if s:
+        _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
+        _sort = [("title", 1)]
+
+    data = RepoResource.get_list(_filter, _sort, page)
+    # data = py_.map_(data, Repo.mUser.map_item_user_info)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

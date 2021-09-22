@@ -16,6 +16,7 @@ class Item(ma.Schema):
 
     content = ma.fields.Str(required=True)
     images = ma.fields.List(ma.fields.Url())
+    videos = ma.fields.List(ma.fields.Str())
     mode = ma.fields.Str(
         validate=ma.validate.OneOf(Consts.TWEET_MODES),
         default=Consts.MODE_PUBLIC
@@ -34,6 +35,7 @@ class ItemUpdate(ma.Schema):
 
     content = ma.fields.Str(required=True)
     images = ma.fields.List(ma.fields.Url())
+    videos = ma.fields.List(ma.fields.Str())
     mode = ma.fields.Str(
         validate=ma.validate.OneOf(Consts.TWEET_MODES),
         default=Consts.MODE_PUBLIC

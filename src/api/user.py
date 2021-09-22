@@ -40,3 +40,32 @@ def user_info(user_info):
         "data": SchemaUser.Item().dump(user_info),
         "msg": "Success"
     }
+
+
+@bp.route('/author/<author_id>', methods=['GET'])
+@Http.make_cross_resp
+@Decorators.require_login
+def author_info(user_info, author_id):
+    uid = user_info["id"]
+    item = Repo.mUser.find_one({
+        "_id": author_id,
+    })
+    if not author_info:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": ""
+        }
+
+    item = Repo.mFollow.map_follow_info(
+        Consts.RESOURCE_TYPE_AUTHOR,
+        author_id, uid, item
+    )
+
+    return {
+        "status": Consts.STATUS_NOT_OK,
+        "error_code": HTTPStatus.OK,
+        "data": SchemaUser.PublicItem().dump(item),
+        "msg": "Success"
+    }

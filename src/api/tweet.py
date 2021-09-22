@@ -129,9 +129,9 @@ def get_by_author_id(user_info, author_id):
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": author_id
     }
-    if tweet_type in Consts.RESOURCE_TYPE_IMAGE:
+    if tweet_type == Consts.RESOURCE_TYPE_IMAGE:
         _filter["images"] = {"$ne": [], "$exists": True}
-    if tweet_type in Consts.RESOURCE_TYPE_VIDEO:
+    if tweet_type == Consts.RESOURCE_TYPE_VIDEO:
         _filter["videos"] = {"$ne": [], "$exists": True}
 
     _sort = [("_id", -1)]

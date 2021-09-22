@@ -23,14 +23,14 @@ class RzPaymentAPI(object):
         self.db = db
 
     @classmethod
-    def iapi_transaction(cls, user_id, price, order_type, items, merchant_id, noted, provider='rinz_points', return_url='webview') -> dict:
+    def iapi_transaction(cls, user_id, price, order_type, items) -> dict:
         try:
             headers = {
                 'ApiKey': cls.API_KEY,
             }
             payload = {
                 "price": price,
-                "noted": "noted",
+                "noted": "",
                 "from_service": "rinz-music",
                 "orders": [
                     {
@@ -40,8 +40,8 @@ class RzPaymentAPI(object):
                         "items": items,
                         "transport_fee": 0,
                         "user_id": user_id,
-                        "noted": "noted",
-                        "merchant_id": "khoapd",
+                        "noted": "",
+                        "merchant_id": "",
                         "coupon": {},
                         "discount": 0,
                         "delivery": {}
@@ -49,7 +49,7 @@ class RzPaymentAPI(object):
                 ],
                 "provider": "rinz_points",
                 "user_id": user_id,
-                "return_url": "webview"
+                "return_url": ""
             }
             resp = requests.post(
                 f"{cls.API_URL}/transaction/init",

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 # Response status
@@ -129,3 +131,12 @@ COMMENT_TYPE_NORMAL = 'normal'
 SORT_TYPE_LASTEST = 'lastest'
 SORT_TYPE_OLDEST = 'oldest'
 SORT_TYPE_LIKE = 'like'
+
+PAYMENT_STATUS_PAID = 'paid'
+PAYMENT_STATUS_UNPAID = 'unpaid'
+PAYMENT_RZ_MUSIC_GATEWAY = 'rinz-music'
+
+RESP_MSG = {
+    "payment_error": u"Tạm thời chưa thể thanh toán, vui lòng thử lại sau ít phút!",
+    "payment_require": u"Vui lòng thanh toán để sử dụng Dịch Vụ, Xim cảm ơn!",
+}

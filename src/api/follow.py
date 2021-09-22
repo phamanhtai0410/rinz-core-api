@@ -30,6 +30,8 @@ def item_action(user_info, rtype, oid):
         collection = Repo.mAlbum
     if rtype == Consts.RESOURCE_TYPE_TWEET:
         collection = Repo.mTweet
+    if rtype == Consts.RESOURCE_TYPE_AUTHOR:
+        collection = Repo.mUser
     item = collection.get_item(oid)
     if not item:
         return {

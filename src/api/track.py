@@ -162,8 +162,9 @@ def crud(user_info):
 def paid(user_info):
     uid = py_.get(user_info, 'id')
     _filter = {
-        "status": {"$ne": Consts.STATUS_INACTIVE},
-        "author_id": uid
+        "status": Consts.PAYMENT_STATUS_PAID,
+        "user_id": uid,
+        "type": Consts.RESOURCE_TYPE_TRACK,
     }
     _sort = [("_id", -1)]
 
@@ -172,8 +173,14 @@ def paid(user_info):
         _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
         _sort = [("title", 1)]
 
-    data = RepoResource.get_list(_filter, _sort)
-    data = py_.map_(data, Repo.mUser.map_item_user_info)
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
+    paid_orders = Repo.mPayment.get_list(_filter, _sort, page)
+    tracks_oid = [ObjectId(py_.get(ord, 'oid')) for ord in paid_orders]
+    items = Repo.mTrack.get_list({
+        "_id": {"$in": tracks_oid},
+    })
+    data = py_.map_(items, Repo.mUser.map_item_user_info)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

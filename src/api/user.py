@@ -36,7 +36,7 @@ def user_info(user_info):
             }
 
     return {
-        "status": Consts.STATUS_NOT_OK,
+        "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
         "data": SchemaUser.Item().dump(user_info),
         "msg": "Success"
@@ -64,7 +64,7 @@ def author_info(user_info, author_id):
     )
 
     return {
-        "status": Consts.STATUS_NOT_OK,
+        "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
         "data": SchemaUser.PublicItem().dump(item),
         "msg": "Success"

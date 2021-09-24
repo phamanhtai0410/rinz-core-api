@@ -6,6 +6,7 @@ from flask import (
 
 from marshmallow import ValidationError
 
+import pydash as py_
 import src.models.repo as Repo
 import src.constants as Consts
 import src.middlewares.http as Http
@@ -47,10 +48,9 @@ def user_info(user_info):
 @Decorators.require_login
 def author_info(user_info, author_id):
     uid = user_info["id"]
-    item = Repo.mUser.find_one({
-        "_id": author_id,
-    })
-    if not author_info:
+    author_id = py_.to_integer(author_id)
+    item = Repo.mUser.get_item(author_id)
+    if not item:
         return {
             "status": Consts.STATUS_NOT_OK,
             "error_code": HTTPStatus.NOT_FOUND,

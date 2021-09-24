@@ -25,6 +25,8 @@ RepoResource = Repo.mBlock
 @Http.make_cross_resp
 @Decorators.get_user_info
 def get_item(user_info, oid):
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
     block = RepoResource.get_item(oid)
     print(oid, block)
     if not block:
@@ -53,7 +55,7 @@ def get_item(user_info, oid):
     if block_type == Consts.BLOCK_TABS:
         schema = SchemaBlock.Tabs()
 
-    if block_type == Consts.BLOCK_IDOL_LIVE:
+    if block_type == Consts.BLOCK_IDOL_LIVE and page == 1:
         schema = SchemaBlock.IdolLive()
         mdata = Repo.mEvent.get_list({
             "status": {"$ne": Consts.STATUS_INACTIVE},
@@ -68,7 +70,7 @@ def get_item(user_info, oid):
             idt["type"] = Consts.RESOURCE_TYPE_EVENT
             data.append(idt)
 
-    if block_type == Consts.BLOCK_TOP_IDOL:
+    if block_type == Consts.BLOCK_TOP_IDOL and page == 1:
         schema = SchemaBlock.TopIdol()
         mdata = Repo.mUser.get_random_items({
             "status": {"$ne": Consts.STATUS_INACTIVE},
@@ -82,11 +84,14 @@ def get_item(user_info, oid):
     if isinstance(data, str):
         args_data = json.loads(data)
         args_data["user_id"] = py_.get(user_info, 'id', -1)
-        page = py_.get(request.args, 'page', 1)
-        page = py_.to_integer(page) or 1
         args_data["page"] = int(page)
         item_type = py_.get(args_data, 'type')
-        mdata = Repo.factory_get_list(**args_data)
+
+        randomize = py_.get(args_data, 'randomize', False)
+        if not(page > 1 and randomize):
+            mdata = []
+        else:
+            mdata = Repo.factory_get_list(**args_data)
         print("GO HERE", item_type)
         # print(mdata)
         data = []

@@ -99,13 +99,27 @@ def crud(user_info):
             }
 
     uid = py_.get(user_info, 'id')
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
+    tweet_type = py_.get(request.args, 'type')
+
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": uid
     }
+    if tweet_type == Consts.RESOURCE_TYPE_IMAGE:
+        _filter["images"] = {"$ne": [], "$exists": True}
+    if tweet_type == Consts.RESOURCE_TYPE_VIDEO:
+        _filter["videos"] = {"$ne": [], "$exists": True}
+
     _sort = [("_id", -1)]
 
-    data = RepoResource.get_list(_filter, _sort)
+    s = request.args.get('s')
+    if s:
+        _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
+        _sort = [("title", 1)]
+
+    data = RepoResource.get_list(_filter, _sort, page)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

@@ -88,7 +88,7 @@ def get_item(user_info, oid):
         item_type = py_.get(args_data, 'type')
 
         randomize = py_.get(args_data, 'randomize', False)
-        if not(page > 1 and randomize):
+        if page > 1 and randomize:
             mdata = []
         else:
             mdata = Repo.factory_get_list(**args_data)

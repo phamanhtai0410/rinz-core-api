@@ -18,3 +18,8 @@ class UserDAO(BaseDAO):
         item["author_name"] = py_.get(user_info, 'user_full_name', '')
         item["author_avatar"] = py_.get(user_info, 'user_avatar', '')
         return item
+
+    def map_author(self, item, author):
+        item["author_name"] = py_.get(author, 'user_full_name', '')
+        item["author_avatar"] = py_.get(author, 'user_avatar', '')
+        return item

@@ -137,6 +137,15 @@ def get_by_author_id(user_info, author_id):
     page = py_.to_integer(page) or 1
     author_id = py_.to_integer(author_id)
 
+    author = Repo.mUser.get_item(author_id)
+    if not author:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": ""
+        }
+
     tweet_type = py_.get(request.args, 'type')
 
     _filter = {
@@ -156,7 +165,7 @@ def get_by_author_id(user_info, author_id):
         _sort = [("title", 1)]
 
     data = RepoResource.get_list(_filter, _sort, page)
-    # data = py_.map_(data, Repo.mUser.map_item_user_info)
+    data = py_.map_(data, lambda item: Repo.mUser.map_author(item, author))
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

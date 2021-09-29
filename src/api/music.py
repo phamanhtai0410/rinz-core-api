@@ -36,6 +36,10 @@ def list_hot(user_info, ms_type):
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE}
     }
+    rzm_author = py_.get(request.args, 'rzm_author')
+    if rzm_author:
+        _filter["rzm_author"] = rzm_author
+
     if fee is not None:
         fee = py_.to_boolean(fee)
         if fee:

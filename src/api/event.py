@@ -148,6 +148,13 @@ def crud(user_info):
     }
     _sort = [("_id", -1)]
 
+    rzm_author = py_.get(request.args, 'rzm_author')
+    if rzm_author:
+        _filter = {
+            "status": {"$ne": Consts.STATUS_INACTIVE},
+            "rzm_author": rzm_author
+        }
+
     s = request.args.get('s')
     if s:
         _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
@@ -178,7 +185,7 @@ def get_by_author_id(user_info, author_id):
             "data": {},
             "msg": ""
         }
-    
+
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": author_id

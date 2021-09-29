@@ -22,7 +22,7 @@ class RzFieldDateTime(ma.fields.Field):
 class SchemaFunc(object):
     @classmethod
     def generate_share_link(cls, obj, rtype):
-        print(obj)
+        # print(obj)
         oid = py_.get(obj, '_id') or py_.get(obj, 'oid') or py_.get(obj, 'id')
         if rtype == Consts.RESOURCE_TYPE_IDOL:
             user_name = py_.get(obj, 'user_name') or 'rzmusic'
@@ -40,7 +40,7 @@ class SchemaFunc(object):
 
         # Try to get banner from tracks images
         tracks = py_.get(obj, 'tracks', [])
-        print(len(tracks))
+        # print(len(tracks))
         n_imgs = 4 if len(tracks) >= 4 else 1
         track_oids = [ObjectId(track) for track in rd.sample(tracks, n_imgs)]
         # print(track_oids)

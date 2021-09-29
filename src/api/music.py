@@ -47,6 +47,7 @@ def list_hot(user_info, ms_type):
     randomize = True
     ordered = False
 
+    music_data = [Consts.RESOURCE_TYPE_TRACK, Consts.RESOURCE_TYPE_ALBUM]
     page_size = Consts.PAGE_SIZE_DEFAULT
     if ms_type == Consts.MUSIC_TYPE_ALL:
         randomize = False
@@ -57,31 +58,38 @@ def list_hot(user_info, ms_type):
         ordered = True
         page_size = int(Consts.PAGE_SIZE_DEFAULT/2)
 
+    if ms_type == Consts.MUSIC_TYPE_RANKING:
+        randomize = True
+        ordered = True
+        page_size = int(Consts.PAGE_SIZE_DEFAULT * 2)
+        music_data = [Consts.RESOURCE_TYPE_TRACK]
+
+    print(music_data)
     if randomize:
         _sort = {"_id": -1}
         albums = Repo.mAlbum.get_random_items(
             _filter,
             _sort,
             page_size
-        ) if page == 1 else []
+        ) if page == 1 and Consts.RESOURCE_TYPE_ALBUM in music_data else []
         tracks = Repo.mTrack.get_random_items(
             _filter,
             _sort,
             page_size
-        ) if page == 1 else []
+        ) if page == 1 and Consts.RESOURCE_TYPE_TRACK in music_data else []
     else:
         albums = Repo.mAlbum.get_list(
             _filter,
             _sort,
             page,
             page_size
-        )
+        ) if Consts.RESOURCE_TYPE_ALBUM in music_data else []
         tracks = Repo.mTrack.get_list(
             _filter,
             _sort,
             page,
             page_size
-        )
+        ) if Consts.RESOURCE_TYPE_TRACK in music_data else []
 
     albums = py_.map_(albums, Repo.mUser.map_item_user_info)
     tracks = py_.map_(tracks, Repo.mUser.map_item_user_info)

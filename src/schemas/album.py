@@ -22,6 +22,7 @@ class Item(ma.Schema):
     title = ma.fields.Str(required=True)
     description = ma.fields.Str()
     category = ma.fields.Str(default='')
+    rzm_author = ma.fields.Str()
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
 
@@ -40,6 +41,7 @@ class ItemUpdate(ma.Schema):
     title = ma.fields.Str(required=True)
     description = ma.fields.Str(default='')
     category = ma.fields.Str(default='other')
+    rzm_author = ma.fields.Str(required=True)
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
 

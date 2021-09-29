@@ -23,6 +23,7 @@ class Item(ma.Schema):
     description = ma.fields.Str()
 
     category = ma.fields.Str(default='')
+    rzm_author = ma.fields.Str()
 
     created_date = RzFieldDateTime()
 
@@ -45,6 +46,11 @@ class Item(ma.Schema):
     enable_comment = ma.fields.Boolean(default=True)
     comment_type = ma.fields.Str(default=Consts.COMMENT_TYPE_NORMAL)
 
+    followers = ma.fields.Function(
+        lambda obj: len(py_.get(obj, "followers", []))
+    )
+    following = ma.fields.Boolean(default=False)
+
 
 class ItemUpdate(ma.Schema):
     class Meta:
@@ -55,6 +61,7 @@ class ItemUpdate(ma.Schema):
     title = ma.fields.Str(required=True)
     description = ma.fields.Str(default='')
     category = ma.fields.Str(required=True)
+    rzm_author = ma.fields.Str(required=True)
 
     rz_point = ma.fields.Int(validate=ma.validate.Range(min=0), default=0)
     enable_comment = ma.fields.Boolean(default=True)

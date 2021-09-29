@@ -66,6 +66,10 @@ def get_item(user_info, oid):
             }
 
     item = Repo.mUser.map_item_user_info(item)
+    item = Repo.mFollow.map_follow_info(
+        Consts.RESOURCE_TYPE_EVENT,
+        oid, uid, item
+    )
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,

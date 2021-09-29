@@ -80,7 +80,7 @@ def crud():
     if _type and _type in Consts.META_TYPES:
         _filter = {'type': _type}
 
-    data = Repo.mMeta.get_list(_filter, [("name", 1)])
+    data = Repo.mMeta.get_list(_filter, [('priority', -1), ("name", 1)])
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,

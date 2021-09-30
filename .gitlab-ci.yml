@@ -13,4 +13,3 @@ include:
     file: 'deliver/.deliver.gitlab-ci.yml'
   - project: 'devops/ci-pipeline'
     file: 'util/.deploy_rzmusic.swarm.gitlab-ci.yml'
-    

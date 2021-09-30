@@ -19,7 +19,7 @@ services:
         #    tag: "rzmusic_core_api"
             
         ports:
-        - "6002:5000"
+        - "16002:5000"
 
         # healthcheck:
         #     test: curl --fail -s http://localhost:5005/common/health_check || exit 1

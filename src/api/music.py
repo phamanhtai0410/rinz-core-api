@@ -105,7 +105,7 @@ def list_hot(user_info, ms_type):
 
     return {
         "status": Consts.STATUS_OK,
-        "error_code": Consts.NOT_E,
+        "error_code": HTTPStatus.OK,
         "data": data,
         "msg": "success"
     }

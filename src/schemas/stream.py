@@ -59,7 +59,7 @@ class Track(ma.Schema):
     class Meta:
         ordered = True
 
-    download = ma.fields.Boolean()
+    download = ma.fields.Str()
     streams = ma.fields.List(ma.fields.Nested(StreamItem))
 
 

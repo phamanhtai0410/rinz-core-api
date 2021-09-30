@@ -1,0 +1,16 @@
+stages:
+  - deliver-image
+  - deploy-production
+
+variables:
+  REPO_NAME: https://gitlab.rinznetwork.com/rinz-kingdom/core-api
+  APP_NAME:  rzmusic_core_api
+  APP_NAME_ENV: "$RZMUSIC_CORE_API_ENV"
+
+include:
+  - project: 'devops/ci-pipeline'
+    file: 'global.gitlab-ci.yml'
+  - project: 'devops/ci-pipeline'
+    file: 'deliver/.deliver.gitlab-ci.yml'
+  - project: 'devops/ci-pipeline'
+    file: 'util/.deploy-production.swarm.gitlab-ci.yml'

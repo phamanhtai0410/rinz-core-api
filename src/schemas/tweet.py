@@ -27,6 +27,7 @@ class Item(ma.Schema):
 
     enable_comment = ma.fields.Boolean(default=True)
     comment_type = ma.fields.Str(default=Consts.COMMENT_TYPE_NORMAL)
+    rzm_author = ma.fields.Str()
 
 
 class ItemUpdate(ma.Schema):
@@ -42,3 +43,4 @@ class ItemUpdate(ma.Schema):
     )
 
     enable_comment = ma.fields.Boolean(default=True)
+    rzm_author = ma.fields.Str()

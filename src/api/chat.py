@@ -14,7 +14,7 @@ import src.decorators as Decorators
 
 from lib.rz_chat import RzChatAPI
 
-bp = Blueprint('event', __name__, url_prefix='/api/chat')
+bp = Blueprint('chat', __name__, url_prefix='/api/chat')
 
 
 @bp.route('/groups', methods=['GET'])

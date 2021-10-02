@@ -146,3 +146,7 @@ RESP_MSG = {
     "payment_error": u"Tạm thời chưa thể thanh toán, vui lòng thử lại sau ít phút!",
     "payment_require": u"Vui lòng thanh toán để sử dụng Dịch Vụ, Xim cảm ơn!",
 }
+
+CHAT_STATUS_SENT = 'sent'
+CHAT_STATUS_SEEN = 'seen'
+CHAT_TYPE_SINGLE = 'single'

@@ -27,6 +27,9 @@ mTrack = BaseDAO(mdb.db.track)
 mTweet = BaseDAO(mdb.db.tweet)
 mAlbum = BaseDAO(mdb.db.album)
 
+mChat = BaseDAO(mdb.db.chat)
+mChatGroup = BaseDAO(mdb.db.chat_group)
+
 mPayment = BaseDAO(mdb.db.order)
 mRzPayment = BaseDAO(mdb_payment.db.orders)
 

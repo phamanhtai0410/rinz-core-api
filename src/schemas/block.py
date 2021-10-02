@@ -5,7 +5,7 @@ import marshmallow as ma
 import random as rd
 
 import src.constants as Consts
-from .base import RzFieldDateTime
+from .base import RzFieldDateTime, AuthorNameField
 from .tweet import Item as TweetItem
 
 
@@ -32,7 +32,7 @@ class SearchBar(BaseBlock):
 class Idol(ma.Schema):
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int()
-    author_name = ma.fields.Str()
+    author_name = AuthorNameField()
     author_avatar = ma.fields.Str()
     live_stream = ma.fields.Boolean(default=True)
     type = ma.fields.Str(default=True)
@@ -59,7 +59,7 @@ class WidgetIcons(BaseBlock):
 class SliderItem(ma.Schema):
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int()
-    author_name = ma.fields.Str()
+    author_name = AuthorNameField()
     author_avatar = ma.fields.Str()
 
     on_air_time = RzFieldDateTime(attribute='start_time')

@@ -2,7 +2,7 @@ import pydash as py_
 import marshmallow as ma
 
 import src.constants as Consts
-from .base import RzFieldDateTime, SchemaFunc
+from .base import RzFieldDateTime, SchemaFunc, AuthorNameField
 
 
 class Item(ma.Schema):
@@ -11,7 +11,7 @@ class Item(ma.Schema):
 
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int(required=True)
-    author_name = ma.fields.Str()
+    author_name = AuthorNameField()
     author_avatar = ma.fields.Str()
 
     banner = ma.fields.Function(

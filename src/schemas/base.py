@@ -19,6 +19,17 @@ class RzFieldDateTime(ma.fields.Field):
         return int(value.timestamp())
 
 
+class AuthorNameField(ma.fields.Field):
+    """Field that serializes to a string of numbers and deserializes
+    to a list of numbers.
+    """
+
+    def _serialize(self, value, attr, obj, **kwargs):
+        if value.isdigit():
+            return '***' + value[-3:]
+        return value
+
+
 class SchemaFunc(object):
     @classmethod
     def generate_share_link(cls, obj, rtype):

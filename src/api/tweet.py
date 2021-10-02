@@ -107,6 +107,13 @@ def crud(user_info):
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": uid
     }
+    rzm_author = py_.get(request.args, 'rzm_author')
+    if rzm_author:
+        _filter = {
+            "status": {"$ne": Consts.STATUS_INACTIVE},
+            "rzm_author": rzm_author
+        }
+        
     if tweet_type == Consts.RESOURCE_TYPE_IMAGE:
         _filter["images"] = {"$ne": [], "$exists": True}
     if tweet_type == Consts.RESOURCE_TYPE_VIDEO:

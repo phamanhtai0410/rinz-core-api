@@ -28,6 +28,7 @@ class Item(ma.Schema):
         validate=ma.validate.OneOf(Consts.RESOURCE_TYPES)
     )
     content = ma.fields.Str(default='')
+    images = ma.fields.List(ma.fields.Str())
 
     status = ma.fields.Str(
         validate=ma.validate.OneOf([
@@ -42,3 +43,4 @@ class ItemUpdate(ma.Schema):
         ordered = True
 
     content = ma.fields.Str(default='')
+    images = ma.fields.List(ma.fields.Str())

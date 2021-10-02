@@ -1,3 +1,4 @@
+from bson import ObjectId
 import pydash as py_
 
 import src.constants as Consts
@@ -115,3 +116,21 @@ class CommentDAO(BaseDAO):
         # ]
 
         return list(datas), int(total)
+
+    def action_user_like(self, user_id, comment_id):
+        self.db.update_one(
+            {"_id": ObjectId(comment_id)},
+            {
+                '$push': {'likes': user_id},
+                '$inc': {'nlike': 1}
+            }
+        )
+
+    def action_user_dislike(self, user_id, comment_id):
+        self.db.update_one(
+            {"_id": ObjectId(comment_id)},
+            {
+                '$pull': {'likes': user_id},
+                '$inc': {'nlike': -1}
+            }
+        )

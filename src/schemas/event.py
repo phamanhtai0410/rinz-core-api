@@ -49,6 +49,8 @@ class Item(ma.Schema):
 
     rzm_author = ma.fields.Str()
 
+    donates = ma.fields.List(ma.fields.Int())
+
 
 class ItemUpdate(ma.Schema):
     class Meta:
@@ -74,3 +76,4 @@ class ItemUpdate(ma.Schema):
     enable_comment = ma.fields.Boolean(default=True)
 
     rzm_author = ma.fields.Str()
+    donates = ma.fields.List(ma.fields.Int())

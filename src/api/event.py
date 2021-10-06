@@ -12,6 +12,8 @@ import src.models.repo as Repo
 import src.schemas.event as SchemaResource
 import src.schemas.track as SchemaTrack
 import src.decorators as Decorators
+from lib.rz_chat import RzChatAPI
+
 
 bp = Blueprint('event', __name__, url_prefix='/api/event')
 
@@ -56,6 +58,22 @@ def get_item(user_info, oid):
         payload = request.json
         try:
             obj = SchemaResource.ItemUpdate().load(payload)
+
+            # Check user update group rule
+            if obj['enable_comment'] != item['enable_comment']:
+
+                # Publish Message to Socket Channel
+                payload_pub = {
+                    "type": "control",
+                    "content": "enable_comment" if item['enable_comment'] else "disable_comment",
+                    # "user": {
+                    #     "user_name": py_.get(user_info, 'user_full_name', ''),
+                    #     "user_avatar": py_.get(user_info, 'user_avatar', ''),
+                    # }
+                }
+
+                RzChatAPI.send_public_message(payload_pub, oid)
+
             result = RepoResource.update(oid, obj, True)
             item = RepoResource.get_item(oid)
         except ValidationError as err:

@@ -36,3 +36,25 @@ class RzChatAPI(object):
         except:
             traceback.print_exc()
             return {}
+
+    @classmethod
+    def send_public_message(cls, payload, room_id) -> dict:
+        try:
+            payload = {
+                "type": "public",
+                "room": room_id,
+                "event": "message",
+                "payload": payload,
+                "users": []
+            }
+            resp = requests.post(
+                f"{cls.API_URL}/v1/socket/send_to_room",
+                json = payload,
+            )
+            if resp.status_code == HTTPStatus.OK:
+                obj = resp.json()
+                return py_.get(obj, "data", {})
+            return {}
+        except:
+            traceback.print_exc()
+            return {}

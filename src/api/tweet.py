@@ -53,7 +53,7 @@ def get_item(user_info, oid):
     if request.method == 'PUT':
         payload = request.json
         try:
-            obj = SchemaResource.ItemUpdate().load(payload)
+            obj = SchemaResource.ItemUpdate().load(payload, partial=True)
             result = RepoResource.update(oid, obj, True)
             item = RepoResource.get_item(oid)
         except ValidationError as err:

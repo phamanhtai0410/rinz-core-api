@@ -24,7 +24,7 @@ def user_info(user_info):
     if request.method == 'PUT':
         payload = request.json
         try:
-            obj = SchemaUser.ItemUpdate().load(payload)
+            obj = SchemaUser.ItemUpdate().load(payload, partial=True)
             user_info = {**user_info, **obj}
             result = Repo.mUser.update(uid, user_info, True)
         except ValidationError as err:

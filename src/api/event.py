@@ -57,11 +57,12 @@ def get_item(user_info, oid):
     if request.method == 'PUT':
         payload = request.json
         try:
-            obj = SchemaResource.ItemUpdate().load(payload)
+            obj = SchemaResource.ItemUpdate().load(payload, partial=True)
+            o_cmt = py_.get(obj, "enable_comment")
+            i_cmt = py_.get(item, "enable_comment", True)
 
             # Check user update group rule
-            if obj['enable_comment'] != item['enable_comment']:
-
+            if o_cmt != i_cmt:
                 # Publish Message to Socket Channel
                 payload_pub = {
                     "type": "control",

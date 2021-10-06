@@ -61,3 +61,16 @@ class SchemaFunc(object):
             "status": {"$ne": Consts.STATUS_INACTIVE}
         })]
         return images
+
+
+class RzAddress(ma.Schema):
+    tp_code = ma.fields.Str(required=True)
+    qh_code = ma.fields.Str(required=True)
+    xp_code = ma.fields.Str(required=True)
+    so_nha = ma.fields.Str(required=True)
+
+
+class RzCMND(ma.Schema):
+    numbers = ma.fields.Str(required=True)
+    issue_date = ma.fields.DateTime(format="%Y/%m/%d", required=True)
+    issue_from = ma.fields.Str(required=True)

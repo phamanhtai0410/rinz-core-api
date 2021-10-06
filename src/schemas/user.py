@@ -4,7 +4,7 @@ import marshmallow as ma
 
 import src.constants as Consts
 
-from .base import SchemaFunc
+from .base import SchemaFunc, RzAddress, RzCMND
 
 
 class Item(ma.Schema):
@@ -14,7 +14,7 @@ class Item(ma.Schema):
     id = ma.fields.Int()
     balance = ma.fields.Int()
 
-    user_address = ma.fields.Str()
+    user_address = ma.fields.Nested(RzAddress)
     user_avatar = ma.fields.Str()
     user_bio = ma.fields.Str()
     user_birthday = ma.fields.Int()
@@ -24,6 +24,8 @@ class Item(ma.Schema):
     user_name = ma.fields.Str()
     user_password = ma.fields.Str()
     user_phone = ma.fields.Str()
+
+    user_cmnd = ma.fields.Nested(RzCMND)
 
     livestream_url = ma.fields.Str()
 
@@ -51,7 +53,8 @@ class ItemUpdate(ma.Schema):
     class Meta:
         ordered = True
 
-    user_address = ma.fields.Str()
+    user_email = ma.fields.Email()
+    user_address = ma.fields.Nested(RzAddress)
     user_avatar = ma.fields.Str()
     user_bio = ma.fields.Str()
     user_birthday = ma.fields.Str()
@@ -60,6 +63,8 @@ class ItemUpdate(ma.Schema):
     user_name = ma.fields.Str(
         validate=ma.validate.Regexp(r"^[a-zA-Z0-9\.-]+$")
     )
+
+    user_cmnd = ma.fields.Nested(RzCMND)
 
 
 class PublicItem(ma.Schema):

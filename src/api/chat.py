@@ -178,7 +178,7 @@ def chat_to_group(user_info, oid):
 @bp.route('/control/<string:oid>', methods=['POST'])
 @Http.make_cross_resp
 @Decorators.require_login
-def chat_to_group(user_info, oid):
+def control_chat_group(user_info, oid):
     """
     Use for owner/admin control group real time.
     Maybe use for system event later.

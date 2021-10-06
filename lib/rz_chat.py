@@ -38,12 +38,12 @@ class RzChatAPI(object):
             return {}
 
     @classmethod
-    def send_public_message(cls, payload, room_id) -> dict:
+    def send_public_message(cls, payload, room_id, event='message') -> dict:
         try:
             payload = {
                 "type": "public",
                 "room": room_id,
-                "event": "message",
+                "event": event,
                 "payload": payload,
                 "users": []
             }

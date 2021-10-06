@@ -66,14 +66,14 @@ def get_item(user_info, oid):
                 # Publish Message to Socket Channel
                 payload_pub = {
                     "type": "control",
-                    "content": "enable_comment" if item['enable_comment'] else "disable_comment",
+                    "content": "enable_comment" if item["enable_comment"] else "disable_comment",
                     # "user": {
                     #     "user_name": py_.get(user_info, 'user_full_name', ''),
                     #     "user_avatar": py_.get(user_info, 'user_avatar', ''),
                     # }
                 }
 
-                RzChatAPI.send_public_message(payload_pub, oid)
+                RzChatAPI.send_public_message(payload_pub, oid, payload_pub["type"])
 
             result = RepoResource.update(oid, obj, True)
             item = RepoResource.get_item(oid)

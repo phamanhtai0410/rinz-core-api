@@ -65,6 +65,15 @@ def configure_extensions(app):
     mdb.init_app(app, uri=app.config['MONGO_URI_RINZ_MUSIC'])
     mdb_payment.init_app(app, uri=app.config['MONGO_URI_RINZ_PAYMENT'])
 
+    # Sentry
+    if DefaultConfig.SENTRY_DSN:
+        sentry_sdk.init(
+            dsn=DefaultConfig.SENTRY_DSN,
+            integrations=[FlaskIntegration()],
+        )
+
+        capture_message('{} starts'.format(DefaultConfig.PROJECT))
+
 
 def configure_blueprints(app):
     """Configure blueprints in views."""

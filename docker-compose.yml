@@ -11,5 +11,7 @@ services:
       - 6002:5000
     environment:
       - PYTHONUNBUFFERED=true
+    env_file:
+      - .env
     command: python manage.py run
     # command: tail -f /dev/null

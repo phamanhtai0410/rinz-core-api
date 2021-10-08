@@ -14,6 +14,7 @@ from .follow import bp as rest_follow
 from .music import bp as rest_music
 from .comment import bp as rest_comment
 from .chat import bp as rest_chat
+from .report import bp as rest_report
 
 DEFAULT_BLUEPRINTS = [
     rest_index,
@@ -32,4 +33,5 @@ DEFAULT_BLUEPRINTS = [
     rest_music,
     rest_comment,
     rest_chat,
+    rest_report,
 ]

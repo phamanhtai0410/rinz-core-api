@@ -78,6 +78,7 @@ STATUS_PROCESSING = 'processing'
 STATUS_ENCODED = 'encoded'
 STATUS_LIVE = 'live'
 STATUS_LIVE_ENDED = 'live_ended'
+STATUS_PENDING = 'pending'
 
 MODE_PUBLIC = 'public'
 MODE_PRIVATE = 'private'
@@ -157,3 +158,9 @@ RESP_MSG = {
 CHAT_STATUS_SENT = 'sent'
 CHAT_STATUS_SEEN = 'seen'
 CHAT_TYPE_SINGLE = 'single'
+
+NUM_REPORT_ALERT = 3
+NUM_REPORT_PENDING = 5
+
+REPORT_TYPE_SPAM = 'spam'
+REPORT_TYPE_NOT_MATCH = 'not_match'

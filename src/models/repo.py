@@ -19,6 +19,7 @@ mSiteMap = BaseDAO(mdb.db.site_map)
 mMeta = BaseDAO(mdb.db.meta)
 mUser = UserDAO(mdb.db.user)
 mFollow = FollowDAO(mdb.db.follow)
+mReport = BaseDAO(mdb.db.report)
 mComment = CommentDAO(mdb.db.comment)
 
 mStream = StreamDAO(mdb.db.stream)

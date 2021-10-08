@@ -11,7 +11,10 @@ redis_cache = Redis()
 mdb = PyMongo()
 mdb_payment = PyMongo()
 
-RzPayment = RzPaymentAPI(mdb_payment)
+RzPayment = RzPaymentAPI()
 # Redis user info, will initialized in app
-# redis_cluster = RedisCluster(startup_nodes=DefaultConfig.REDIS_USERS_STARTUP_NODES, decode_responses=True)
+redis_cluster = RedisCluster(
+    startup_nodes=DefaultConfig.REDIS_USERS_STARTUP_NODES,
+    decode_responses=True
+)
 # print('Init Redis user info successfully')

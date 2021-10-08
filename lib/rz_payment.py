@@ -17,11 +17,6 @@ class RzPaymentAPI(object):
     API_KEY = os.getenv('RZ_PAYMENT_KEY') \
         or '8b65e82396d4c53296f36a1531ededca'
 
-    def __init__(self, db):
-        if not db:
-            raise Exception("Must has db orders info")
-        self.db = db
-
     @classmethod
     def iapi_transaction(cls, user_id, price, order_type, items) -> dict:
         try:

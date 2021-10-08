@@ -60,10 +60,11 @@ def configure_extensions(app):
     # print('Init Redis user info successfully')
 
     print(app.config['MONGO_URI_RINZ_MUSIC'])
+    print(app.config['REDIS_USERS_STARTUP_NODES'])
 
     # Sentry
     mdb.init_app(app, uri=app.config['MONGO_URI_RINZ_MUSIC'])
-    mdb_payment.init_app(app, uri=app.config['MONGO_URI_RINZ_PAYMENT'])
+    # mdb_payment.init_app(app, uri=app.config['MONGO_URI_RINZ_PAYMENT'])
 
     # Sentry
     if DefaultConfig.SENTRY_DSN:

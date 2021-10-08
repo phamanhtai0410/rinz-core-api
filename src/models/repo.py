@@ -1,6 +1,7 @@
 import pydash as py_
 
-from src.extensions import mdb, mdb_payment
+
+from src.extensions import mdb, redis_cluster
 import src.constants as Consts
 
 from lib.rz_payment import RzPaymentAPI
@@ -32,7 +33,7 @@ mChat = BaseDAO(mdb.db.chat)
 mChatGroup = BaseDAO(mdb.db.chat_group)
 
 mPayment = BaseDAO(mdb.db.order)
-mRzPayment = BaseDAO(mdb_payment.db.orders)
+# mRzPayment = BaseDAO(mdb_payment.db.orders)
 
 
 def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_DEFAULT, randomize=True, personalize=False):
@@ -67,28 +68,34 @@ class PaymentGateway(object):
         if rzm_order:
             return rzm_order
 
-        tct_order = mRzPayment.get_item_with({
-            "order_type": rtype,
-            "status": Consts.PAYMENT_STATUS_PAID,
-            "gateway": Consts.PAYMENT_RZ_MUSIC_GATEWAY,
-            "user_id": user_id,
-            "items.value.id": oid,
-        })
-        if not tct_order:
+        # TODO: FLOW use MongoDB Payment check status of order
+        # tct_order = mRzPayment.get_item_with({
+        #     "order_type": rtype,
+        #     "status": Consts.PAYMENT_STATUS_PAID,
+        #     "gateway": Consts.PAYMENT_RZ_MUSIC_GATEWAY,
+        #     "user_id": user_id,
+        #     "items.value.id": oid,
+        # })
+
+        # TODO: Flow use Redis check Status of order
+        key_pm_order = f"payment:orders:{rtype}:{user_id}:{oid}"
+        status_order = redis_cluster.get(key_pm_order)
+        print("- Checking", key_pm_order, status_order)
+        if not status_order or status_order != Consts.PAYMENT_STATUS_PAID:
             return {}
 
-        transaction_id = py_.get(tct_order, 'transaction_id', '')
-        pay_provider = py_.get(tct_order, 'pay_provider', '')
-        items = py_.get(tct_order, 'items', {})
+        # transaction_id = py_.get(tct_order, 'transaction_id', '')
+        # pay_provider = py_.get(tct_order, 'pay_provider', '')
+        item = py_.get(rzm_order, 'item', {})
         rzm_order = {
             "oid": oid,
             "type": rtype,
             "user_id": user_id,
             "author_id": author_id,
             "status": Consts.PAYMENT_STATUS_PAID,
-            "transaction_id": transaction_id,
-            "pay_provider": pay_provider,
-            "items": items,
+            # "transaction_id": transaction_id,
+            # "pay_provider": pay_provider,
+            "item": item,
         }
         mPayment.update_by_filter({
             "oid": oid,

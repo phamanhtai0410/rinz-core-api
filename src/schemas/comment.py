@@ -20,7 +20,7 @@ class Item(ma.Schema):
 
     parent_id = ma.fields.Str(default='')
     pin_top = ma.fields.Boolean(default=False)
-    ucomment = ma.fields.Boolean(default=False)
+    ucomment = ma.fields.Boolean(default=True)
     uliked = ma.fields.Boolean(default=False)
 
     content_id = ma.fields.Str()

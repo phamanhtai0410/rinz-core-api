@@ -23,7 +23,7 @@ class CommentDAO(BaseDAO):
         _filter = {
             "content_id": content_id,
             "content_type": content_type,
-            "parrent_id": "",
+            "parent_id": "",
             "status": Consts.STATUS_ACTIVE,
         }
 

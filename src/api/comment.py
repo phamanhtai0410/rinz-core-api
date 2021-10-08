@@ -140,12 +140,11 @@ def crud(user_info):
             }
             obj = SchemaResource.ItemUpdate().load(payload)
             obj = {**obj_default, **obj}
-            print(obj)
             result = RepoResource.insert(obj)
             return {
                 "status": Consts.STATUS_OK,
                 "error_code": HTTPStatus.OK,
-                "data": bool(result),
+                "data": SchemaResource.Item().dump(obj),
                 "msg": "Success"
             }
         except ValidationError as err:

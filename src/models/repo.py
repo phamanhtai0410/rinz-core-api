@@ -100,16 +100,17 @@ class PaymentGateway(object):
         return rzm_order
 
     @classmethod
-    def exec_order(cls, oid, rtype, user_id, items, rz_point, author_id):
-        tct_order = RzPaymentAPI.iapi_transaction(
+    def exec_order(cls, oid, rtype, user_id, item, rz_point, author_id):
+        tct_order = RzPaymentAPI.iapi_transaction_now(
             user_id,
             rz_point,
             rtype,
-            items
+            item,
+            author_id,
         )
-        payment_url = py_.get(tct_order, 'transaction.payment_url', '')
-        if not payment_url:
-            return {}
+        resp_status = py_.get(tct_order, 'status')
+        if not resp_status:
+            return tct_order
 
         transaction = py_.get(tct_order, 'transaction', {})
         rzm_order = {
@@ -118,7 +119,7 @@ class PaymentGateway(object):
             "user_id": user_id,
             "author_id": author_id,
             "status": Consts.PAYMENT_STATUS_UNPAID,
-            "items": items,
+            "item": item,
             "transaction": transaction,
         }
         mPayment.insert(rzm_order)

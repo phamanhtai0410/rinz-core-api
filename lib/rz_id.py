@@ -27,6 +27,7 @@ class RzID(object):
             resp = requests.get(
                 f"{cls.RZ_ID_API}/v1/id/user/me",
                 headers=headers,
+                timeout=1
             )
             if resp.status_code == HTTPStatus.OK:
                 obj = resp.json()

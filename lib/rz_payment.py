@@ -63,3 +63,41 @@ class RzPaymentAPI(object):
         except:
             traceback.print_exc()
             return {}
+
+    @classmethod
+    def iapi_transaction_now(cls, user_id, price, order_type, item, author_id) -> dict:
+        try:
+            headers = {
+                'ApiKey': cls.API_KEY,
+            }
+            payload = {
+                "price": price,
+                "noted": "",
+                "from_service": "rinz-music",
+                "item": item,
+                "provider": "rinz_points",
+                "user_id": user_id,
+                "merchant_id": author_id,
+                # "return_url": ""
+            }
+            # print('-' * 10)
+            # print(payload)
+            resp = requests.post(
+                f"{cls.API_URL}/transaction/now",
+                json=payload,
+                headers=headers,
+            )
+            if resp.status_code == HTTPStatus.OK:
+                obj = resp.json()
+                data = py_.get(obj, "data", {}) or obj
+                return data
+            return {
+                "error_code": HTTPStatus.INTERNAL_SERVER_ERROR,
+                "status": 0,
+            }
+        except:
+            traceback.print_exc()
+            return {
+                "error_code": HTTPStatus.SERVICE_UNAVAILABLE,
+                "status": 0,
+            }

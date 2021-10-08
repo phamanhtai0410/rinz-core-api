@@ -56,21 +56,18 @@ def get_event_stream(user_info, oid):
             author_id
         )
         if not paid_order:
-            items = [{
+            paid_item = SchemaEvent.Item().dump(event)
+            paid_item['_id'] = oid
+            items = {
                 "type": rtype,
-                "value": SchemaEvent.Item().dump(event),
-            }]
+                "value": paid_item,
+            }
             exec_order = Repo.PaymentGateway.exec_order(
                 oid, rtype, uid, items, rz_point, author_id
             )
-            payment_url = py_.get(exec_order, 'transaction.payment_url', '')
-            if not payment_url:
-                return {
-                    "status": Consts.STATUS_NOT_OK,
-                    "error_code": HTTPStatus.INTERNAL_SERVER_ERROR,
-                    "data": {},
-                    "msg": Consts.RESP_MSG["payment_error"]
-                }
+            resp_status = py_.get(exec_order, 'status')
+            if not resp_status:
+                return exec_order
 
             obj_transaction = py_.get(exec_order, 'transaction', {})
             return {
@@ -134,21 +131,18 @@ def get_music_stream(user_info, oid):
         paid_order = Repo.PaymentGateway.get_paid_order(
             oid, rtype, uid, author_id)
         if not paid_order:
-            items = [{
+            paid_item = SchemaTrack.Item().dump(track)
+            paid_item['_id'] = str(oid)
+            items = {
                 "type": rtype,
-                "value": SchemaTrack.Item().dump(track),
-            }]
+                "value": paid_item,
+            }
             exec_order = Repo.PaymentGateway.exec_order(
                 oid, rtype, uid, items, rz_point, author_id
             )
-            payment_url = py_.get(exec_order, 'transaction.payment_url', '')
-            if not payment_url:
-                return {
-                    "status": Consts.STATUS_NOT_OK,
-                    "error_code": HTTPStatus.INTERNAL_SERVER_ERROR,
-                    "data": {},
-                    "msg": Consts.RESP_MSG["payment_error"]
-                }
+            resp_status = py_.get(exec_order, 'status')
+            if not resp_status:
+                return exec_order
 
             obj_transaction = py_.get(exec_order, 'transaction', {})
             return {

@@ -128,7 +128,8 @@ def get_music_stream(user_info, oid):
     is_owner = bool(uid == author_id)
     rz_point = py_.get(track, 'rz_point', 0)
 
-    if not is_owner and rz_point > 0:
+    is_rz_vip = py_.get(user_info, 'rz_vip')
+    if not is_rz_vip and not is_owner and rz_point > 0:
         # FLOW PAYMENT ORDER
         paid_order = Repo.PaymentGateway.get_paid_order(
             oid, rtype, uid, author_id)

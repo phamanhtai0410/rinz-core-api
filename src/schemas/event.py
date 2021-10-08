@@ -9,7 +9,6 @@ class Item(ma.Schema):
     class Meta:
         ordered = True
 
-    _id = ma.fields.Str()
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int(required=True)
     author_name = AuthorNameField()

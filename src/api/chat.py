@@ -71,7 +71,7 @@ def get_by_author_id(user_info, author_id):
     if request.method == 'POST':
         if not group_chat:
             group_chat = {
-                "users": {"$all": group_users},
+                "users": group_users,
                 "chat_type": Consts.CHAT_TYPE_SINGLE
             }
             group_chat = Repo.mChatGroup.insert(group_chat)

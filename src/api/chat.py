@@ -67,14 +67,14 @@ def get_by_author_id(user_info, author_id):
         "users": {"$all": group_users},
         "chat_type": Consts.CHAT_TYPE_SINGLE
     }
-    group_chat = Repo.mGroupChat.get_item_with(_filter)
+    group_chat = Repo.mChatGroup.get_item_with(_filter)
     if request.method == 'POST':
         if not group_chat:
             group_chat = {
                 "users": {"$all": group_users},
                 "chat_type": Consts.CHAT_TYPE_SINGLE
             }
-            group_chat = Repo.mGroupChat.insert(group_chat)
+            group_chat = Repo.mChatGroup.insert(group_chat)
         group_id = str(group_chat['id'])
         payload = request.json
         try:
@@ -127,7 +127,7 @@ def get_by_author_id(user_info, author_id):
 @Http.make_cross_resp
 @Decorators.require_login
 def chat_to_group(user_info, oid):
-    item = Repo.mGroupChat.get_item(oid)
+    item = Repo.mChatGroup.get_item(oid)
     if not item:
         return {
             "status": Consts.STATUS_NOT_OK,

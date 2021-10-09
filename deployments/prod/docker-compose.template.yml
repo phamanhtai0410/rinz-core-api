@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+    app:
+        image: ${CI_REGISTRY}/rzmusic/${APP_NAME}:${CI_COMMIT_SHORT_SHA}
+        command: python manage.py run
+     
+        environment: 
+            - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+            - SQLALCHEMY_DATABASE_URI=${SQLALCHEMY_DATABASE_URI}
+            - REDIS_URL=${REDIS_URL}
+            - REDIS_USERS_STARTUP_NODES=${REDIS_USERS_STARTUP_NODES}
+            - IAPI_DOMAIN=${IAPI_DOMAIN}
+            - SENTRY_DSN=${SENTRY_DSN}
+
+        #logging:
+        #  driver: syslog
+        #  options:
+        #    syslog-address: "udp://94.237.79.182:514"
+        #    tag: "rzmusic_core_api"
+            
+        ports:
+        - "16002:5000"
+
+        # healthcheck:
+        #     test: curl --fail -s http://localhost:5005/common/health_check || exit 1
+        #     interval: 30s
+        #     timeout: 10s
+        #     retries: 3        
+
+        deploy:
+            replicas: 3
+            placement:
+                max_replicas_per_node: 1
+            rollback_config:
+                parallelism: 1
+                delay: 10s
+                failure_action: continue
+                monitor: 1m
+                max_failure_ratio: 3
+                order: stop-first
+            update_config:          # Rolling update
+                parallelism: 1        # The number of containers to update at a time
+                delay: 10s            # Time to wait between updating a group of containers
+                order: stop-first
+                failure_action: rollback
+            restart_policy:
+                condition: on-failure
+                delay: 3s
+                max_attempts: 5
+                window: 120s
+

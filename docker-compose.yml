@@ -8,10 +8,11 @@ services:
     volumes:
       - ./:/webapps
     ports:
-      - 6002:5000
+      - 5000:5005
     environment:
       - PYTHONUNBUFFERED=true
     env_file:
       - .env
-    command: python manage.py run
+    # command: python manage.py run
+    command: supervisord -n -c /etc/supervisor.d/supervisord.conf
     # command: tail -f /dev/null

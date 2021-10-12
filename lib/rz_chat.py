@@ -12,7 +12,7 @@ DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
 class RzChatAPI(object):
-    API_URL = os.getenv('RZ_PAYMENT_API') \
+    API_URL = os.getenv('RZ_SOCKET_API') \
         or 'https://socket-staging.rinznetwork.com'
 
     @classmethod

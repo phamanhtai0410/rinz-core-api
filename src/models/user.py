@@ -1,5 +1,4 @@
 import pydash as py_
-from hashlib import pbkdf2_hmac
 
 from lib.rz_stream import RzStreamAPI
 import src.constants as Consts
@@ -14,7 +13,7 @@ class UserDAO(BaseDAO):
         author_id = py_.get(item, 'author_id')
         if not author_id:
             return item
-        user_info = self.get_item(author_id)
+        user_info = self.c_get_item(uid=author_id)
         item["author_name"] = py_.get(user_info, 'user_full_name', '')
         item["author_avatar"] = py_.get(user_info, 'user_avatar', '')
         return item

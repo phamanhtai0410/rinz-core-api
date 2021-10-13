@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from functools import wraps
 from http import HTTPStatus
 from src.api import user
@@ -6,12 +7,61 @@ from flask import request
 import pydash as py_
 
 from lib.rz_id import RzID
+from src.extensions import redis_cluster
+import src.functions as func
 import src.constants as Consts
-import src.models.repo as Repo
-import src.schemas.user as SchemaUser
+# import src.schemas.user as SchemaUser
+
+
+def cache_filter(timeout=86400, key_prefix='common', key_fields=[], options=[], expires_time=False):
+    """
+    Decorator for caching functions by filter
+    Returns the cached value, or the function if the cache is disabled
+    """
+    if timeout is None:
+        timeout = 86400
+
+    if not expires_time:
+        expires_time = timeout
+
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            print(args, kwargs)
+            # user_id, limit, offset {}
+            _filter = dict()
+            for key_field in key_fields:
+                _filter[key_field] = kwargs.get(key_field)
+            _options = kwargs.get('options', {})
+            for option in options:
+                _filter[option] = _options.get(option)
+            # Remove below to clear cache
+            #_filter['expires_time'] = expires_time
+            key = "%s:%s" % (
+                key_prefix,
+                json.dumps(_filter, default=func.json_encode_hook)
+            )
+            output = redis_cluster.get(key)
+            if output:
+                print('HIT', key)
+                return json.loads(output, object_hook=func.json_decode_hook)
+            print('MISS', key)
+            output = f(*args, **kwargs)
+            # Set data to redis
+            redis_cluster.setex(
+                key, timeout,
+                json.dumps(output, default=func.json_encode_hook)
+            )
+
+            return output
+
+        return wrapper
+
+    return decorator
 
 
 def get_rz_music_user_info():
+    import src.models.repo as Repo
     # FIXME: NEED ADD CACHE FUNCTION
     token = request.headers['Authorization'] if 'Authorization' in request.headers else ''
     user_info = RzID.get_user_info(token)

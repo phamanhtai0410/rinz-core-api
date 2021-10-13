@@ -9,6 +9,7 @@ import src.middlewares.http as Http
 import src.models.repo as Repo
 import src.schemas.comment as SchemaResource
 import src.decorators as Decorators
+from lib.rz_chat import RzChatAPI
 
 bp = Blueprint('comment', __name__, url_prefix='/api/comment')
 
@@ -126,11 +127,12 @@ def crud(user_info):
             "msg": ""
         }
 
+    owner_id = py_.get(item, 'author_id')
     if request.method == 'POST':
         payload = request.json
         try:
             obj_default = {
-                "owner_id": item["author_id"],
+                "owner_id": owner_id,
                 "author_id": user_info["id"],
                 "content_id": content_id,
                 "content_type": content_type,
@@ -141,10 +143,18 @@ def crud(user_info):
             obj = SchemaResource.ItemUpdate().load(payload)
             obj = {**obj_default, **obj}
             result = RepoResource.insert(obj)
+            obj_pub = SchemaResource.Item().dump(obj)
+
+            # CALL SOCKET CHAT
+            RzChatAPI.send_public_message(
+                obj_pub,
+                content_id,
+                owner_id
+            )
             return {
                 "status": Consts.STATUS_OK,
                 "error_code": HTTPStatus.OK,
-                "data": SchemaResource.Item().dump(obj),
+                "data": obj_pub,
                 "msg": "Success"
             }
         except ValidationError as err:

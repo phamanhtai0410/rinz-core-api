@@ -7,6 +7,8 @@ import pydash as py_
 import src.constants as Consts
 import src.models.repo as Repo
 
+import lib.functions as ifuncs
+
 
 class RzFieldDateTime(ma.fields.Field):
     """Field that serializes to a string of numbers and deserializes
@@ -74,3 +76,8 @@ class RzCMND(ma.Schema):
     numbers = ma.fields.Str(required=True)
     issue_date = ma.fields.DateTime(format="%Y/%m/%d", required=True)
     issue_from = ma.fields.Str(required=True)
+
+
+class RzSafeContentField(ma.fields.Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        return ifuncs.filter_chat_content(value)

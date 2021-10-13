@@ -3,7 +3,7 @@ import pydash as py_
 import marshmallow as ma
 
 import src.constants as Consts
-from .base import RzFieldDateTime, AuthorNameField
+from .base import RzFieldDateTime, AuthorNameField, RzSafeContentField
 
 
 class Item(ma.Schema):
@@ -27,7 +27,7 @@ class Item(ma.Schema):
     content_type = ma.fields.Str(
         validate=ma.validate.OneOf(Consts.RESOURCE_TYPES)
     )
-    content = ma.fields.Str(default='')
+    content = RzSafeContentField(default='')
     images = ma.fields.List(ma.fields.Str())
 
     status = ma.fields.Str(
@@ -36,11 +36,12 @@ class Item(ma.Schema):
             Consts.STATUS_INACTIVE
         ])
     )
+    created_date = RzFieldDateTime()
 
 
 class ItemUpdate(ma.Schema):
     class Meta:
         ordered = True
 
-    content = ma.fields.Str(default='')
+    content = RzSafeContentField(default='')
     images = ma.fields.List(ma.fields.Str())

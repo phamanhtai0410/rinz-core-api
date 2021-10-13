@@ -2,6 +2,7 @@ from bson import ObjectId
 import datetime as dt
 
 from .type import *
+import src.decorators as Decorators
 
 
 class BaseDAO(object):
@@ -64,7 +65,7 @@ class BaseDAO(object):
     def get_list_active(self):
         return self.get_list({"status": {"$ne": STATUS_INACTIVE}})
 
-    def get_list(self, filter={}, sort={}, page=1, page_size=PAGE_SIZE_DEFAULT, ):
+    def get_list(self, filter={}, sort={}, page=1, page_size=PAGE_SIZE_DEFAULT):
         if not page:
             page = 1
         if not page_size or page_size > PAGE_SIZE_MAX:
@@ -90,3 +91,10 @@ class BaseDAO(object):
 
     def aggregate(self, pipelines):
         return self.db.aggregate(pipelines)
+
+    @Decorators.cache_filter(key_prefix=__name__, key_fields=['uid'])
+    def c_get_item(self, uid):
+        return self.get_item(uid)
+
+    def c_get_list(self, filter={}, sort={}, page=1, page_size=PAGE_SIZE_DEFAULT):
+        return self.get_list(filter={}, sort={}, page=1, page_size=PAGE_SIZE_DEFAULT)

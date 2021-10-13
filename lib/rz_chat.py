@@ -38,20 +38,22 @@ class RzChatAPI(object):
             return {}
 
     @classmethod
-    def send_public_message(cls, payload, room_id, event='message') -> dict:
+    def send_public_message(cls, payload, room_id, author_id, event='message') -> dict:
         try:
             payload = {
                 "type": "public",
                 "room": room_id,
+                "author_id": author_id,
                 "event": event,
                 "payload": payload,
                 "users": []
             }
             resp = requests.post(
                 f"{cls.API_URL}/v1/socket/send_to_room",
-                json = payload,
+                json=payload,
             )
             if resp.status_code == HTTPStatus.OK:
+                print("Publish Chat MSG Successfull")
                 obj = resp.json()
                 return py_.get(obj, "data", {})
             return {}

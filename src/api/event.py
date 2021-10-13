@@ -25,7 +25,7 @@ RepoResource = Repo.mEvent
 @Decorators.require_login_actions
 def get_item(user_info, oid):
     item = RepoResource.get_item(oid)
-    print(oid, item)
+    # print(oid, item)
     if not item:
         return {
             "status": Consts.STATUS_NOT_OK,
@@ -35,7 +35,8 @@ def get_item(user_info, oid):
         }
 
     uid = py_.get(user_info, 'id', -1)
-    if request.method in Consts.REQUEST_ACTTIONS_METHODS and uid != py_.get(item, 'author_id'):
+    author_id = py_.get(item, 'author_id')
+    if request.method in Consts.REQUEST_ACTTIONS_METHODS and uid != author_id:
         return {
             "status": Consts.STATUS_NOT_OK,
             "error_code": HTTPStatus.FORBIDDEN,
@@ -73,7 +74,12 @@ def get_item(user_info, oid):
                     # }
                 }
 
-                RzChatAPI.send_public_message(payload_pub, oid, payload_pub["type"])
+                RzChatAPI.send_public_message(
+                    payload_pub,
+                    oid,
+                    author_id,
+                    payload_pub["type"]
+                )
 
             result = RepoResource.update(oid, obj, True)
             item = RepoResource.get_item(oid)

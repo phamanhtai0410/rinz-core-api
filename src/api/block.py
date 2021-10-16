@@ -40,6 +40,8 @@ def get_item(user_info, oid):
     block_type = py_.get(block, 'type')
     data = py_.get(block, 'data') or []
     schema = SchemaBlock.BaseBlock()
+
+    uid = py_.get(user_info, 'id', -1)
     if block_type == Consts.BLOCK_SEARCH_BAR:
         schema = SchemaBlock.SearchBar()
 
@@ -63,8 +65,11 @@ def get_item(user_info, oid):
         }, [("start_time", 1)])
 
         for idt in mdata:
-            print(idt)
+            # print(idt)
             idt = Repo.mUser.map_item_user_info(idt)
+            idt = Repo.PaymentGateway.map_item_info(
+                idt, Consts.RESOURCE_TYPE_EVENT, uid
+            )
             idt["live_stream"] = bool(
                 py_.get(idt, "status") == Consts.STATUS_LIVE)
             idt["type"] = Consts.RESOURCE_TYPE_EVENT
@@ -92,13 +97,14 @@ def get_item(user_info, oid):
             mdata = []
         else:
             mdata = Repo.factory_get_list(**args_data)
-        print("GO HERE", item_type)
         # print(mdata)
         data = []
         for idt in mdata:
             # print(idt)
             idt = Repo.mUser.map_item_user_info(idt)
             idt["type"] = item_type
+            if item_type in [Consts.RESOURCE_TYPE_EVENT, Consts.RESOURCE_TYPE_TRACK]:
+                idt = Repo.PaymentGateway.map_item_info(idt, item_type, uid)
             data.append(idt)
 
         if item_type == Consts.RESOURCE_TYPE_ALBUM:
@@ -111,7 +117,6 @@ def get_item(user_info, oid):
             data = SchemaEvent.Item(many=True).dump(data)
 
     block["data"] = data
-    # print(data)
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,

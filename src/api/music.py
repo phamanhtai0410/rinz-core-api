@@ -68,7 +68,7 @@ def list_hot(user_info, ms_type):
         page_size = int(Consts.PAGE_SIZE_DEFAULT * 2)
         music_data = [Consts.RESOURCE_TYPE_TRACK]
 
-    print(music_data)
+    # print(music_data)
     if randomize:
         _sort = {"_id": -1}
         albums = Repo.mAlbum.get_random_items(
@@ -95,8 +95,16 @@ def list_hot(user_info, ms_type):
             page_size
         ) if Consts.RESOURCE_TYPE_TRACK in music_data else []
 
+    uid = py_.get(user_info, 'id', -1)
+    # for idt in albums:
     albums = py_.map_(albums, Repo.mUser.map_item_user_info)
-    tracks = py_.map_(tracks, Repo.mUser.map_item_user_info)
+    # tracks = py_.map_(tracks, Repo.mUser.map_item_user_info)
+    for idt in tracks:
+        # albums = py_.map_(albums, Repo.mUser.map_item_user_info)
+        idt = Repo.mUser.map_item_user_info(idt)
+        idt = Repo.PaymentGateway.map_item_info(
+            idt, Consts.RESOURCE_TYPE_TRACK, uid
+        )
     data = SchemaAlbum.Item(many=True).dump(albums) \
         + SchemaTrack.Item(many=True).dump(tracks)
 

@@ -51,6 +51,8 @@ class Item(ma.Schema):
 
     donates = ma.fields.List(ma.fields.Int())
 
+    is_paid = ma.fields.Boolean(default=False)
+
 
 class ItemUpdate(ma.Schema):
     class Meta:

@@ -253,7 +253,13 @@ def get_by_author_id(user_info, author_id):
         _sort = [("title", 1)]
 
     data = RepoResource.get_list(_filter, _sort, page)
-    data = py_.map_(data, lambda item: Repo.mUser.map_author(item, author))
+    # data = py_.map_(data, lambda item: Repo.mUser.map_author(item, author))
+    for idt in data:
+        idt = Repo.mUser.map_author(idt, author)
+        idt = Repo.PaymentGateway.map_item_info(
+            idt, Consts.RESOURCE_TYPE_TRACK, uid
+        )
+
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

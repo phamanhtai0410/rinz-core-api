@@ -51,6 +51,8 @@ class Item(ma.Schema):
     )
     following = ma.fields.Boolean(default=False)
 
+    is_paid = ma.fields.Boolean(default=False)
+
 
 class ItemUpdate(ma.Schema):
     class Meta:

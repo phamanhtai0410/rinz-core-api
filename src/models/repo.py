@@ -58,6 +58,19 @@ def factory_get_list(type, filter, sort, user_id=0, page=1, page_size=PAGE_SIZE_
 
 class PaymentGateway(object):
     @classmethod
+    def map_item_info(self, item, rtype, user_id):
+        if not user_id:
+            return item
+
+        oid = str(py_.get(item, '_id', ''))
+        # TODO: Flow use Redis check Status of order
+        key_pm_order = f"payment:orders:{rtype}:{user_id}:{oid}"
+        status_order = redis_cluster.get(key_pm_order)
+        print("- Checking", key_pm_order, status_order)
+        item["is_paid"] = bool(status_order and status_order == Consts.PAYMENT_STATUS_PAID)
+        return item
+
+    @classmethod
     def get_paid_order(cls, oid, rtype, user_id, author_id):
         rzm_order = mPayment.get_item_with({
             "oid": oid,

@@ -99,14 +99,17 @@ def list_hot(user_info, ms_type):
     # for idt in albums:
     albums = py_.map_(albums, Repo.mUser.map_item_user_info)
     # tracks = py_.map_(tracks, Repo.mUser.map_item_user_info)
+    resp_tracks = []
     for idt in tracks:
         # albums = py_.map_(albums, Repo.mUser.map_item_user_info)
         idt = Repo.mUser.map_item_user_info(idt)
         idt = Repo.PaymentGateway.map_item_info(
             idt, Consts.RESOURCE_TYPE_TRACK, uid
         )
+        resp_tracks.append(idt)
+
     data = SchemaAlbum.Item(many=True).dump(albums) \
-        + SchemaTrack.Item(many=True).dump(tracks)
+        + SchemaTrack.Item(many=True).dump(resp_tracks)
 
     if not ordered:
         rd.shuffle(data)

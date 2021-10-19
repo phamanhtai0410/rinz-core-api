@@ -70,6 +70,11 @@ def get_item(user_info, oid):
         Consts.RESOURCE_TYPE_EVENT,
         oid, uid, item
     )
+    item = Repo.PaymentGateway.map_item_info(
+        item,
+        Consts.RESOURCE_TYPE_TRACK,
+        uid
+    )
     return {
         "status": Consts.STATUS_OK,
         "error_code": Consts.NOT_E,

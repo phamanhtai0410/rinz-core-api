@@ -52,6 +52,7 @@ class Item(ma.Schema):
     following = ma.fields.Boolean(default=False)
 
     is_paid = ma.fields.Boolean(default=False)
+    waveform = ma.fields.Dict(default={})
 
 
 class ItemUpdate(ma.Schema):

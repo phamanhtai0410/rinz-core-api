@@ -184,11 +184,17 @@ def paid(user_info):
     items = Repo.mTrack.get_list({
         "_id": {"$in": tracks_oid},
     })
-    data = py_.map_(items, Repo.mUser.map_item_user_info)
+    # data = py_.map_(items, Repo.mUser.map_item_user_info)
+    resp_data = []
+    for idt in items:
+        idt = Repo.mUser.map_item_user_info(idt)
+        idt['is_paid'] = True
+        resp_data.append(idt)
+
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
-        "data": SchemaResource.Item(many=True).dump(data),
+        "data": SchemaResource.Item(many=True).dump(resp_data),
         "msg": "Success"
     }
 
@@ -207,7 +213,7 @@ def get_related(user_info, oid):
             "msg": ""
         }
 
-    # author_id = py_.get(item, 'id')
+    uid = py_.get(user_info, 'id')
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "_id": {"$ne": ObjectId(oid)}
@@ -215,11 +221,18 @@ def get_related(user_info, oid):
     _sort = [("_id", -1)]
 
     data = RepoResource.get_list(_filter, _sort)
-    data = py_.map_(data, Repo.mUser.map_item_user_info)
+    resp_data = []
+    for idt in data:
+        idt = Repo.mUser.map_item_user_info(idt)
+        idt = Repo.PaymentGateway.map_item_info(
+            idt, Consts.RESOURCE_TYPE_TRACK, uid
+        )
+        resp_data.append(idt)
+
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
-        "data": SchemaResource.Item(many=True).dump(data),
+        "data": SchemaResource.Item(many=True).dump(resp_data),
         "msg": "Success"
     }
 
@@ -254,15 +267,17 @@ def get_by_author_id(user_info, author_id):
 
     data = RepoResource.get_list(_filter, _sort, page)
     # data = py_.map_(data, lambda item: Repo.mUser.map_author(item, author))
+    resp_data = []
     for idt in data:
         idt = Repo.mUser.map_author(idt, author)
         idt = Repo.PaymentGateway.map_item_info(
             idt, Consts.RESOURCE_TYPE_TRACK, uid
         )
+        resp_data.append(idt)
 
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
-        "data": SchemaResource.Item(many=True).dump(data),
+        "data": SchemaResource.Item(many=True).dump(resp_data),
         "msg": "Success"
     }

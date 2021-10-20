@@ -56,24 +56,10 @@ def get_event_stream(user_info, oid):
             author_id
         )
         if not paid_order:
-            paid_item = SchemaEvent.Item().dump(event)
-            paid_item['_id'] = oid
-            items = {
-                "type": rtype,
-                "value": paid_item,
-            }
-            exec_order = Repo.PaymentGateway.exec_order(
-                oid, rtype, uid, items, rz_point, author_id
-            )
-            resp_status = py_.get(exec_order, 'status')
-            if not resp_status:
-                return exec_order
-
-            obj_transaction = py_.get(exec_order, 'transaction', {})
             return {
                 "status": Consts.STATUS_NOT_OK,
                 "error_code": HTTPStatus.NOT_ACCEPTABLE,
-                "data": obj_transaction,
+                "data": {},
                 "msg": Consts.RESP_MSG["payment_require"]
             }
 
@@ -89,18 +75,6 @@ def get_event_stream(user_info, oid):
 @Http.make_cross_resp
 @Decorators.get_user_info
 def get_music_stream(user_info, oid):
-    # results = Repo.mStream.get_random_items(
-    #     {"type": "track", "streams": {"$exists": True}},
-    #     size=1
-    # )
-    # stream = py_.get([item for item in results], 0)
-    # schema_item = SchemaStream.Track()
-    # return {
-    #     "status": Consts.STATUS_OK,
-    #     "error_code": HTTPStatus.OK,
-    #     "data": schema_item.dump(stream),
-    #     "msg": "success"
-    # }
     rtype = Consts.RESOURCE_TYPE_TRACK
     track = Repo.mTrack.get_item(oid)
     if not track:
@@ -131,7 +105,65 @@ def get_music_stream(user_info, oid):
         paid_order = Repo.PaymentGateway.get_paid_order(
             oid, rtype, uid, author_id)
         if not paid_order:
-            paid_item = SchemaTrack.Item().dump(track)
+            return {
+                "status": Consts.STATUS_NOT_OK,
+                "error_code": HTTPStatus.NOT_ACCEPTABLE,
+                "data": {},
+                "msg": Consts.RESP_MSG["payment_require"]
+            }
+
+    schema_item = SchemaStream.Track()
+    return {
+        "status": Consts.STATUS_OK,
+        "error_code": HTTPStatus.OK,
+        "data": schema_item.dump(stream),
+        "msg": "success"
+    }
+
+
+@bp.route('/<string:rtype>/<string:oid>/redeem', methods=['GET'])
+@Http.make_cross_resp
+@Decorators.get_user_info
+def redeem_stream(user_info, rtype, oid):
+    repo = Repo.mTrack
+    schema = SchemaTrack
+    schema_item = SchemaStream.Track()
+    if rtype == Consts.RESOURCE_TYPE_EVENT:
+        repo = Repo.mEvent
+        schema = SchemaEvent
+        schema_item = SchemaStream.EventConsumer()
+
+    item = repo.get_item(oid)
+    if not item:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": "Not found"
+        }
+
+    stream = Repo.mStream.get_stream(oid, rtype, item)
+    if not stream:
+        return {
+            "status": Consts.STATUS_NOT_OK,
+            "error_code": HTTPStatus.NOT_FOUND,
+            "data": {},
+            "msg": "Not found Stream of this item"
+        }
+
+    uid = py_.get(user_info, 'id', -1)
+    author_id = py_.get(item, 'author_id')
+    is_owner = bool(uid == author_id)
+    rz_point = py_.get(item, 'rz_point', 0)
+
+    is_rz_vip = py_.get(user_info, 'rz_vip')
+    if not is_rz_vip and not is_owner and rz_point > 0:
+        # FLOW PAYMENT ORDER
+        paid_order = Repo.PaymentGateway.get_paid_order(
+            oid, rtype, uid, author_id
+        )
+        if not paid_order:
+            paid_item = schema.Item().dump(item)
             paid_item['_id'] = str(oid)
             items = {
                 "type": rtype,
@@ -144,15 +176,6 @@ def get_music_stream(user_info, oid):
             if not resp_status:
                 return exec_order
 
-            obj_transaction = py_.get(exec_order, 'transaction', {})
-            return {
-                "status": Consts.STATUS_NOT_OK,
-                "error_code": HTTPStatus.NOT_ACCEPTABLE,
-                "data": obj_transaction,
-                "msg": Consts.RESP_MSG["payment_require"]
-            }
-
-    schema_item = SchemaStream.Track()
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,

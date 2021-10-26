@@ -62,7 +62,7 @@ class Track(ma.Schema):
     download = ma.fields.Str()
     streams = ma.fields.List(ma.fields.Nested(StreamItem))
     waveform = ma.fields.Dict(default={})
-    screenshot = ma.fields.str(default='')
+    screenshot = ma.fields.Str(default='')
 
 
 class EncodedTrack(ma.Schema):
@@ -77,7 +77,7 @@ class EncodedTrack(ma.Schema):
     duration = ma.fields.Int(default=0)
     streams = ma.fields.List(ma.fields.Nested(StreamItem), required=True)
     waveform = ma.fields.Dict(default={})
-    screenshot = ma.fields.str(default='')
+    screenshot = ma.fields.Str(default='')
 
 
 class EncodedVideo(ma.Schema):

@@ -84,6 +84,11 @@ def get_item(user_info, oid):
         for idt in mdata:
             idt["author_name"] = py_.get(idt, 'user_full_name', '')
             idt["author_avatar"] = py_.get(idt, 'user_avatar', '')
+            author_id = py_.get(idt, 'id', '')
+            idt = Repo.mFollow.map_follow_info(
+                Consts.RESOURCE_TYPE_AUTHOR,
+                author_id, uid, idt
+            )
             data.append(idt)
 
     if isinstance(data, str):

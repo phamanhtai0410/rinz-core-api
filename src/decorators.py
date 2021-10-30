@@ -27,7 +27,7 @@ def cache_filter(timeout=86400, key_prefix='common', key_fields=[], options=[], 
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            print(args, kwargs)
+            # print(args, kwargs)
             # user_id, limit, offset {}
             _filter = dict()
             for key_field in key_fields:
@@ -43,7 +43,7 @@ def cache_filter(timeout=86400, key_prefix='common', key_fields=[], options=[], 
             )
             output = redis_cluster.get(key)
             if output:
-                print('HIT', key)
+                # print('HIT', key)
                 return json.loads(output, object_hook=func.json_decode_hook)
             print('MISS', key)
             output = f(*args, **kwargs)

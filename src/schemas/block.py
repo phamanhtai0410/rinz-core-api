@@ -37,8 +37,10 @@ class Idol(ma.Schema):
     live_stream = ma.fields.Boolean(default=True)
     type = ma.fields.Str(default=True)
 
-    followers = ma.fields.Function(lambda obj: rd.randrange(100, 10000))
-    following = ma.fields.Function(lambda obj: rd.choice([True, False]))
+    followers = ma.fields.Function(
+        lambda obj: len(py_.get(obj, "followers", []))
+    )
+    following = ma.fields.Boolean(default=False)
 
 
 class IdolLive(BaseBlock):

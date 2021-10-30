@@ -76,6 +76,9 @@ class BaseDAO(object):
 
         return self.db.find(filter).sort(sort).skip(int((page - 1) * page_size)).limit(page_size)
 
+    def get_count(self, filter={}):
+        return self.db.find(filter).count()
+
     def get_random_items(self, filter={}, sort={}, size=1):
         if sort:
             return self.db.aggregate([

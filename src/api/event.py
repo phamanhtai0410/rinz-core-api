@@ -171,7 +171,7 @@ def crud(user_info):
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": uid,
-        "is_author": True,
+        "skip_geoip": True,
     }
     _sort = [("_id", -1)]
 

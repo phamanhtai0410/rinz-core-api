@@ -147,7 +147,7 @@ def crud(user_info):
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": uid,
-        "is_author": True,
+        "skip_geoip": True,
     }
     _sort = [("_id", -1)]
 
@@ -185,10 +185,12 @@ def paid(user_info):
 
     page = py_.get(request.args, 'page', 1)
     page = py_.to_integer(page) or 1
+    total = Repo.mPayment.get_count(_filter)
     paid_orders = Repo.mPayment.get_list(_filter, _sort, page)
     tracks_oid = [ObjectId(py_.get(ord, 'oid')) for ord in paid_orders]
     items = Repo.mTrack.get_list({
         "_id": {"$in": tracks_oid},
+        "skip_geoip": True,
     })
     # data = py_.map_(items, Repo.mUser.map_item_user_info)
     resp_data = []
@@ -201,6 +203,7 @@ def paid(user_info):
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
         "data": SchemaResource.Item(many=True).dump(resp_data),
+        "total": total,
         "msg": "Success"
     }
 

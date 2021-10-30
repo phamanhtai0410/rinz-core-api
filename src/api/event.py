@@ -144,6 +144,7 @@ def get_tracks(user_info, oid):
 @Decorators.require_login
 def crud(user_info):
     uid = py_.get(user_info, 'id')
+
     if request.method == 'POST':
         payload = request.json
         try:
@@ -169,7 +170,8 @@ def crud(user_info):
     page = py_.to_integer(page) or 1
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
-        "author_id": uid
+        "author_id": uid,
+        "is_author": True,
     }
     _sort = [("_id", -1)]
 

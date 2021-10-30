@@ -8,6 +8,7 @@ from lib.rz_payment import RzPaymentAPI
 
 from .type import *
 from .base import BaseDAO
+from .base_geoip import BaseGeoIP_DAO
 from .stream import StreamDAO
 from .user import UserDAO
 from .follow import FollowDAO
@@ -24,8 +25,8 @@ mReport = BaseDAO(mdb.db.report)
 mComment = CommentDAO(mdb.db.comment)
 
 mStream = StreamDAO(mdb.db.stream)
-mEvent = BaseDAO(mdb.db.event)
-mTrack = BaseDAO(mdb.db.track)
+mEvent = BaseGeoIP_DAO(mdb.db.event)
+mTrack = BaseGeoIP_DAO(mdb.db.track)
 mTweet = BaseDAO(mdb.db.tweet)
 mAlbum = BaseDAO(mdb.db.album)
 

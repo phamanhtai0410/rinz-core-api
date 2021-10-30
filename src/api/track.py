@@ -146,7 +146,8 @@ def crud(user_info):
     uid = py_.get(user_info, 'id')
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
-        "author_id": uid
+        "author_id": uid,
+        "is_author": True,
     }
     _sort = [("_id", -1)]
 

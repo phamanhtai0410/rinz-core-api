@@ -1,5 +1,9 @@
 from datetime import datetime, date, timedelta
 
+from flask import request
+
+import src.constants as Consts
+
 
 def json_decode_hook(obj):
     if '__datetime__' in obj:
@@ -26,3 +30,11 @@ def json_encode_response(obj):
     if isinstance(obj, date):
         return datetime.combine(obj.today(), datetime.min.time()).timestamp()
     return obj
+
+
+def get_headers():
+    geo_ip = request.headers.get('X-GeoIP-Country-Code')
+    geo_ip = Consts.GEO_IP_VN if geo_ip == Consts.GEO_IP_VN else Consts.GEO_IP_OTHER
+    return {
+        'geo_ip': geo_ip
+    }

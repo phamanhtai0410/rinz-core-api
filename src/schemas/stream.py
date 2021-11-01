@@ -93,6 +93,9 @@ class EncodedVideo(ma.Schema):
     thumb = ma.fields.Str(default='')
     streams = ma.fields.List(ma.fields.Nested(StreamItem), required=True)
 
+    waveform = ma.fields.Dict(default={})
+    screenshot = ma.fields.Str(default='')
+
 
 class ItemUpdate(ma.Schema):
     class Meta:

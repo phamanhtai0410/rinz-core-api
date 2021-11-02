@@ -67,7 +67,7 @@ def get_item(user_info, oid):
 
     item = Repo.mUser.map_item_user_info(item)
     item = Repo.mFollow.map_follow_info(
-        Consts.RESOURCE_TYPE_EVENT,
+        Consts.RESOURCE_TYPE_TRACK,
         oid, uid, item
     )
     item = Repo.PaymentGateway.map_item_info(

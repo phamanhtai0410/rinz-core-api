@@ -51,10 +51,14 @@ class BaseGeoIP_DAO(BaseDAO):
         return super().update_by_filter(filter, obj, upsert, multi)
 
     def get_list(self, filter={}, sort={}, page=1, page_size=PAGE_SIZE_DEFAULT):
-        print("- Before", filter)
+        # print("- Before", filter)
         filter = self._makup_filter(filter)
-        print("- After", filter)
+        # print("- After", filter)
         return super().get_list(filter, sort, page, page_size)
+
+    def get_count(self, filter={}):
+        filter = self._makup_filter(filter)
+        return super().get_count(filter)
 
     def get_random_items(self, filter={}, sort={}, size=1):
         # print("- Before", filter)

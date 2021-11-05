@@ -132,12 +132,14 @@ def crud(user_info):
         _sort = [("title", 1)]
 
     data = RepoResource.get_list(_filter, _sort, page)
+    total = RepoResource.get_count(_filter)
     data = py_.map_(data, Repo.mUser.map_item_user_info)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
         "data": SchemaResource.Item(many=True).dump(data),
-        "msg": "Success"
+        "msg": "Success",
+        "total": total,
     }
 
 

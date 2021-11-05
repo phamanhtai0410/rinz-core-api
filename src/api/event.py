@@ -187,12 +187,14 @@ def crud(user_info):
         _filter["title"] = {"$regex": re.compile(s, re.IGNORECASE)}
         _sort = [("title", 1)]
 
+    total = RepoResource.get_count(_filter)
     data = RepoResource.get_list(_filter, _sort, page)
     return {
         "status": Consts.STATUS_OK,
         "error_code": HTTPStatus.OK,
         "data": SchemaResource.Item(many=True).dump(data),
-        "msg": "Success"
+        "msg": "Success",
+        "total": total,
     }
 
 

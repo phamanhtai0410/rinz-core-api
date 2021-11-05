@@ -29,7 +29,8 @@ class CommentDAO(BaseDAO):
 
         total = self.db.find(_filter).count()
 
-        datas = self.db.aggregate([
+        # print(_filter, _sort, _skip, page_size)
+        pipelines = [
             {'$match': _filter},
             {'$sort': _sort},
             {'$skip': _skip},
@@ -67,9 +68,13 @@ class CommentDAO(BaseDAO):
                     "approved_time": 0,
                 }
             }
-        ])
+        ]
+        # print(pipelines)
+        datas = self.db.aggregate(pipelines)
 
-        return list(datas), int(total)
+        datas = list(datas)
+        # print(datas)
+        return datas, int(total)
 
     def get_childs(self, parent_id, sort_type, page, page_size):
         _filter = {'parent_id': parent_id, "status": Consts.STATUS_ACTIVE}

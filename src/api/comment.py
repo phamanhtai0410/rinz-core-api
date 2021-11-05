@@ -102,7 +102,7 @@ def crud(user_info):
     page = py_.to_integer(page) or 1
 
     page_size = py_.get(request.args, 'page_size', 0)
-    page_size = py_.to_integer(page_size) or 1
+    page_size = py_.to_integer(page_size) or Consts.PAGE_SIZE_DEFAULT
 
     sort_type = py_.get(request.args, 'sort_type', Consts.SORT_TYPE_LASTEST)
 

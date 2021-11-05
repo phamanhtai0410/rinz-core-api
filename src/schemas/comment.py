@@ -13,7 +13,7 @@ class Item(ma.Schema):
     id = ma.fields.Str(attribute='_id')
     author_id = ma.fields.Int(required=True)
     author_name = AuthorNameField()
-    avatar = ma.fields.Str()
+    author_avatar = ma.fields.Str()
 
     nlike = ma.fields.Int(default=0)
     nreply = ma.fields.Int(default=0)

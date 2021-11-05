@@ -188,8 +188,9 @@ def crud(user_info):
         )
 
     user_id = py_.get(user_info, 'id', -1)
-    if user_id:
-        for d in data:
+    for d in data:
+        d = Repo.mUser.map_item_user_info(d)
+        if user_id:
             d['ucomment'] = bool(d['author_id'] == user_id)
             d['uliked'] = bool(user_id in d['likes'])
 

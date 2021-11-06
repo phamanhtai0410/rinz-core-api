@@ -144,6 +144,8 @@ def crud(user_info):
             }
 
     uid = py_.get(user_info, 'id')
+    page = py_.get(request.args, 'page', 1)
+    page = py_.to_integer(page) or 1
     _filter = {
         "status": {"$ne": Consts.STATUS_INACTIVE},
         "author_id": uid,
@@ -157,7 +159,7 @@ def crud(user_info):
         _sort = [("title", 1)]
 
     total = RepoResource.get_count(_filter)
-    data = RepoResource.get_list(_filter, _sort)
+    data = RepoResource.get_list(_filter, _sort, page)
     data = py_.map_(data, Repo.mUser.map_item_user_info)
     return {
         "status": Consts.STATUS_OK,

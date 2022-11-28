@@ -75,7 +75,7 @@ def get_rz_music_user_info():
     if not rzm_user_info:
         # print(user_info)
         #FIXME: fake name and avatar for new users to demo - remove later
-        if not py_.get(user_info, 'user_full_name', ''):
+        if not py_.get(user_info, 'user_full_name', '') or py_.get(user_info, 'user_full_name', '') in ['Không tên']:
             user_info['user_full_name'] = faker.name()
         if not py_.get(user_info, 'user_avatar', ''):
             # hard code random image for user

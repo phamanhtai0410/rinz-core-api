@@ -10,6 +10,7 @@ from lib.rz_id import RzID
 from src.extensions import redis_cluster
 import src.functions as func
 import src.constants as Consts
+from extensions import faker
 # import src.schemas.user as SchemaUser
 
 
@@ -72,6 +73,12 @@ def get_rz_music_user_info():
     rzm_user_info = Repo.mUser.get_item(uid) or {}
     if not rzm_user_info:
         # print(user_info)
+        #FIXME: fake name and avatar for new users to demo - remove later
+        if not py_.get(user_info, 'user_full_name', ''):
+            user_info['user_full_name'] = faker.name()
+        if not py_.get(user_info, 'user_avatar', ''):
+            # hard code random image for user
+            user_info['user_avatar'] = f'https://s3.ap-southeast-1.amazonaws.com/images.rinz.io/rinz/2022/11/28/{random.randint(1, 30)}.jpeg'
         Repo.mUser.update(uid, user_info, True)
         print(f"- CREATED NEW USER SUCCESSFUL: {uid}")
 

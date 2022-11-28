@@ -26,14 +26,7 @@ def user_info(user_info):
     if request.method == 'PUT':
         payload = request.json
         try:
-            obj = SchemaUser.ItemUpdate().load(payload, partial=True)
-            #FIXME: fake name and avatar for new users to demo - remove later
-            if not py_.get(obj, 'user_full_name', ''):
-                obj['user_full_name'] = faker.name()
-            if not py_.get(obj, 'user_avatar', ''):
-                # hard code random image for user
-                obj['user_avatar'] = f'https://s3.ap-southeast-1.amazonaws.com/images.rinz.io/rinz/2022/11/28/{random.randint(1, 30)}.jpeg'
-                
+            obj = SchemaUser.ItemUpdate().load(payload, partial=True)    
             user_info = {**user_info, **obj}
             result = Repo.mUser.update(uid, user_info, True)
         except ValidationError as err:

@@ -10,7 +10,7 @@ from lib.rz_id import RzID
 from src.extensions import redis_cluster
 import src.functions as func
 import src.constants as Consts
-from extensions import faker
+from src.extensions import faker
 # import src.schemas.user as SchemaUser
 
 

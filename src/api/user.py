@@ -5,6 +5,7 @@ from flask import (
 )
 
 from marshmallow import ValidationError
+import random
 
 import pydash as py_
 import src.models.repo as Repo
@@ -12,6 +13,7 @@ import src.constants as Consts
 import src.middlewares.http as Http
 import src.decorators as Decorators
 import src.schemas.user as SchemaUser
+from src.extensions import faker
 
 bp = Blueprint('user', __name__, url_prefix='/api/user')
 
@@ -25,6 +27,13 @@ def user_info(user_info):
         payload = request.json
         try:
             obj = SchemaUser.ItemUpdate().load(payload, partial=True)
+            #FIXME: fake name and avatar for new users to demo - remove later
+            if not py_.get(obj, 'user_full_name', ''):
+                obj['user_full_name'] = faker.name()
+            if not py_.get(obj, 'user_avatar', ''):
+                # hard code random image for user
+                obj['user_avatar'] = f'https://s3.ap-southeast-1.amazonaws.com/images.rinz.io/rinz/2022/11/28/{random.randint(1, 30)}.jpeg'
+                
             user_info = {**user_info, **obj}
             result = Repo.mUser.update(uid, user_info, True)
         except ValidationError as err:

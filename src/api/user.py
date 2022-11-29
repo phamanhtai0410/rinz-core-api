@@ -5,6 +5,7 @@ from flask import (
 )
 
 from marshmallow import ValidationError
+import random
 
 import pydash as py_
 import src.models.repo as Repo
@@ -12,6 +13,7 @@ import src.constants as Consts
 import src.middlewares.http as Http
 import src.decorators as Decorators
 import src.schemas.user as SchemaUser
+from src.extensions import faker
 
 bp = Blueprint('user', __name__, url_prefix='/api/user')
 
@@ -24,7 +26,7 @@ def user_info(user_info):
     if request.method == 'PUT':
         payload = request.json
         try:
-            obj = SchemaUser.ItemUpdate().load(payload, partial=True)
+            obj = SchemaUser.ItemUpdate().load(payload, partial=True)    
             user_info = {**user_info, **obj}
             result = Repo.mUser.update(uid, user_info, True)
         except ValidationError as err:

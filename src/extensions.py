@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 
 from rediscluster import RedisCluster
 from .config import DefaultConfig
+from faker import Faker
 
 # Redis cache
 redis_cache = Redis()
@@ -18,3 +19,5 @@ redis_cluster = RedisCluster(
     decode_responses=True
 )
 # print('Init Redis user info successfully')
+
+faker = Faker()

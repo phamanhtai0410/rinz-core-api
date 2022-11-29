@@ -1,5 +1,9 @@
+import traceback
+
 import pydash as py_
 from http import HTTPStatus
+
+import sentry_sdk
 from flask import (Blueprint, request)
 
 from marshmallow import ValidationError
@@ -192,6 +196,7 @@ def sync_encoded():
     try:
         rtype = py_.get(payload, 'type')
         if rtype not in Consts.RESOURCE_TYPE_ENCODEDS:
+            print("rtype Invalid format resource type, It's must in `track, music, video` type", rtype)
             return {
                 "status": Consts.STATUS_NOT_OK,
                 "error_code": HTTPStatus.BAD_REQUEST,
@@ -241,6 +246,8 @@ def sync_encoded():
         }
 
     except ValidationError as err:
+        traceback.print_exc()
+        sentry_sdk.capture_exception()
         return {
             "status": Consts.STATUS_NOT_OK,
             "error_code": HTTPStatus.BAD_REQUEST,
